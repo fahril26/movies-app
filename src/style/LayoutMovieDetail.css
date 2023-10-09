@@ -1,0 +1,26 @@
+.movie-detail {
+  background: url("../assets/background/services_bg.jpg");
+  color: #fff;
+  padding: 5rem 0;
+}
+
+.movie-detail a.nav-link {
+  padding: 0;
+}
+
+.director p,
+.producer p {
+  margin-bottom: 0;
+}
+
+.additional-info {
+  font-size: 0.8rem;
+}
+
+.additional-info i {
+  color: var(--yellow);
+}
+
+.poster img {
+  border-radius: 5px;
+}

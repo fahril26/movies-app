@@ -1,0 +1,50 @@
+.my-nav {
+  gap: 1rem;
+  justify-content: end;
+  align-items: center;
+  transform: translateY(-7px);
+}
+
+.my-nav .nav-item {
+  background-color: #20212b;
+  border-radius: 20px;
+  width: 100px;
+  height: 40px;
+  border: 2.5px solid #2d303d;
+}
+
+.my-nav l.nav-item:hover a {
+  color: var(--yellow) !important;
+  transition: 0.3s;
+}
+
+.my-nav a {
+  font-size: 0.8rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item:has(a.active) {
+  border-color: var(--yellow);
+}
+
+.my-nav .detail {
+  border: 2px solid var(--yellow) !important;
+}
+
+.my-nav .watch-now {
+  background-color: var(--yellow) !important;
+  border-color: var(--yellow);
+}
+
+.watch-now a {
+  color: #20212b !important;
+}
+
+.watch-now:hover {
+  background-color: #20212b !important;
+  transition: 0.3s;
+}

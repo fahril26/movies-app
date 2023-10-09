@@ -1,0 +1,17 @@
+.episode .navigation a {
+  color: #000 !important;
+  font-size: 1.1rem;
+}
+
+.episode .navigation {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 10px 31px;
+}
+
+.episode .navigation a {
+  font-size: 0.9rem;
+}
+
+.list-episode {
+  padding: 0 35px;
+}

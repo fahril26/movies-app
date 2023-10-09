@@ -1,0 +1,29 @@
+.upcoming-movies {
+  position: relative;
+  background: url(../assets/background/ucm_bg_shape.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.upcoming-movies::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: url(../assets/background/ucm_bg.jpg);
+  background-position: center;
+  background-size: cover;
+  filter: brightness(5%);
+  z-index: -1;
+}
+
+.upcoming-movies.bg-dark {
+  --bs-bg-opacity: 0.5 !important;
+}
+
+.ucm-cards-wrapper {
+}

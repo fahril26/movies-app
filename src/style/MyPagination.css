@@ -1,0 +1,26 @@
+.my-pagination {
+  --bs-pagination-focus-box-shadow: none !important;
+  margin-top: 2rem;
+}
+
+.my-pagination .page-link {
+  background-color: rgb(33, 37, 41) !important;
+  border: none;
+  border-radius: 5px !important;
+}
+
+.my-pagination .page-item:first-child .page-link {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.my-pagination a.page-link:hover,
+a.page-link:focus {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.active > .page-link {
+  background-color: var(--yellow) !important;
+  border-color: var(--yellow) !important;
+}

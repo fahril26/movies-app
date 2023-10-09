@@ -1,0 +1,29 @@
+.list-group,
+.list-group-item {
+  background-color: transparent !important;
+  color: #000;
+}
+
+.list-group {
+  border-radius: 0 !important;
+  margin-top: 2rem;
+}
+
+.list-group-item {
+  border: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+  padding: 1.5rem 0 !important;
+}
+
+.list-group-item .rating {
+  padding: 4px;
+  background-color: var(--yellow);
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.list-group a {
+  color: #000 !important;
+}

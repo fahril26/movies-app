@@ -1,0 +1,68 @@
+.card {
+  --bs-card-bg: transparent !important;
+  --bs-card-border-color: none !important;
+  color: #fff !important;
+  position: relative;
+}
+
+.card .extra-content {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 81.5%;
+  border-radius: 5px;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.card .card-title {
+  font-size: 1rem;
+}
+
+.card .card-title .release-year,
+.card i {
+  color: var(--yellow);
+}
+
+.card span {
+  font-size: 0.8rem;
+}
+
+.card:hover .extra-content {
+  opacity: 1;
+}
+
+.card:hover img {
+  filter: brightness(0.1);
+  transition: 0.5s;
+}
+
+.card:not(:hover) ~ .extra-content {
+  transition: 0.3s;
+}
+.extra-content .detail {
+  transform: translateY(10px);
+}
+.extra-content .watch-now {
+  transform: translateY(-10px);
+}
+.extra-content:hover .detail,
+.extra-content:hover .watch-now {
+  transform: translateY(0);
+  transition: 0.5s;
+}
+
+.extra-content:not(:hover) .detail,
+.extra-content:not(:hover) .watch-now {
+  transition: 0.3s;
+}
+
+.extra-content:not(:hover) {
+  opacity: 0 !important;
+}

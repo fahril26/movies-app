@@ -1,0 +1,19 @@
+.top-rated {
+  position: relative;
+}
+
+.top-rated::before {
+  content: "";
+  background: url("../assets//background/services_bg.jpg");
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: brightness(70%);
+  z-index: -1;
+}
+
+header {
+  color: #fff;
+}

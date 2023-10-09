@@ -1,0 +1,32 @@
+footer {
+  font-size: 0.8rem;
+}
+
+footer .social-media-list a {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: inset 0px 4px 9px 0px rgba(0, 0, 0, 0.25);
+  background-color: rgb(18, 21, 30);
+  text-align: center;
+  line-height: 36px;
+  font-size: 12px;
+  color: #bcbcbc;
+  padding: 0 !important;
+}
+
+footer .social-media-list li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+footer .navigation {
+  border-bottom: 2px solid #444;
+  padding-bottom: 1rem;
+}
+
+footer .quick-link-list a,
+footer .social-media-list a {
+  padding: 0.3rem 0.5rem;
+}

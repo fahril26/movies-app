@@ -1,0 +1,9 @@
+header h1 {
+  font-weight: bolder;
+}
+
+header h5 {
+  color: var(--yellow);
+  font-size: 0.8rem;
+  font-variant: small-caps;
+}

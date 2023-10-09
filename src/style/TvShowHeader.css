@@ -1,0 +1,12 @@
+.tv-show-header {
+  padding: 0.8rem 2rem;
+  background: url("../assets/background/services_bg.jpg");
+}
+
+.tv-show-header h2 {
+  margin: 0;
+}
+
+.tv-show-header i {
+  font-style: normal;
+}
