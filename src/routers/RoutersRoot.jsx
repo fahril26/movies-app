@@ -20,7 +20,7 @@ export const RoutersRoot = () => {
       <Route path="/" errorElement={<ErrorElement />}>
         <Route index element={<Home />} />
         <Route
-          path="/upcoming-list"
+          path="https://movies-app-gamma-six.vercel.app/upcoming-list"
           element={
             <PaginationContext>
               <UpcomingList />
