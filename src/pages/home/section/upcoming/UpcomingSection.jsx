@@ -15,6 +15,7 @@ const url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
 
 const UpcomingSection = () => {
   const { data, loading } = useFetch(url);
+
   const windowWidth = useContext(ResizeContext);
   const dataComponent = {
     windowWidth,
@@ -44,7 +45,7 @@ const UpcomingSection = () => {
           </div>
         </div>
 
-        <div className="row-gap-4 row row-cols-2 row-cols-md-3 row-cols-lg-4 pt-5 ucm-cards-wrapper row-gap-5">
+        <div className=" row row-cols-2 row-cols-md-3 row-cols-lg-4 pt-5 ucm-cards-wrapper">
           {getDataRandom?.map((data) => (
             <div className="col d-flex justify-content-center " key={data.id}>
               {loading ? (
@@ -57,6 +58,7 @@ const UpcomingSection = () => {
                   releaseDate={data.release_date}
                   id={data.id}
                   type={type}
+                  width={"95%"}
                 />
               )}
             </div>

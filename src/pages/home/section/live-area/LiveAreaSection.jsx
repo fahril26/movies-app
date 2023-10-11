@@ -1,21 +1,11 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Header from "../../../../components/Header";
-import ModalWatchNow from "../../../../components/ModalWatchNow";
 import MyOdometer from "../../../../components/MyOdometer";
-
 import "../../../../style/LifeAreaSection.css";
-import { useState } from "react";
 import Img from "../../../../assets/background/live_img.png";
 
-const LiveAreaSection = () => {
-  const [modalShow, setModalShow] = useState(false);
-
-  const handleShowModal = (e) => {
-    e.preventDefault();
-
-    setModalShow(true);
-  };
-
+const LiveAreaSection = ({ handleShowModal }) => {
   return (
     <section className="live-area" id="live-area">
       <div className="container-fluid py-5">
@@ -64,8 +54,6 @@ const LiveAreaSection = () => {
           </div>
         </div>
       </div>
-
-      <ModalWatchNow show={modalShow} onHide={() => setModalShow(false)} />
     </section>
   );
 };

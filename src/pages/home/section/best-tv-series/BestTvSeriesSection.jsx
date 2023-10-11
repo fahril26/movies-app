@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import Header from "../../../../components/Header";
 import MyCard from "../../../../components/MyCard";
@@ -9,7 +10,7 @@ import "../../../../style/BestTvSeriesSection.css";
 import { ResizeContext } from "../../../../context/WindowWidthContext";
 import useSetCardTotals from "../../../../hook/useSetCardTotals";
 
-const BestTvSeriesSection = () => {
+const BestTvSeriesSection = ({ handleShowModal }) => {
   const { data, loading } = useFetch(
     "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1"
   );
@@ -57,6 +58,8 @@ const BestTvSeriesSection = () => {
                   releaseDate={data.first_air_date}
                   id={data.id}
                   type={type}
+                  width={"95%"}
+                  handleShowModal={handleShowModal}
                 />
               )}
             </div>

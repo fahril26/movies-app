@@ -3,6 +3,7 @@
   --bs-card-border-color: none !important;
   color: #fff !important;
   position: relative;
+  animation: showUp 1s ease-in;
 }
 
 .card .extra-content {
@@ -65,4 +66,31 @@
 
 .extra-content:not(:hover) {
   opacity: 0 !important;
+}
+
+.card button {
+  width: 100%;
+  padding: 5px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-weight: 500;
+}
+
+.card .watch-now a {
+  padding: 0;
+}
+
+.card .watch-now a:hover button {
+  color: var(--yellow);
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

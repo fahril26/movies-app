@@ -1,34 +1,5 @@
 .all-list {
-  padding-top: 5rem;
-}
-
-.navigate-back {
-  margin-bottom: 3rem;
-}
-
-.all-list .input-group {
-  box-shadow: inset 0px 4px 9px 0px rgba(0, 0, 0, 0.25) !important;
-  background-color: rgb(18, 21, 30) !important;
-  border-radius: 10px;
-  flex-wrap: nowrap;
-}
-
-.input-group input {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: #fff !important;
-}
-
-.input-group input::placeholder {
-  color: #bbb;
-}
-
-.all-list button {
-  background-color: var(--yellow);
-  border: none;
-}
-
-.all-list button:hover {
-  background-color: #d1c70c;
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+  background: url("../assets/background/services_bg.jpg");
 }

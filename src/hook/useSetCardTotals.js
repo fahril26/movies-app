@@ -1,14 +1,14 @@
-import { useEffect } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const useSetCardTotals = ({ windowWidth, initialValue, newValue }) => {
-  const [cardTotals, setCardTotals] = useState(initialValue);
+  const [cardTotal, setCardTotal] = useState(initialValue);
 
   const handleCardTotals = () => {
-    const cardTotal =
+    const newCardTotal =
       windowWidth > 992 || windowWidth < 768 ? initialValue : newValue;
 
-    setCardTotals(cardTotal);
+    setCardTotal(newCardTotal);
   };
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const useSetCardTotals = ({ windowWidth, initialValue, newValue }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowWidth]);
 
-  return cardTotals;
+  return cardTotal;
 };
 
 export default useSetCardTotals;

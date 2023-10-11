@@ -13,15 +13,24 @@ const MyCard = ({
   releaseDate,
   id,
   type,
+  width,
+  handleShowModal,
 }) => {
   return (
-    <Card className={className} style={{ width: "90%" }}>
+    <Card
+      className={className}
+      style={{
+        width: width ? width : "90%",
+        animation: "showUp 1s ease-in-out",
+      }}
+    >
       {poster ? (
         <Card.Img
           variant="top"
           src={`https://image.tmdb.org/t/p/w220_and_h330_face${poster}`}
           className="rounded"
           alt="poster"
+          height={350}
         />
       ) : (
         <ImageLost />
@@ -51,7 +60,7 @@ const MyCard = ({
 
       <div className="extra-content">
         <MyNav width={{ width: "130px" }} className={"watch-now"}>
-          Trailer
+          <button onClick={handleShowModal}>Trailer</button>
         </MyNav>
 
         <MyNav

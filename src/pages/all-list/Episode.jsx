@@ -63,7 +63,7 @@ const Episode = () => {
         {season?.length > 1 && (
           <div className="navigation row">
             <div className="col-6">
-              {pagination.prevLink && season?.length - 1 !== 0 && (
+              {pagination?.prevLink && season?.length - 1 !== 0 && (
                 <Link className="float-start" onClick={decrement}>
                   <i className="bi bi-arrow-left"></i>
                   {pagination.prevLink}
@@ -72,7 +72,7 @@ const Episode = () => {
             </div>
 
             <div className="col-6">
-              {pagination.nextLink && (
+              {pagination?.nextLink && (
                 <Link className="float-end" onClick={increment}>
                   {pagination.nextLink} <i className="bi bi-arrow-right"></i>
                 </Link>

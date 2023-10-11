@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
 import Header from "./Header";
 import "../style/AllList.css";
 import ListMoviesComponent from "./ListMoviesComponent";
 import Footer from "../components/Footer";
+import MyNavbar from "../components/Navbar";
+import AnimatedProgressBar from "./AnimatedProgressBar";
 
 const LayoutListMovies = ({
   fetchData,
@@ -11,37 +12,41 @@ const LayoutListMovies = ({
   currentPage,
   titlePage,
   secondTitlePage,
-  loading,
   type,
 }) => {
   return (
-    <div className="all-list bg-dark">
-      <div className="container-fluid">
-        <div className="row navigate-back">
-          <Link to={-1}>
-            <i className="bi bi-arrow-left"></i> Back
-          </Link>
-        </div>
-        <div className="row">
-          <div className="col-lg-10 col-sm-9 col-8">
-            <Header>
-              <h5>{secondTitlePage}</h5>
-              <h1>{titlePage}</h1>
-            </Header>
+    <>
+      <MyNavbar fixed={"top"} />
+      <div className="all-list">
+        {fetchData?.showPersentageBar ? (
+          <AnimatedProgressBar width={fetchData?.loadingPersentage} />
+        ) : null}
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-10 col-sm-9 col-8">
+              <Header>
+                <h5>{secondTitlePage}</h5>
+                <h1>{titlePage}</h1>
+              </Header>
+            </div>
           </div>
-        </div>
 
-        <ListMoviesComponent
-          fetchData={fetchData}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          loading={loading}
-          type={type}
-        />
+          {!fetchData.loading ? (
+            <ListMoviesComponent
+              fetchData={fetchData}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              type={type}
+              loading={fetchData.showPersentageBar}
+            />
+          ) : (
+            <div className="loading" style={{ height: "100vh" }}></div>
+          )}
+        </div>
       </div>
 
-      <Footer className={"mt-5"} />
-    </div>
+      <Footer />
+    </>
   );
 };
 

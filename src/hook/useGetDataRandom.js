@@ -1,23 +1,23 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-const useGetDataRandom = (dataSent, cardsLength) => {
+const useGetDataRandom = (dataReceived, cardsLength) => {
   const [data, setData] = useState(null);
 
   const getDataRandom = () => {
-    if (dataSent && dataSent?.results.length > 0) {
+    if (dataReceived && dataReceived?.results?.length > 0) {
       const randomIndexes = [];
       let randomIndex = null;
 
       // eslint-disable-next-line no-unused-vars
-      for (const index of dataSent.results) {
-        randomIndex = Math.floor(Math.random() * dataSent.results.length);
+      for (const index of dataReceived.results) {
+        randomIndex = Math.floor(Math.random() * dataReceived?.results?.length);
 
         if (
-          !randomIndexes.includes(dataSent.results[randomIndex]) &&
+          !randomIndexes.includes(dataReceived?.results[randomIndex]) &&
           randomIndexes.length < cardsLength
         ) {
-          randomIndexes.push(dataSent.results[randomIndex]);
+          randomIndexes.push(dataReceived?.results[randomIndex]);
         }
       }
 
@@ -28,7 +28,7 @@ const useGetDataRandom = (dataSent, cardsLength) => {
   useEffect(() => {
     getDataRandom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataSent, cardsLength]);
+  }, [dataReceived, cardsLength]);
 
   return data;
 };

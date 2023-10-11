@@ -59,6 +59,7 @@ const TopRatedSection = () => {
                   releaseDate={data.release_date}
                   id={data.id}
                   type={type}
+                  width={"95%"}
                 />
               )}
             </div>

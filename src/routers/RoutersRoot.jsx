@@ -13,14 +13,22 @@ import TvSeriesDetail from "../pages/detail/TvSeriesDetail";
 import PaginationContext from "../context/PaginationContext";
 import Seasons from "../pages/all-list/Seasons";
 import Episode from "../pages/all-list/Episode";
+import ModaltrailerContext from "../context/ModaltrailerContext";
 
 export const RoutersRoot = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" errorElement={<ErrorElement />}>
-        <Route index element={<Home />} />
         <Route
-          path="https://movies-app-gamma-six.vercel.app/upcoming-list"
+          index
+          element={
+            <ModaltrailerContext>
+              <Home />
+            </ModaltrailerContext>
+          }
+        />
+        <Route
+          path="/upcoming-list"
           element={
             <PaginationContext>
               <UpcomingList />
