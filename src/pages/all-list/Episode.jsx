@@ -3,11 +3,14 @@ import MyNavbar from "../../components/Navbar";
 import TvShowHeader from "../../components/TvShowHeader";
 import useFetch from "../../hook/useFetch";
 import { useParams } from "react-router-dom";
-import ListGroupSeasons from "../../components/ListGroupComponent";
+import ListGroupComponent from "../../components/ListGroupComponent";
 import "../../style/Episode.css";
 import Footer from "../../components/Footer";
 import { useState } from "react";
 import { useEffect } from "react";
+import AnimatedProgressBar from "../../components/AnimatedProgressBar";
+import { useNavigate } from "react-router-dom";
+import CurrentPageContext from "../../context/CurrentPageContext";
 
 const Episode = () => {
   const [pagination, setPagination] = useState({
@@ -17,53 +20,70 @@ const Episode = () => {
   });
 
   const { tv_id } = useParams();
+  const navigate = useNavigate();
 
   const getDataSeason = useFetch(`https://api.themoviedb.org/3/tv/${tv_id}}`);
-  const season = getDataSeason?.data?.seasons;
+  const season = getDataSeason?.data?.seasons?.filter(
+    (s) => s.season_number !== 0
+  );
   const season_number = Number(localStorage.getItem("season_number"));
-  const currentIndex = Number(localStorage.getItem("index"));
-  const { data, loading } = useFetch(
+  const index = Number(localStorage.getItem("index"));
+
+  const { data, loadingPersentage, showPersentageBar } = useFetch(
     `https://api.themoviedb.org/3/tv/${tv_id}/season/${season_number}`
   );
   const listFor = "episode";
 
   const increment = () => {
-    localStorage.setItem("index", currentIndex + 1);
+    localStorage.setItem("index", index + 1);
     localStorage.setItem("season_number", season_number + 1);
+    navigate(`/tv-series-detail/${tv_id}/seasons/${season_number + 1}`);
   };
 
   const decrement = () => {
-    localStorage.setItem("index", currentIndex - 1);
+    localStorage.setItem("index", index - 1);
     localStorage.setItem("season_number", season_number - 1);
+    navigate(`/tv-series-detail/${tv_id}/seasons/${season_number - 1}`);
+  };
+
+  const handleChangePagination = () => {
+    if (season) {
+      const newPagination = pagination;
+      newPagination.currentIndex = index;
+      newPagination.nextLink = season[pagination.currentIndex + 1]?.name;
+      if (season_number > 1)
+        newPagination.prevLink = season[pagination.currentIndex - 1]?.name;
+
+      setPagination(newPagination);
+    }
   };
 
   useEffect(() => {
-    if (season) {
-      const newPagination = pagination;
-      newPagination.currentIndex = currentIndex;
-      newPagination.nextLink = season[currentIndex + 1]?.name;
-      if (season?.length > 1)
-        newPagination.prevLink = season[currentIndex - 1]?.name;
-      setPagination(newPagination);
-    }
-  }, [season, season_number, currentIndex]);
+    handleChangePagination();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [season, season_number, index]);
 
   return (
     <>
-      <div className="episode">
-        <MyNavbar fixed={top} />
+      {showPersentageBar && <AnimatedProgressBar width={loadingPersentage} />}
 
+      <CurrentPageContext>
+        <MyNavbar fixed={"top"} />
+      </CurrentPageContext>
+      <div className="episode">
         <TvShowHeader
           name={data?.name}
           poster={data?.poster_path}
           releaseDate={data?.air_date}
           prevLink={"List Seasons"}
+          listFor={listFor}
+          id={tv_id}
         />
 
         {season?.length > 1 && (
           <div className="navigation row">
             <div className="col-6">
-              {pagination?.prevLink && season?.length - 1 !== 0 && (
+              {pagination?.prevLink && pagination.currentIndex >= 1 && (
                 <Link className="float-start" onClick={decrement}>
                   <i className="bi bi-arrow-left"></i>
                   {pagination.prevLink}
@@ -82,7 +102,7 @@ const Episode = () => {
         )}
 
         <div className="list-episode">
-          <ListGroupSeasons
+          <ListGroupComponent
             data={data?.episodes}
             listFor={listFor}
             title={"Episode"}

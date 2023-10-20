@@ -5,12 +5,12 @@ import MyNav from "../../../../components/MyNav";
 import PlaceholderCard from "../../../../components/PlaceholderCard";
 import useFetch from "../../../../hook/useFetch";
 import useGetDataRandom from "../../../../hook/useGetDataRandom";
-
 import "../../../../style/TopRatedSection.css";
 import { ResizeContext } from "../../../../context/WindowWidthContext";
 import useSetCardTotals from "../../../../hook/useSetCardTotals";
 
-const TopRatedSection = () => {
+// eslint-disable-next-line react/prop-types
+const TopRatedSection = ({ handleShowModal }) => {
   const { data, loading } = useFetch(
     "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
   );
@@ -26,7 +26,7 @@ const TopRatedSection = () => {
 
   const getDataRandom = useGetDataRandom(data, cardTotals);
 
-  const link = "top-rated-movies-list";
+  const link = "/movies/top-rated/1";
 
   const type = "movie";
 
@@ -60,6 +60,7 @@ const TopRatedSection = () => {
                   id={data.id}
                   type={type}
                   width={"95%"}
+                  handleShowModal={handleShowModal}
                 />
               )}
             </div>

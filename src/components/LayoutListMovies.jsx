@@ -3,8 +3,9 @@ import Header from "./Header";
 import "../style/AllList.css";
 import ListMoviesComponent from "./ListMoviesComponent";
 import Footer from "../components/Footer";
-import MyNavbar from "../components/Navbar";
 import AnimatedProgressBar from "./AnimatedProgressBar";
+import MyNavbar from "./Navbar";
+import ModaltrailerContext from "../context/ModaltrailerContext";
 
 const LayoutListMovies = ({
   fetchData,
@@ -17,10 +18,11 @@ const LayoutListMovies = ({
   return (
     <>
       <MyNavbar fixed={"top"} />
+      {fetchData?.showPersentageBar ? (
+        <AnimatedProgressBar width={fetchData?.loadingPersentage} />
+      ) : null}
+
       <div className="all-list">
-        {fetchData?.showPersentageBar ? (
-          <AnimatedProgressBar width={fetchData?.loadingPersentage} />
-        ) : null}
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-10 col-sm-9 col-8">
@@ -32,13 +34,15 @@ const LayoutListMovies = ({
           </div>
 
           {!fetchData.loading ? (
-            <ListMoviesComponent
-              fetchData={fetchData}
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-              type={type}
-              loading={fetchData.showPersentageBar}
-            />
+            <ModaltrailerContext>
+              <ListMoviesComponent
+                fetchData={fetchData}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+                type={type}
+                loading={fetchData.showPersentageBar}
+              />
+            </ModaltrailerContext>
           ) : (
             <div className="loading" style={{ height: "100vh" }}></div>
           )}

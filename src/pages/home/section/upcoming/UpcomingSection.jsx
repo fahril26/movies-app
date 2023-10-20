@@ -1,10 +1,8 @@
 import Header from "../../../../components/Header";
 import MyCard from "../../../../components/MyCard";
 import MyNav from "../../../../components/MyNav";
-
 import "../../../../style/UpcomingSection.css";
 import useFetch from "../../../../hook/useFetch";
-
 import useGetDataRandom from "../../../../hook/useGetDataRandom";
 import PlaceholderCard from "../../../../components/PlaceholderCard";
 import { useContext } from "react";
@@ -13,7 +11,8 @@ import useSetCardTotals from "../../../../hook/useSetCardTotals";
 
 const url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
 
-const UpcomingSection = () => {
+// eslint-disable-next-line react/prop-types
+const UpcomingSection = ({ handleShowModal }) => {
   const { data, loading } = useFetch(url);
 
   const windowWidth = useContext(ResizeContext);
@@ -27,7 +26,7 @@ const UpcomingSection = () => {
 
   const getDataRandom = useGetDataRandom(data, cardTotals);
 
-  const link = "upcoming-list";
+  const link = "/movies/upcoming/1";
   const type = "movie";
 
   return (
@@ -59,6 +58,7 @@ const UpcomingSection = () => {
                   id={data.id}
                   type={type}
                   width={"95%"}
+                  handleShowModal={handleShowModal}
                 />
               )}
             </div>

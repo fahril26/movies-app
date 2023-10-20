@@ -2,6 +2,7 @@
   background: url("../assets/background/services_bg.jpg");
   color: #fff;
   padding: 5rem 0;
+  overflow: hidden;
 }
 
 .movie-detail a.nav-link {
@@ -23,4 +24,8 @@
 
 .poster img {
   border-radius: 5px;
+}
+
+.movie-detail .navigation a {
+  text-decoration: underline !important;
 }

@@ -7,8 +7,11 @@ export const TrailerContext = createContext();
 const ModaltrailerContext = ({ children }) => {
   const [modalShow, setModalShow] = useState(false);
 
-  const handleShowModal = (e) => {
-    e.preventDefault();
+  const handleShowModal = (data) => {
+    if (!data) {
+      alert("No Trailer Data");
+      return;
+    }
 
     setModalShow(true);
   };

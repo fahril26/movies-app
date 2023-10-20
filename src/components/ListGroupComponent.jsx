@@ -14,9 +14,9 @@ const ListGroupComponent = ({ data, listFor, title }) => {
     return yearOfRelease.slice(0, 4);
   };
 
-  const handleClick = (index, seasonNumber) => {
-    localStorage.setItem("index", index);
+  const handleClick = (seasonNumber, index) => {
     localStorage.setItem("season_number", seasonNumber);
+    localStorage.setItem("index", index);
   };
 
   const changeFormatDate = (date) => {
@@ -66,7 +66,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
           <div className="poster">
             <Link
               to={`/tv-series-detail/${tv_id}/seasons/${item.season_number}`}
-              onClick={() => handleClick(index, item.season_number)}
+              onClick={() => handleClick(item.season_number, index)}
             >
               {item?.poster_path || item?.still_path ? (
                 <img
@@ -88,7 +88,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
                 {listFor === "episode" && item.episode_number + "."}{" "}
                 <Link
                   to={`/tv-series-detail/${tv_id}/seasons/${item.season_number}`}
-                  onClick={() => handleClick(index, item.season_number)}
+                  onClick={() => handleClick(item.season_number, index)}
                 >
                   {item.name}
                 </Link>
@@ -120,7 +120,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
 
                   {item.runtime && (
                     <span className="runtime">
-                      {" •"}
+                      {" • "}
                       {changeFormatDuration(item?.runtime)}
                     </span>
                   )}

@@ -1,3 +1,7 @@
+.episode {
+  padding: 5.5rem 0;
+}
+
 .episode .navigation a {
   color: #000 !important;
   font-size: 1.1rem;

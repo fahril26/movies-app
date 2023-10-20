@@ -17,36 +17,54 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
   const [loadingPersentage, setLoadingPercentage] = useState(0);
   const [showPersentageBar, setShowPersentageBar] = useState(true);
+
   let timeout = null;
 
-  const fetchData = async () => {
-    setLoadingPercentage(0);
-    setShowPersentageBar(true);
-    let count = 0;
-    const total = 100;
-    let remainder = null;
-    let finished = null;
+  const changeDataMax = (data) => {
+    if (data.total_pages > 500) {
+      const newData = { ...data, total_pages: 500 };
 
-    const interval = setInterval(() => {
-      count++;
-      setLoadingPercentage(count);
-    }, [count]);
+      return newData;
+    }
+
+    return data;
+  };
+
+  const fetchData = async () => {
+    setShowPersentageBar(true);
+    let getData = null;
+
+    // start loading persentage
+    const progressBar = {
+      process: 0,
+      totalProcess: 100,
+      remainderProcess: null,
+      finished: null,
+    };
+
+    const loadingPersentageBar = setInterval(() => {
+      progressBar.process++;
+      setLoadingPercentage(progressBar.process);
+    }, progressBar.process);
+    // end loading persentage
 
     try {
       const response = await axios.get(url, authentication);
-      clearInterval(interval);
-      remainder = total - count;
-      finished = count + remainder;
-
-      setData(response.data);
-      setLoading(false);
-      setLoadingPercentage(finished);
-      timeout = setTimeout(() => {
-        setShowPersentageBar(false);
-      }, 600);
+      getData = changeDataMax(response.data);
+      setData(getData);
     } catch (error) {
       setError(error);
-      clearInterval(interval);
+    } finally {
+      clearInterval(loadingPersentageBar);
+      progressBar.remainderProcess =
+        progressBar.totalProcess - progressBar.process;
+      progressBar.finished = progressBar.process + progressBar.remainderProcess;
+      setLoadingPercentage(progressBar.finished);
+      setLoading(false);
+      timeout = setTimeout(() => {
+        setShowPersentageBar(false);
+        setLoadingPercentage(0);
+      }, 800);
     }
   };
 

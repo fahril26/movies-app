@@ -3,32 +3,38 @@ import useFetch from "../hook/useFetch";
 import "../style/LayoutMovieDetail.css";
 import MyNavbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
-import { Nav } from "react-bootstrap";
+import { Button, Nav } from "react-bootstrap";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import ImageLost from "./ImageLost";
+import { useContext } from "react";
+import { TrailerContext } from "../context/ModaltrailerContext";
+import ModalWatchNow from "../components/ModalWatchNow";
+import CurrentPageContext from "../context/CurrentPageContext";
 
-const type = localStorage.getItem("type");
+const LayoutMovieDetail = ({ type }) => {
+  const { modalShow, setModalShow, handleShowModal } =
+    useContext(TrailerContext);
 
-const handleChangeUrl = () => {
-  let url = null;
-  type === "movie"
-    ? (url = `https://api.themoviedb.org/3/movie/`)
-    : (url = `https://api.themoviedb.org/3/tv/`);
+  const handleChangeUrl = (urlMovie, urlTv) => {
+    let url = null;
+    type === "movie" ? (url = urlMovie) : (url = urlTv);
 
-  return url;
-};
+    return url;
+  };
 
-const url = handleChangeUrl();
-
-const LayoutMovieDetail = () => {
   const id = useParams();
+
+  const url = handleChangeUrl(
+    `https://api.themoviedb.org/3/movie/`,
+    `https://api.themoviedb.org/3/tv/`
+  );
 
   const useId = type === "movie" ? id.movie_id : id.tv_id;
 
   const { data, loading } = useFetch(url + useId);
-
   const getCredits = useFetch(url + `${useId}/credits`);
+  const getVideo = useFetch(url + `${useId}/videos`);
 
   const formatDuration = (timeTotal) => {
     const hour = Math.floor(timeTotal / 60);
@@ -53,14 +59,20 @@ const LayoutMovieDetail = () => {
 
   const getProducer = getCrew?.filter(findProducer);
 
+  const getOfficialTrailer = getVideo?.data?.results.find((data) =>
+    data.name.includes("Trailer")
+  );
+
   return (
     <>
       <div className="movie-detail">
-        <MyNavbar fixed={"top"} />
+        <CurrentPageContext>
+          <MyNavbar fixed={"top"} />
+        </CurrentPageContext>
         <div className="container-fluid mt-5 px-0">
           <div className="content row  gap-md-3 gap-5 justify-content-center justify-content-md-start">
             <div className="poster col-11 col-md-5 col-lg-4 col-xl-3">
-              {!loading ? (
+              {!loading && data.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w220_and_h330_face${data?.poster_path}`}
                   alt=""
@@ -122,9 +134,11 @@ const LayoutMovieDetail = () => {
                     {type === "movie" ? (
                       <div className="director">
                         <p className="fw-semibold">Director : </p>
-                        {getDirector == true ? (
+                        {getDirector?.length > 0 ? (
                           getDirector?.map((data) => (
-                            <p key={data?.id}>{data?.name}</p>
+                            <p key={data?.id}>
+                              {data?.name ? data.name : "No Data"}
+                            </p>
                           ))
                         ) : (
                           <p>No Data</p>
@@ -133,7 +147,7 @@ const LayoutMovieDetail = () => {
                     ) : (
                       <div className="producer">
                         <p className="fw-semibold">Producer : </p>
-                        {getProducer == true ? (
+                        {getProducer?.length > 0 ? (
                           getProducer?.map((data) => (
                             <p key={data?.id}>{data?.name}</p>
                           ))
@@ -144,11 +158,31 @@ const LayoutMovieDetail = () => {
                     )}
                   </div>
 
+                  {type === "movie" && (
+                    <div className="btn-trailer-wrapper mt-4">
+                      <Button
+                        size="sm"
+                        onClick={() => handleShowModal(getOfficialTrailer)}
+                      >
+                        Watch Trailer
+                      </Button>
+                    </div>
+                  )}
+
                   {type === "tv" && (
-                    <div className="mt-4">
+                    <div className="mt-4 d-flex gap-3 align-items-end  navigation">
                       <Link to={`/tv-series-detail/${useId}/seasons`}>
                         See All Seasons
                       </Link>
+
+                      <div className="btn-trailer-wrapper">
+                        <Button
+                          size="sm"
+                          onClick={() => handleShowModal(getOfficialTrailer)}
+                        >
+                          Watch Trailer
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </>
@@ -170,6 +204,12 @@ const LayoutMovieDetail = () => {
           </div>
         </div>
       </div>
+
+      <ModalWatchNow
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        data={getOfficialTrailer?.key}
+      />
       <Footer />
     </>
   );

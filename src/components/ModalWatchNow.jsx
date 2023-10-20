@@ -17,12 +17,10 @@ function MyVerticallyCenteredModal(props) {
         <iframe
           width="100%"
           height="450"
-          src="https://www.youtube.com/embed/b8Jvw_vzQN0?si=A-g1eYCA6vR9BhyP"
+          src={`https://www.youtube.com/embed/${props.data}`}
           title="YouTube video player"
           // eslint-disable-next-line react/no-unknown-property
-          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
         ></iframe>
       </Modal.Body>
     </Modal>

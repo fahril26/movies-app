@@ -1,12 +1,12 @@
-import { useEffect } from "react";
 import LayoutMovieDetail from "../../components/LayoutMovieDetail";
+import ModaltrailerContext from "../../context/ModaltrailerContext";
 
 const TvSeriesDetail = () => {
-  useEffect(() => {
-    localStorage.setItem("type", "tv");
-  }, []);
-
-  return <LayoutMovieDetail />;
+  return (
+    <ModaltrailerContext>
+      <LayoutMovieDetail type={"tv"} />
+    </ModaltrailerContext>
+  );
 };
 
 export default TvSeriesDetail;

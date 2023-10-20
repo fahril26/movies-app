@@ -5,25 +5,20 @@ import LiveAreaSection from "./section/live-area/LiveAreaSection";
 import TopRatedSection from "./section/toprated/TopRatedSection";
 import UpcomingSection from "./section/upcoming/UpcomingSection";
 import MyNavbar from "../../components/Navbar";
-import { TrailerContext } from "../../context/ModaltrailerContext";
-import ModalWatchNow from "../../components/ModalWatchNow";
-import { useContext } from "react";
+import CurrentPageContext from "../../context/CurrentPageContext";
 
 const Home = () => {
-  const { modalShow, handleShowModal, setModalShow } =
-    useContext(TrailerContext);
-
   return (
     <main id="home" className="home">
-      <MyNavbar fixed={"top"} />
+      <CurrentPageContext>
+        <MyNavbar fixed={"top"} />
+      </CurrentPageContext>
       <Jumbotron />
-      <UpcomingSection handleShowModal={handleShowModal} />
-      <TopRatedSection handleShowModal={handleShowModal} />
-      <LiveAreaSection handleShowModal={handleShowModal} />
-      <BestTvSeriesSection handleShowModal={handleShowModal} />
+      <UpcomingSection />
+      <TopRatedSection />
+      <LiveAreaSection />
+      <BestTvSeriesSection />
       <Footer />
-
-      <ModalWatchNow show={modalShow} onHide={() => setModalShow(false)} />
     </main>
   );
 };

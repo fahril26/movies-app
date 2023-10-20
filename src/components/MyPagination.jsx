@@ -1,27 +1,40 @@
 /* eslint-disable react/prop-types */
 import { Pagination } from "react-bootstrap";
-import { MyPaginationContext } from "../context/PaginationContext";
 import "../style/MyPagination.css";
-import { useContext } from "react";
 
-const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
-  const { pageNumbers, setPageNumbers } = useContext(MyPaginationContext);
-
+const MyPagination = ({
+  totalPage,
+  currentPage,
+  setCurrentPage,
+  loading,
+  pageNumbers,
+  setPageNumbers,
+}) => {
   const changeNumber = (index) => {
     let newNumbers = null;
     const currentNumber = pageNumbers.slice();
 
-    if (index <= 2 && currentNumber[0] !== 1) {
-      if (currentPage > 3) newNumbers = decrementNumber(index, currentNumber);
+    if (index < 2 && currentNumber[0] !== 1) {
+      if (currentPage > 3 && currentPage <= totalPage - 4) {
+        newNumbers = decrementNumber(index, currentNumber);
+        localStorage.setItem("paginationNumbers", JSON.stringify(newNumbers));
+      } else newNumbers = currentNumber;
     } else if (
       index > 2 &&
       currentNumber[currentNumber.length - 1] !== totalPage
     ) {
-      if (currentPage <= totalPage - 3)
+      if (currentPage <= totalPage - 3 && currentPage >= 5) {
         newNumbers = incrementNumber(index, currentNumber);
+        localStorage.setItem("paginationNumbers", JSON.stringify(newNumbers));
+      } else {
+        newNumbers = currentNumber;
+      }
     }
 
-    if (newNumbers && currentPage > 3) setPageNumbers(newNumbers);
+    if (newNumbers && currentPage > 3) {
+      setPageNumbers(newNumbers);
+      localStorage.setItem("paginationNumbers", JSON.stringify(newNumbers));
+    }
   };
 
   const incrementNumber = (indexNumber, currentNumber) => {
@@ -46,6 +59,7 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
         totalPage,
       ];
 
+    localStorage.setItem("paginationNumbers", JSON.stringify(newNumber));
     return newNumber;
   };
 
@@ -66,13 +80,14 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
 
     if (newNumber[0] === 0) newNumber = [1, 2, 3, 4, 5];
 
+    localStorage.setItem("paginationNumbers", JSON.stringify(newNumber));
     return newNumber;
   };
 
   const handleClick = (number, index) => {
     if (!loading) {
       setCurrentPage(number);
-      changeNumber(index);
+      number !== currentPage && changeNumber(index);
     }
   };
 
@@ -85,6 +100,7 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
         newNumber.push(currentNumber[index]);
       }
 
+      localStorage.setItem("paginationNumbers", JSON.stringify(newNumber));
       setCurrentPage(1);
       setPageNumbers(newNumber);
     }
@@ -101,6 +117,7 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
 
       newNumber.reverse();
 
+      localStorage.setItem("paginationNumbers", JSON.stringify(newNumber));
       setCurrentPage(totalPage);
       setPageNumbers(newNumber);
     }
@@ -124,7 +141,7 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
 
   return (
     <Pagination className="my-pagination d-flex justify-content-center gap-2">
-      {currentPage > 5 && (
+      {pageNumbers[0] !== 1 && (
         <Pagination.Item
           onClick={firstPage}
           linkStyle={{ cursor: loading && "no-drop" }}
@@ -142,7 +159,7 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
         <Pagination.Item
           key={items}
           onClick={() => handleClick(items, index)}
-          active={currentPage === items}
+          active={currentPage == items}
           linkStyle={{ cursor: loading && "no-drop" }}
         >
           {items}
@@ -155,7 +172,7 @@ const MyPagination = ({ totalPage, currentPage, setCurrentPage, loading }) => {
           linkStyle={{ cursor: loading && "no-drop" }}
         />
       )}
-      {currentPage <= totalPage - 5 && (
+      {pageNumbers[4] !== totalPage && (
         <Pagination.Item
           onClick={lastPage}
           linkStyle={{ cursor: loading && "no-drop" }}

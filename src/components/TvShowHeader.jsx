@@ -5,7 +5,7 @@ import "../style/TvShowHeader.css";
 import useFetchYear from "../hook/useFetchYear";
 import ImageLost from "./ImageLost";
 
-const TvShowHeader = ({ name, releaseDate, poster, prevLink }) => {
+const TvShowHeader = ({ name, releaseDate, poster, prevLink, listFor, id }) => {
   const getYearRelease = useFetchYear(releaseDate);
 
   return (
@@ -26,13 +26,19 @@ const TvShowHeader = ({ name, releaseDate, poster, prevLink }) => {
 
         <div className="header-title">
           <h2 className="mb-2">
-            {name}{" "}
+            {name ? name : "Data Not Found"}{" "}
             {getYearRelease && (
               <span className="text-white-50">{`(${getYearRelease})`}</span>
             )}
           </h2>
 
-          <Link to={-1}>
+          <Link
+            to={
+              listFor === "episode"
+                ? `/tv-series-detail/${id}/seasons`
+                : `/tv-series-detail/${id}`
+            }
+          >
             <i className="bi bi-arrow-left-short ">
               Back to {prevLink ? prevLink : "Main"}
             </i>

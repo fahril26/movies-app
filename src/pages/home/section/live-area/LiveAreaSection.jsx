@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
 import Header from "../../../../components/Header";
 import MyOdometer from "../../../../components/MyOdometer";
 import "../../../../style/LifeAreaSection.css";
 import Img from "../../../../assets/background/live_img.png";
 
-const LiveAreaSection = ({ handleShowModal }) => {
+const LiveAreaSection = () => {
   return (
     <section className="live-area" id="live-area">
       <div className="container-fluid py-5">
@@ -34,18 +33,6 @@ const LiveAreaSection = ({ handleShowModal }) => {
                   <MyOdometer />K<span className="plus">+</span>
                 </div>
                 <span className="text">Active Customer</span>
-              </div>
-            </div>
-
-            <div className="row mt-5">
-              <div className="col-5 ">
-                <Link
-                  to={"https://www.youtube.com/watch?v=b8Jvw_vzQN0"}
-                  className="watch-now"
-                  onClick={handleShowModal}
-                >
-                  <i className="bi bi-play-fill fs-4"></i> watch now
-                </Link>
               </div>
             </div>
           </div>

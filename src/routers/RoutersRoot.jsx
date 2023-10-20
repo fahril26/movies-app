@@ -5,50 +5,44 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home/Home";
 import ErrorElement from "../ErrorElement";
 import WindowWidthContext from "../context/WindowWidthContext";
-import { UpcomingList } from "../pages/all-list/UpcomingList";
-import TopRatedList from "../pages/all-list/TopRatedList";
+import { UpcomingList } from "../pages/all-list/movies/UpcomingList";
+import TopRatedList from "../pages/all-list/movies/TopRatedList";
 import BestTvSeriesList from "../pages/all-list/BestTvSeriesList";
 import MovieDetail from "../pages/detail/MovieDetail";
 import TvSeriesDetail from "../pages/detail/TvSeriesDetail";
-import PaginationContext from "../context/PaginationContext";
 import Seasons from "../pages/all-list/Seasons";
 import Episode from "../pages/all-list/Episode";
-import ModaltrailerContext from "../context/ModaltrailerContext";
+import PopularMovieList from "../pages/all-list/movies/PopularMovieList";
+import NowPlayingList from "../pages/all-list/movies/NowPlayingList";
+import CurrentPageContext from "../context/CurrentPageContext";
 
 export const RoutersRoot = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" errorElement={<ErrorElement />}>
+        <Route index element={<Home />} />
         <Route
-          index
+          path="/movies/upcoming/:page"
           element={
-            <ModaltrailerContext>
-              <Home />
-            </ModaltrailerContext>
-          }
-        />
-        <Route
-          path="/upcoming-list"
-          element={
-            <PaginationContext>
+            <CurrentPageContext>
               <UpcomingList />
-            </PaginationContext>
+            </CurrentPageContext>
           }
         />
         <Route
-          path="/top-rated-movies-list"
+          path="/movies/top-rated/:page"
           element={
-            <PaginationContext>
+            <CurrentPageContext>
               <TopRatedList />
-            </PaginationContext>
+            </CurrentPageContext>
           }
         />
         <Route
-          path="/best-tv-series-list"
+          path="/tv/best-tv-series/:page"
           element={
-            <PaginationContext>
+            <CurrentPageContext>
               <BestTvSeriesList />
-            </PaginationContext>
+            </CurrentPageContext>
           }
         />
         <Route path="/movie-detail/:movie_id" element={<MovieDetail />} />
@@ -57,6 +51,22 @@ export const RoutersRoot = () => {
         <Route
           path="/tv-series-detail/:tv_id/seasons/:index"
           element={<Episode />}
+        />
+        <Route
+          path="/movies/popular/:page"
+          element={
+            <CurrentPageContext>
+              <PopularMovieList />
+            </CurrentPageContext>
+          }
+        />
+        <Route
+          path="/movies/now-playing/:page"
+          element={
+            <CurrentPageContext>
+              <NowPlayingList />
+            </CurrentPageContext>
+          }
         />
       </Route>
     )

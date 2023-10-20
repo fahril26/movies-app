@@ -2,8 +2,8 @@
 import { Card } from "react-bootstrap";
 import "../style/MyCard.css";
 import { Link } from "react-router-dom";
-import MyNav from "./MyNav";
 import ImageLost from "./ImageLost";
+import { useNavigate } from "react-router-dom";
 
 const MyCard = ({
   className,
@@ -14,8 +14,9 @@ const MyCard = ({
   id,
   type,
   width,
-  handleShowModal,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Card
       className={className}
@@ -31,16 +32,39 @@ const MyCard = ({
           className="rounded"
           alt="poster"
           height={350}
+          onClick={() =>
+            navigate(
+              type == "movie"
+                ? `/movie-detail/${id}`
+                : `/tv-series-detail/${id}`
+            )
+          }
         />
       ) : (
-        <ImageLost />
+        <ImageLost
+          handleClick={function handleClick() {
+            navigate(
+              type == "movie"
+                ? `/movie-detail/${id}`
+                : `/tv-series-detail/${id}`
+            );
+          }}
+        />
       )}
 
       <Card.Body>
         <Card.Title style={{ height: "20px", fontSize: "0.9rem" }}>
           <div className="row">
             <div className="col-12 p-0">
-              <Link to={`/movie-detail/${id}`}>{title}</Link>
+              <Link
+                to={
+                  type == "movie"
+                    ? `/movie-detail/${id}`
+                    : `tv-series-detail/${id}`
+                }
+              >
+                {title}
+              </Link>
             </div>
           </div>
         </Card.Title>
@@ -57,22 +81,6 @@ const MyCard = ({
           </div>
         </div>
       </Card.Body>
-
-      <div className="extra-content">
-        <MyNav width={{ width: "130px" }} className={"watch-now"}>
-          <button onClick={handleShowModal}>Trailer</button>
-        </MyNav>
-
-        <MyNav
-          width={{ width: "130px" }}
-          className={"mt-4 detail"}
-          link={
-            type == "movie" ? `/movie-detail/${id}` : `tv-series-detail/${id}`
-          }
-        >
-          Details
-        </MyNav>
-      </div>
     </Card>
   );
 };
