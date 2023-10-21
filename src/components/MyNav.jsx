@@ -12,7 +12,7 @@ const MyNav = ({ link, className, children, width }) => {
     <Nav className="my-nav" defaultActiveKey="/home">
       <Nav.Item style={width} className={className}>
         <NavLink
-          href={link ? link : null}
+          to={link ? link : null}
           className="fw-semibold"
           onClick={resetLocalStorage}
         >

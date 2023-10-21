@@ -35,15 +35,19 @@ const Episode = () => {
   const listFor = "episode";
 
   const increment = () => {
-    localStorage.setItem("index", index + 1);
-    localStorage.setItem("season_number", season_number + 1);
-    navigate(`/tv-series-detail/${tv_id}/seasons/${season_number + 1}`);
+    if (!loadingPersentage) {
+      localStorage.setItem("index", index + 1);
+      localStorage.setItem("season_number", season_number + 1);
+      navigate(`/tv-series-detail/${tv_id}/seasons/${season_number + 1}`);
+    }
   };
 
   const decrement = () => {
-    localStorage.setItem("index", index - 1);
-    localStorage.setItem("season_number", season_number - 1);
-    navigate(`/tv-series-detail/${tv_id}/seasons/${season_number - 1}`);
+    if (!loadingPersentage) {
+      localStorage.setItem("index", index - 1);
+      localStorage.setItem("season_number", season_number - 1);
+      navigate(`/tv-series-detail/${tv_id}/seasons/${season_number - 1}`);
+    }
   };
 
   const handleChangePagination = () => {

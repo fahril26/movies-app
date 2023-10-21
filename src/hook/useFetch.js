@@ -61,10 +61,11 @@ const useFetch = (url) => {
       progressBar.finished = progressBar.process + progressBar.remainderProcess;
       setLoadingPercentage(progressBar.finished);
       setLoading(false);
+
       timeout = setTimeout(() => {
-        setShowPersentageBar(false);
         setLoadingPercentage(0);
-      }, 800);
+        setShowPersentageBar(false);
+      }, 600);
     }
   };
 
