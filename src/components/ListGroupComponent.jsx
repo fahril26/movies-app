@@ -56,7 +56,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
   };
 
   return (
-    <ListGroup style={{ height: data?.length ? "" : "220px" }}>
+    <ListGroup style={{ height: data?.length ? "" : "100vh" }}>
       {listFor === "episode" ? (
         <h5>{data?.length ? title + " " + data?.length : "No Data"}</h5>
       ) : null}
