@@ -10,6 +10,15 @@ import ImageLost from "./ImageLost";
 const ListGroupComponent = ({ data, listFor, title }) => {
   const { tv_id } = useParams();
 
+  const dataList = data?.map((item) => {
+    const vote_average = String(item.vote_average).slice(0, 3);
+
+    return {
+      ...item,
+      vote_average: Number(vote_average),
+    };
+  });
+
   const fetchYear = (yearOfRelease) => {
     return yearOfRelease.slice(0, 4);
   };
@@ -61,7 +70,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
         <h5>{data?.length ? title + " " + data?.length : "No Data"}</h5>
       ) : null}
 
-      {data?.map((item, index) => (
+      {dataList?.map((item, index) => (
         <ListGroup.Item key={item.id} className="d-flex gap-4">
           <div className="poster">
             <Link

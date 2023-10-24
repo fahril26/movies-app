@@ -31,6 +31,7 @@ function AccordionsCustomToogle({
   eventKey,
   resetStorage,
 }) {
+  console.log("oke");
   return (
     <Accordion>
       <div>

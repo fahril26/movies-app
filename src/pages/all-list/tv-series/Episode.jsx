@@ -11,6 +11,8 @@ import AnimatedProgressBar from "../../../components/AnimatedProgressBar";
 import { useNavigate } from "react-router-dom";
 import CurrentPageContext from "../../../context/CurrentPageContext";
 import "../../../style/Episode.css";
+import { useContext } from "react";
+import { ResizeContext } from "../../../context/WindowWidthContext";
 
 const Episode = () => {
   const [pagination, setPagination] = useState({
@@ -21,7 +23,7 @@ const Episode = () => {
 
   const { tv_id } = useParams();
   const navigate = useNavigate();
-
+  const windowWidth = useContext(ResizeContext);
   const getDataSeason = useFetch(`https://api.themoviedb.org/3/tv/${tv_id}}`);
   const season = getDataSeason?.data?.seasons?.filter(
     (s) => s.season_number !== 0
@@ -78,7 +80,10 @@ const Episode = () => {
         className="episode"
         style={{
           height:
-            data?.episodes?.length && data?.episodes?.length > 2 ? "" : "100vh",
+            data?.episodes?.length ||
+            (data?.episodes?.length > 2 && windowWidth > 768)
+              ? ""
+              : "100vh",
         }}
       >
         <TvShowHeader
