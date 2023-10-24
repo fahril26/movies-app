@@ -55,12 +55,8 @@ const ListGroupComponent = ({ data, listFor, title }) => {
     return `${hour ? hour + "h" : ""} ${minute}m`;
   };
 
-  console.log(data?.length);
-
   return (
-    <ListGroup
-      style={{ height: data?.length && data?.length > 2 ? "" : "100vh" }}
-    >
+    <ListGroup>
       {listFor === "episode" ? (
         <h5>{data?.length ? title + " " + data?.length : "No Data"}</h5>
       ) : null}

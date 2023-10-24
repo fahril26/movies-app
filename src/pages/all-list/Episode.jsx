@@ -74,7 +74,13 @@ const Episode = () => {
       <CurrentPageContext>
         <MyNavbar fixed={"top"} />
       </CurrentPageContext>
-      <div className="episode">
+      <div
+        className="episode"
+        style={{
+          height:
+            data?.episodes?.length && data?.episodes?.length > 2 ? "" : "100vh",
+        }}
+      >
         <TvShowHeader
           name={data?.name}
           poster={data?.poster_path}
