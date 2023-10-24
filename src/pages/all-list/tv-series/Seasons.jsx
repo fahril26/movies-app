@@ -27,8 +27,9 @@ const Seasons = () => {
         className="seasons"
         style={{
           height:
-            data?.seasons?.length ||
-            (data?.seasons?.length > 2 && windowWidth > 768)
+            data?.seasons?.length &&
+            data?.seasons?.length > 2 &&
+            windowWidth > 768
               ? ""
               : "100vh",
         }}

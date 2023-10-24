@@ -80,8 +80,9 @@ const Episode = () => {
         className="episode"
         style={{
           height:
-            data?.episodes?.length ||
-            (data?.episodes?.length > 2 && windowWidth > 768)
+            data?.episodes?.length &&
+            data?.episodes?.length > 2 &&
+            windowWidth > 768
               ? ""
               : "100vh",
         }}
