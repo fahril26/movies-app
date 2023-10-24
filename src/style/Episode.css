@@ -2,18 +2,14 @@
   padding-top: 5.5rem;
 }
 
-.episode .navigation a {
+.episode .navigation-list-episode a {
   color: #000 !important;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
-.episode .navigation {
+.episode .navigation-list-episode {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding: 10px 31px;
-}
-
-.episode .navigation a {
-  font-size: 0.9rem;
 }
 
 .list-episode {

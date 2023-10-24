@@ -65,9 +65,13 @@ const ListGroupComponent = ({ data, listFor, title }) => {
   };
 
   return (
-    <ListGroup style={{ height: data?.length < 2 || !data ? "60vh" : null }}>
+    <ListGroup style={{ height: data?.length < 2 || !data ? "80vh" : null }}>
       {listFor === "episode" ? (
-        <h5>{data?.length ? title + " " + data?.length : "No Data"}</h5>
+        <h5>
+          {data?.length
+            ? title + " " + data?.length
+            : "There are no episodes added to this season."}
+        </h5>
       ) : null}
 
       {dataList?.map((item, index) => (
@@ -86,7 +90,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
                   width={item.poster_path ? 110 : 150}
                 />
               ) : (
-                <ImageLost width={item.poster_path ? 110 : 150} />
+                <ImageLost width={110} />
               )}
             </Link>
           </div>

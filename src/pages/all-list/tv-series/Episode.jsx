@@ -11,8 +11,6 @@ import AnimatedProgressBar from "../../../components/AnimatedProgressBar";
 import { useNavigate } from "react-router-dom";
 import CurrentPageContext from "../../../context/CurrentPageContext";
 import "../../../style/Episode.css";
-import { useContext } from "react";
-import { ResizeContext } from "../../../context/WindowWidthContext";
 
 const Episode = () => {
   const [pagination, setPagination] = useState({
@@ -23,7 +21,6 @@ const Episode = () => {
 
   const { tv_id } = useParams();
   const navigate = useNavigate();
-  const windowWidth = useContext(ResizeContext);
   const getDataSeason = useFetch(`https://api.themoviedb.org/3/tv/${tv_id}}`);
   const season = getDataSeason?.data?.seasons?.filter(
     (s) => s.season_number !== 0
@@ -86,7 +83,7 @@ const Episode = () => {
       />
 
       {season?.length > 1 && (
-        <div className="navigation row">
+        <div className="navigation-list-episode row">
           <div className="col-6">
             {pagination?.prevLink && pagination.currentIndex >= 1 && (
               <Link className="float-start" onClick={decrement}>

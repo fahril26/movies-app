@@ -7,12 +7,8 @@ import Footer from "../../../components/Footer";
 import ListGroupComponent from "../../../components/ListGroupComponent";
 import CurrentPageContext from "../../../context/CurrentPageContext";
 import "../../../style/Season.css";
-import { useContext } from "react";
-import { ResizeContext } from "../../../context/WindowWidthContext";
 
 const Seasons = () => {
-  const windowWidth = useContext(ResizeContext);
-
   const { tv_id } = useParams();
   const { data, loading } = useFetch(
     `https://api.themoviedb.org/3/tv/${tv_id}`
