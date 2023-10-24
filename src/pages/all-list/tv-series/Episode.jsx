@@ -79,8 +79,7 @@ const Episode = () => {
       <div
         className="episode"
         style={{
-          height:
-            data?.episodes?.length > 2 && windowWidth > 768 ? "" : "100vh",
+          height: data?.episodes?.length > 2 && windowWidth > 768 ? "" : "",
         }}
       >
         <TvShowHeader

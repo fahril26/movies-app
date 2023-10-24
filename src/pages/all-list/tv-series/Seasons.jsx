@@ -26,7 +26,7 @@ const Seasons = () => {
       <div
         className="seasons"
         style={{
-          height: data?.seasons?.length > 2 && windowWidth > 768 ? "" : "100vh",
+          height: data?.seasons?.length > 2 && windowWidth > 768 ? "" : "",
         }}
       >
         <CurrentPageContext>
