@@ -108,6 +108,7 @@ const Episode = () => {
           data={data?.episodes}
           listFor={listFor}
           title={"Episode"}
+          loading={showPersentageBar}
         />
       </div>
 

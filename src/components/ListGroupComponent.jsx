@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "../style/ListGroupComponent.css";
 import ImageLost from "./ImageLost";
 
-const ListGroupComponent = ({ data, listFor, title }) => {
+const ListGroupComponent = ({ data, listFor, title, loading }) => {
   const { tv_id } = useParams();
 
   const dataList = data?.map((item) => {

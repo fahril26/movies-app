@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useEffect } from "react";
+import { useRef } from "react";
 import { Accordion, useAccordionButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-function CustomToggle({ children, eventKey, setRotate, rotate }) {
+function CustomToggle({ children, eventKey, setRotate, rotate, linkRef }) {
   const decoratedOnClick = useAccordionButton(eventKey, () => {
     const newTriggerRotate = rotate.slice();
     newTriggerRotate[eventKey] = !rotate[eventKey];
@@ -17,6 +19,7 @@ function CustomToggle({ children, eventKey, setRotate, rotate }) {
         e.preventDefault();
         decoratedOnClick();
       }}
+      ref={linkRef}
     >
       {children}
     </NavLink>
@@ -31,14 +34,21 @@ function AccordionsCustomToogle({
   eventKey,
   resetStorage,
 }) {
+  const linkRef = useRef(null);
+
+  useEffect(() => {
+    linkRef.current.classList.remove("active");
+  }, []);
+
   return (
     <Accordion>
-      <div>
+      <>
         <CustomToggle
           eventKey={eventKey}
           setRotate={setRotate}
           rotate={rotate}
           resetStorage={resetStorage}
+          linkRef={linkRef}
         >
           {children}
         </CustomToggle>
@@ -58,7 +68,7 @@ function AccordionsCustomToogle({
             ))}
           </>
         </Accordion.Collapse>
-      </div>
+      </>
     </Accordion>
   );
 }
