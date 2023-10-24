@@ -25,9 +25,7 @@ const Seasons = () => {
     <>
       <div
         className="seasons"
-        style={{
-          height: data?.seasons?.length > 2 && windowWidth > 768 ? "" : "",
-        }}
+        style={{ height: data?.seasons?.length > 0 ? "" : "100vh" }}
       >
         <CurrentPageContext>
           <MyNavbar fixed={"top"} />

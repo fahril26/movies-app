@@ -72,16 +72,11 @@ const Episode = () => {
   return (
     <>
       {showPersentageBar && <AnimatedProgressBar width={loadingPersentage} />}
-
       <CurrentPageContext>
         <MyNavbar fixed={"top"} />
       </CurrentPageContext>
-      <div
-        className="episode"
-        style={{
-          height: data?.episodes?.length > 2 && windowWidth > 768 ? "" : "",
-        }}
-      >
+      style={{ height: data?.episodes?.length > 0 ? "" : "100vh" }}
+      <div className="episode">
         <TvShowHeader
           name={data?.name}
           poster={data?.poster_path}
