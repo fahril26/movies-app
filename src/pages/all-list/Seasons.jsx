@@ -14,6 +14,8 @@ const Seasons = () => {
   );
   const listFor = "season";
 
+  console.log(data);
+
   const getDataSeason = data?.seasons.filter((s) => s.season_number !== 0);
 
   return (
