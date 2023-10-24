@@ -21,29 +21,26 @@ const Seasons = () => {
 
   const getDataSeason = data?.seasons.filter((s) => s.season_number !== 0);
 
-  return (
-    <>
-      <div
-        className="seasons"
-        style={{ height: data?.seasons?.length > 0 ? "" : "100vh" }}
-      >
-        <CurrentPageContext>
-          <MyNavbar fixed={"top"} />
-        </CurrentPageContext>
-        <TvShowHeader
-          name={data?.name}
-          releaseDate={data?.first_air_date}
-          poster={data?.poster_path}
-          listFor={listFor}
-          id={tv_id}
-        />
+  console.log(data?.seasons);
 
-        <div className="list-seasons">
-          <ListGroupComponent data={getDataSeason} listFor={listFor} />
-        </div>
+  return (
+    <div className="seasons">
+      <CurrentPageContext>
+        <MyNavbar fixed={"top"} />
+      </CurrentPageContext>
+      <TvShowHeader
+        name={data?.name}
+        releaseDate={data?.first_air_date}
+        poster={data?.poster_path}
+        listFor={listFor}
+        id={tv_id}
+      />
+
+      <div className="list-seasons">
+        <ListGroupComponent data={getDataSeason} listFor={listFor} />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -70,53 +70,52 @@ const Episode = () => {
   }, [season, season_number, index]);
 
   return (
-    <>
+    <div className="episode">
       {showPersentageBar && <AnimatedProgressBar width={loadingPersentage} />}
       <CurrentPageContext>
         <MyNavbar fixed={"top"} />
       </CurrentPageContext>
-      style={{ height: data?.episodes?.length > 0 ? "" : "100vh" }}
-      <div className="episode">
-        <TvShowHeader
-          name={data?.name}
-          poster={data?.poster_path}
-          releaseDate={data?.air_date}
-          prevLink={"List Seasons"}
-          listFor={listFor}
-          id={tv_id}
-        />
 
-        {season?.length > 1 && (
-          <div className="navigation row">
-            <div className="col-6">
-              {pagination?.prevLink && pagination.currentIndex >= 1 && (
-                <Link className="float-start" onClick={decrement}>
-                  <i className="bi bi-arrow-left"></i>
-                  {pagination.prevLink}
-                </Link>
-              )}
-            </div>
+      <TvShowHeader
+        name={data?.name}
+        poster={data?.poster_path}
+        releaseDate={data?.air_date}
+        prevLink={"List Seasons"}
+        listFor={listFor}
+        id={tv_id}
+      />
 
-            <div className="col-6">
-              {pagination?.nextLink && (
-                <Link className="float-end" onClick={increment}>
-                  {pagination.nextLink} <i className="bi bi-arrow-right"></i>
-                </Link>
-              )}
-            </div>
+      {season?.length > 1 && (
+        <div className="navigation row">
+          <div className="col-6">
+            {pagination?.prevLink && pagination.currentIndex >= 1 && (
+              <Link className="float-start" onClick={decrement}>
+                <i className="bi bi-arrow-left"></i>
+                {pagination.prevLink}
+              </Link>
+            )}
           </div>
-        )}
 
-        <div className="list-episode">
-          <ListGroupComponent
-            data={data?.episodes}
-            listFor={listFor}
-            title={"Episode"}
-          />
+          <div className="col-6">
+            {pagination?.nextLink && (
+              <Link className="float-end" onClick={increment}>
+                {pagination.nextLink} <i className="bi bi-arrow-right"></i>
+              </Link>
+            )}
+          </div>
         </div>
+      )}
+
+      <div className="list-episode">
+        <ListGroupComponent
+          data={data?.episodes}
+          listFor={listFor}
+          title={"Episode"}
+        />
       </div>
+
       <Footer />
-    </>
+    </div>
   );
 };
 
