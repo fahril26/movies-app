@@ -7,14 +7,15 @@ import ErrorElement from "../ErrorElement";
 import WindowWidthContext from "../context/WindowWidthContext";
 import { UpcomingList } from "../pages/all-list/movies/UpcomingList";
 import TopRatedList from "../pages/all-list/movies/TopRatedList";
-import BestTvSeriesList from "../pages/all-list/BestTvSeriesList";
+import BestTvSeriesList from "../pages/all-list/tv-series/BestTvSeriesList";
 import MovieDetail from "../pages/detail/MovieDetail";
 import TvSeriesDetail from "../pages/detail/TvSeriesDetail";
-import Seasons from "../pages/all-list/Seasons";
-import Episode from "../pages/all-list/Episode";
+import Seasons from "../pages/all-list/tv-series/Seasons";
+import Episode from "../pages/all-list/tv-series/Episode";
 import PopularMovieList from "../pages/all-list/movies/PopularMovieList";
 import NowPlayingList from "../pages/all-list/movies/NowPlayingList";
 import CurrentPageContext from "../context/CurrentPageContext";
+import PopularTvSeries from "../pages/all-list/tv-series/PopularTvSeries";
 
 export const RoutersRoot = () => {
   const router = createBrowserRouter(
@@ -65,6 +66,15 @@ export const RoutersRoot = () => {
           element={
             <CurrentPageContext>
               <NowPlayingList />
+            </CurrentPageContext>
+          }
+        />
+
+        <Route
+          path="/tv/popular/:page"
+          element={
+            <CurrentPageContext>
+              <PopularTvSeries />
             </CurrentPageContext>
           }
         />

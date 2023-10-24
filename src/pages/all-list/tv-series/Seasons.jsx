@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../../hook/useFetch";
-import "../../style/Season.css";
-import MyNavbar from "../../components/Navbar";
-import TvShowHeader from "../../components/TvShowHeader";
-import Footer from "../../components/Footer";
-import ListGroupComponent from "../../components/ListGroupComponent";
-import CurrentPageContext from "../../context/CurrentPageContext";
+import useFetch from "../../../hook/useFetch";
+
+import MyNavbar from "../../../components/Navbar";
+import TvShowHeader from "../../../components/TvShowHeader";
+import Footer from "../../../components/Footer";
+import ListGroupComponent from "../../../components/ListGroupComponent";
+import CurrentPageContext from "../../../context/CurrentPageContext";
+import "../../../style/Season.css";
 
 const Seasons = () => {
   const { tv_id } = useParams();
@@ -21,8 +22,7 @@ const Seasons = () => {
       <div
         className="seasons"
         style={{
-          height:
-            data?.seasons?.length && data?.seasons?.length > 2 ? "" : "100vh",
+          height: data?.seasons?.length ? "" : "100vh",
         }}
       >
         <CurrentPageContext>

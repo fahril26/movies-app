@@ -3,35 +3,60 @@ import { Accordion, useAccordionButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-function CustomToggle({ children, eventKey }) {
-  const decoratedOnClick = useAccordionButton(eventKey, () =>
-    console.log("totally custom!")
-  );
+function CustomToggle({ children, eventKey, setRotate, rotate }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () => {
+    const newTriggerRotate = rotate.slice();
+    newTriggerRotate[eventKey] = !rotate[eventKey];
 
-  return <NavLink onClick={decoratedOnClick}>{children}</NavLink>;
+    setRotate(newTriggerRotate);
+  });
+
+  return (
+    <NavLink
+      onClick={(e) => {
+        e.preventDefault();
+        decoratedOnClick();
+      }}
+    >
+      {children}
+    </NavLink>
+  );
 }
 
-function AccordionsCustomToogle({ children }) {
+function AccordionsCustomToogle({
+  children,
+  setRotate,
+  rotate,
+  list,
+  eventKey,
+  resetStorage,
+}) {
   return (
     <Accordion>
       <div>
-        <CustomToggle eventKey="0">{children}</CustomToggle>
+        <CustomToggle
+          eventKey={eventKey}
+          setRotate={setRotate}
+          rotate={rotate}
+          resetStorage={resetStorage}
+        >
+          {children}
+        </CustomToggle>
 
-        <Accordion.Collapse as={"ul"} eventKey="0" style={{ marginBottom: 0 }}>
-          <ul>
-            <li>
-              <Link>Popular</Link>
-            </li>
-            <li>
-              <Link>Top Rated</Link>
-            </li>
-            <li>
-              <Link>Now Playing</Link>
-            </li>
-            <li>
-              <Link>Upcoming</Link>
-            </li>
-          </ul>
+        <Accordion.Collapse
+          as={"ul"}
+          eventKey={eventKey}
+          style={{ marginBottom: 0 }}
+        >
+          <>
+            {list.map((item) => (
+              <li key={item.name}>
+                <Link to={item.link} onClick={resetStorage}>
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </>
         </Accordion.Collapse>
       </div>
     </Accordion>

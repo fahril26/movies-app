@@ -1,5 +1,6 @@
 .episode {
-  padding: 5.5rem 0;
+  padding-top: 5.5rem;
+  padding-bottom: 1rem;
 }
 
 .episode .navigation a {

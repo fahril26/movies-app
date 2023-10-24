@@ -6,23 +6,36 @@ import { NavLink } from "react-router-dom";
 import "../style/MyNavbar.css";
 import { useContext } from "react";
 import { ResizeContext } from "../context/WindowWidthContext";
-import { Dropdown } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import AccordionsCustomToogle from "./AccordionsCustomToogle";
 import { CurrentPage } from "../context/CurrentPageContext";
 
+const movieList = [
+  { name: "Popular", link: "/movies/popular/1" },
+  { name: "Top Rated", link: "/movies/top-rated/1" },
+  { name: "Now Playing", link: "/movies/now-playing/1" },
+  { name: "Upcoming", link: "/movies/upcoming/1" },
+];
+
+const tvShowList = [
+  { name: "Popular", link: "/tv/popular/1" },
+  { name: "Top Rated", link: "/movies/top-rated/1" },
+  { name: "Airing Today", link: "/movies/now-playing/1" },
+  { name: "On Tv", link: "/movies/upcoming/1" },
+];
+
 // eslint-disable-next-line react/prop-types
 function MyNavbar({ fixed, style }) {
   const windowWidth = useContext(ResizeContext);
+  const { setCurrentPage } = useContext(CurrentPage);
+  const [rotate, setRotate] = useState([false, false]);
 
   const [showDropdown, setShowDropdown] = useState({
     movie: false,
     tvSeries: false,
   });
-
-  const { setCurrentPage } = useContext(CurrentPage);
 
   const handleMouseEnter = (e) => {
     const newData = { ...showDropdown };
@@ -51,6 +64,17 @@ function MyNavbar({ fixed, style }) {
     localStorage.setItem("paginationNumbers", JSON.stringify([1, 2, 3, 4, 5]));
   };
 
+  const setAllRotate = () => {
+    const newTriggerRotate = [];
+
+    rotate.forEach((item) => {
+      item = false;
+      newTriggerRotate.push(item);
+    });
+
+    setRotate(newTriggerRotate);
+  };
+
   return (
     <>
       <Navbar
@@ -68,71 +92,149 @@ function MyNavbar({ fixed, style }) {
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="start"
+            onHide={setAllRotate}
           >
             <Offcanvas.Header closeButton className="text-bg-dark">
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
                 Popoflix
               </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body className={windowWidth < 992 ? "bg-dark" : null}>
+            <Offcanvas.Body
+              className={windowWidth < 992 ? "bg-dark bg-hover" : null}
+            >
               <Nav className="justify-content-center align-items-start  flex-grow-1 ps-lg-5  gap-4 ">
-                <NavLink to={"/"}>Home</NavLink>
                 <NavLink
-                  className={"movies"}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  to={"/"}
+                  style={{ width: windowWidth < 992 ? "100%" : null }}
                 >
-                  Movies
-                  <DropdownMenu show={showDropdown.movie}>
-                    <Link
-                      to={"/movies/popular/1"}
-                      className="dropdown-item"
-                      onClick={resetStorage}
-                    >
-                      Popular
-                    </Link>
-                    <Link
-                      to={"/movies/top-rated/1"}
-                      className="dropdown-item"
-                      onClick={resetStorage}
-                    >
-                      Top Rated
-                    </Link>
-                    <Link
-                      to={"/movies/now-playing/1"}
-                      className="dropdown-item"
-                      onClick={resetStorage}
-                    >
-                      Now Playing
-                    </Link>
-                    <Link
-                      to={"/movies/upcoming/1"}
-                      className="dropdown-item"
-                      onClick={resetStorage}
-                    >
-                      Upcoming
-                    </Link>
-                  </DropdownMenu>
+                  Home
                 </NavLink>
 
+                {windowWidth < 992 ? (
+                  <AccordionsCustomToogle
+                    rotate={rotate}
+                    setRotate={setRotate}
+                    list={movieList}
+                    eventKey={0}
+                    resetStorage={resetStorage}
+                  >
+                    Movies
+                    <i
+                      className={`bi bi-chevron-right ${
+                        rotate[0] ? "rotate" : ""
+                      }`}
+                    ></i>
+                  </AccordionsCustomToogle>
+                ) : (
+                  <NavLink
+                    className={"movies"}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    style={{ width: windowWidth < 992 ? "100%" : null }}
+                  >
+                    Movies
+                    <DropdownMenu show={showDropdown.movie}>
+                      <Link
+                        to={"/movies/popular/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Popular
+                      </Link>
+                      <Link
+                        to={"/movies/top-rated/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Top Rated
+                      </Link>
+                      <Link
+                        to={"/movies/now-playing/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Now Playing
+                      </Link>
+                      <Link
+                        to={"/movies/upcoming/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Upcoming
+                      </Link>
+                    </DropdownMenu>
+                  </NavLink>
+                )}
+
+                {windowWidth < 992 ? (
+                  <AccordionsCustomToogle
+                    rotate={rotate}
+                    setRotate={setRotate}
+                    list={tvShowList}
+                    eventKey={1}
+                    resetStorage={resetStorage}
+                  >
+                    Tv Show
+                    <i
+                      className={`bi bi-chevron-right ${
+                        rotate[1] ? "rotate" : ""
+                      }`}
+                    ></i>
+                  </AccordionsCustomToogle>
+                ) : (
+                  <NavLink
+                    to={"/tv-show"}
+                    className={"tv-series"}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    style={{ width: windowWidth < 992 ? "100%" : null }}
+                  >
+                    Tv Show
+                    <DropdownMenu show={showDropdown.tvSeries}>
+                      <Link
+                        to={"/tv/popular/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Popular
+                      </Link>
+                      <Link
+                        to={"/movies/top-rated/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Top Rated
+                      </Link>
+                      <Link
+                        to={"/movies/now-playing/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Now Playing
+                      </Link>
+                      <Link
+                        to={"/movies/upcoming/1"}
+                        className="dropdown-item"
+                        onClick={resetStorage}
+                      >
+                        Upcoming
+                      </Link>
+                    </DropdownMenu>
+                  </NavLink>
+                )}
+
                 <NavLink
-                  to={"/tv-show"}
-                  className={"tv-series"}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  to={"/blog"}
+                  style={{ width: windowWidth < 992 ? "100%" : null }}
                 >
-                  Tv Show
-                  <DropdownMenu show={showDropdown.tvSeries}>
-                    <Dropdown.Item href="#/action-1">Popular</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Top Rated</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Airing Today
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">On Tv</Dropdown.Item>
-                  </DropdownMenu>
+                  Blog
                 </NavLink>
-                <NavLink to={"/blog"}>Blog</NavLink>
-                <NavLink to={"/contact"}>Contact</NavLink>
+                <NavLink
+                  to={"/contact"}
+                  style={{ width: windowWidth < 992 ? "100%" : null }}
+                >
+                  Contact
+                </NavLink>
               </Nav>
 
               {windowWidth >= 992 ? (

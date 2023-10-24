@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-import MyNavbar from "../../components/Navbar";
-import TvShowHeader from "../../components/TvShowHeader";
-import useFetch from "../../hook/useFetch";
+import MyNavbar from "../../../components/Navbar";
+import TvShowHeader from "../../../components/TvShowHeader";
+import useFetch from "../../../hook/useFetch";
 import { useParams } from "react-router-dom";
-import ListGroupComponent from "../../components/ListGroupComponent";
-import "../../style/Episode.css";
-import Footer from "../../components/Footer";
+import ListGroupComponent from "../../../components/ListGroupComponent";
+import Footer from "../../../components/Footer";
 import { useState } from "react";
 import { useEffect } from "react";
-import AnimatedProgressBar from "../../components/AnimatedProgressBar";
+import AnimatedProgressBar from "../../../components/AnimatedProgressBar";
 import { useNavigate } from "react-router-dom";
-import CurrentPageContext from "../../context/CurrentPageContext";
+import CurrentPageContext from "../../../context/CurrentPageContext";
+import "../../../style/Episode.css";
 
 const Episode = () => {
   const [pagination, setPagination] = useState({

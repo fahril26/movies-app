@@ -1,6 +1,6 @@
-import useFetch from "../../hook/useFetch";
-import LayoutListMovies from "../../components/LayoutListMovies";
-import { CurrentPage } from "../../context/CurrentPageContext";
+import useFetch from "../../../hook/useFetch";
+import LayoutListMovies from "../../../components/LayoutListMovies";
+import { CurrentPage } from "../../../context/CurrentPageContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
