@@ -26,7 +26,7 @@ const BestTvSeriesSection = ({ handleShowModal }) => {
 
   const getDataRandom = useGetDataRandom(data, cardTotals);
 
-  const link = "/tv/best-tv-series/1";
+  const link = "/tv/top-rated/1";
   const type = "tv";
 
   return (

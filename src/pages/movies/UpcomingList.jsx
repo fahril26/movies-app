@@ -1,14 +1,11 @@
-import useFetch from "../../../hook/useFetch";
-import LayoutListMovies from "../../../components/LayoutListMovies";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import useFetch from "../../hook/useFetch";
+import LayoutListMovies from "../../components/LayoutListMovies";
 import { useContext } from "react";
-import { CurrentPage } from "../../../context/CurrentPageContext";
+import { CurrentPage } from "../../context/CurrentPageContext";
 
 export const UpcomingList = () => {
   const { currentPage, setCurrentPage } = useContext(CurrentPage);
-
-  const navigate = useNavigate();
 
   const fetchData = useFetch(
     `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${currentPage}`
@@ -17,10 +14,6 @@ export const UpcomingList = () => {
   const titlePage = "Upcoming Movies";
   const secondTitlePage = "ONLINE STREAMING";
   const type = "movie";
-
-  useEffect(() => {
-    navigate(`/movies/upcoming/${currentPage}`);
-  }, [currentPage]);
 
   return (
     <>

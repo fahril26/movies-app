@@ -15,6 +15,7 @@ label {
 
 :root {
   --yellow: #e4d804;
+  scroll-behavior: auto !important;
 }
 
 a {

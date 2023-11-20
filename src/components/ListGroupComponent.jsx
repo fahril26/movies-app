@@ -6,8 +6,9 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../style/ListGroupComponent.css";
 import ImageLost from "./ImageLost";
+import ChangeFormatDate from "./ChangeFormatDate";
 
-const ListGroupComponent = ({ data, listFor, title, loading }) => {
+const ListGroupComponent = ({ data, listFor, title }) => {
   const { tv_id } = useParams();
 
   const dataList = data?.map((item) => {
@@ -28,44 +29,20 @@ const ListGroupComponent = ({ data, listFor, title, loading }) => {
     localStorage.setItem("index", index);
   };
 
-  const changeFormatDate = (date) => {
-    if (date) {
-      const dataDate = new Date(date);
-      const splitDate = date.split("-");
-
-      const monthNameList = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-
-      const day = splitDate[2];
-      const month = monthNameList[dataDate.getMonth()];
-      const year = splitDate[0];
-
-      return `${month} ${day}, ${year}`;
-    }
-  };
-
-  const changeFormatDuration = (duration) => {
+  const ChangeFormatDuration = ({ duration }) => {
     const hour = Math.floor(duration / 60);
 
     const minute = duration % 60;
 
-    return `${hour ? hour + "h" : ""} ${minute}m`;
+    return (
+      <span className="runtime">{` • ${
+        hour ? hour + "h" : ""
+      } ${minute}m`}</span>
+    );
   };
 
   return (
-    <ListGroup style={{ height: data?.length < 3 || !data ? "65vh" : null }}>
+    <ListGroup style={{ height: data?.length < 3 || !data ? "75vh" : null }}>
       {listFor === "episode" ? (
         <h5>
           {data?.length
@@ -79,7 +56,11 @@ const ListGroupComponent = ({ data, listFor, title, loading }) => {
           <div className="poster">
             <Link
               to={`/tv-series-detail/${tv_id}/seasons/${item.season_number}`}
-              onClick={() => handleClick(item.season_number, index)}
+              onClick={
+                listFor === "season"
+                  ? () => handleClick(item.season_number, index)
+                  : null
+              }
             >
               {item?.poster_path || item?.still_path ? (
                 <img
@@ -90,7 +71,7 @@ const ListGroupComponent = ({ data, listFor, title, loading }) => {
                   width={item.poster_path ? 110 : 150}
                 />
               ) : (
-                <ImageLost width={110} />
+                <ImageLost width={listFor === "episode" ? 150 : 110} />
               )}
             </Link>
           </div>
@@ -101,7 +82,11 @@ const ListGroupComponent = ({ data, listFor, title, loading }) => {
                 {listFor === "episode" && item.episode_number + "."}{" "}
                 <Link
                   to={`/tv-series-detail/${tv_id}/seasons/${item.season_number}`}
-                  onClick={() => handleClick(item.season_number, index)}
+                  onClick={
+                    listFor === "season"
+                      ? () => handleClick(item.season_number, index)
+                      : null
+                  }
                 >
                   {item.name}
                 </Link>
@@ -127,15 +112,10 @@ const ListGroupComponent = ({ data, listFor, title, loading }) => {
                 </>
               ) : (
                 <>
-                  <span className="air_date">
-                    {changeFormatDate(item.air_date)}
-                  </span>
+                  {<ChangeFormatDate date={item.air_date} />}
 
-                  {item.runtime && (
-                    <span className="runtime">
-                      {" • "}
-                      {changeFormatDuration(item?.runtime)}
-                    </span>
+                  {item?.runtime && (
+                    <ChangeFormatDuration duration={item?.runtime} />
                   )}
                 </>
               )}

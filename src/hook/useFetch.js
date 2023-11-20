@@ -13,22 +13,11 @@ const authentication = {
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [loadingPersentage, setLoadingPercentage] = useState(0);
   const [showPersentageBar, setShowPersentageBar] = useState(true);
 
   let timeout = null;
-
-  const changeDataMax = (data) => {
-    if (data.total_pages > 500) {
-      const newData = { ...data, total_pages: 500 };
-
-      return newData;
-    }
-
-    return data;
-  };
 
   const fetchData = async () => {
     setShowPersentageBar(true);
@@ -60,7 +49,6 @@ const useFetch = (url) => {
         progressBar.totalProcess - progressBar.process;
       progressBar.finished = progressBar.process + progressBar.remainderProcess;
       setLoadingPercentage(progressBar.finished);
-      setLoading(false);
 
       timeout = setTimeout(() => {
         setLoadingPercentage(0);
@@ -69,13 +57,31 @@ const useFetch = (url) => {
     }
   };
 
+  const changeDataMax = (data) => {
+    if (data.total_pages > 500) {
+      const newData = { ...data, total_pages: 500 };
+
+      return newData;
+    }
+
+    return data;
+  };
+
   useEffect(() => {
     fetchData();
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [url]);
 
-  return { data, loading, error, loadingPersentage, showPersentageBar };
+  return {
+    data,
+    error,
+    loadingPersentage,
+    showPersentageBar,
+    setData,
+  };
 };
 
 export default useFetch;

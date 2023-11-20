@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { createContext } from "react";
+import { useParams } from "react-router-dom";
 
 export const CurrentPage = createContext();
 
 // eslint-disable-next-line react/prop-types
 const CurrentPageContext = ({ children }) => {
-  const getCurrentPageFromUrl = location.pathname.split("/");
-  const currentPageFromUrl =
-    getCurrentPageFromUrl[getCurrentPageFromUrl.length - 1];
+  const { page } = useParams();
 
-  const [currentPage, setCurrentPage] = useState(currentPageFromUrl);
+  const [currentPage, setCurrentPage] = useState(Number(page));
 
   return (
     <CurrentPage.Provider value={{ currentPage, setCurrentPage }}>

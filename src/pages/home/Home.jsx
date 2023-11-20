@@ -6,10 +6,12 @@ import TopRatedSection from "./section/toprated/TopRatedSection";
 import UpcomingSection from "./section/upcoming/UpcomingSection";
 import MyNavbar from "../../components/Navbar";
 import CurrentPageContext from "../../context/CurrentPageContext";
+import { ScrollRestoration } from "react-router-dom";
 
 const Home = () => {
   return (
     <main id="home" className="home">
+      <ScrollRestoration />
       <CurrentPageContext>
         <MyNavbar fixed={"top"} />
       </CurrentPageContext>

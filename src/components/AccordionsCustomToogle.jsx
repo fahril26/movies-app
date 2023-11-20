@@ -1,16 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
-import { useRef } from "react";
+
 import { Accordion, useAccordionButton } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-function CustomToggle({ children, eventKey, setRotate, rotate, linkRef }) {
-  const decoratedOnClick = useAccordionButton(eventKey, () => {
-    const newTriggerRotate = rotate.slice();
-    newTriggerRotate[eventKey] = !rotate[eventKey];
+function CustomToggle({
+  children,
+  eventKey,
+  setRotateArrow,
+  rotateArrow,
+  moviesRef,
+  tvRef,
+}) {
+  const pagePath = ["/movies", "/tv"];
 
-    setRotate(newTriggerRotate);
+  const decoratedOnClick = useAccordionButton(eventKey, () => {
+    const newTriggershowAccor = rotateArrow.slice();
+    newTriggershowAccor[eventKey] = !rotateArrow[eventKey];
+
+    setRotateArrow(newTriggershowAccor);
   });
 
   return (
@@ -19,7 +26,9 @@ function CustomToggle({ children, eventKey, setRotate, rotate, linkRef }) {
         e.preventDefault();
         decoratedOnClick();
       }}
-      ref={linkRef}
+      to={pagePath[eventKey]}
+      className={"nav-link"}
+      ref={eventKey === 0 ? moviesRef : tvRef}
     >
       {children}
     </NavLink>
@@ -28,27 +37,29 @@ function CustomToggle({ children, eventKey, setRotate, rotate, linkRef }) {
 
 function AccordionsCustomToogle({
   children,
-  setRotate,
-  rotate,
   list,
   eventKey,
   resetStorage,
+  rotateArrow,
+  setRotateArrow,
+  moviesRef,
+  tvRef,
+  defaultActiveKey,
 }) {
-  const linkRef = useRef(null);
-
-  useEffect(() => {
-    linkRef.current.classList.remove("active");
-  }, []);
+  const handleClick = () => {
+    resetStorage();
+  };
 
   return (
-    <Accordion>
+    <Accordion defaultActiveKey={defaultActiveKey}>
       <>
         <CustomToggle
           eventKey={eventKey}
-          setRotate={setRotate}
-          rotate={rotate}
+          setRotateArrow={setRotateArrow}
+          rotateArrow={rotateArrow}
           resetStorage={resetStorage}
-          linkRef={linkRef}
+          moviesRef={moviesRef}
+          tvRef={tvRef}
         >
           {children}
         </CustomToggle>
@@ -61,9 +72,13 @@ function AccordionsCustomToogle({
           <>
             {list.map((item) => (
               <li key={item.name}>
-                <Link to={item.link} onClick={resetStorage}>
+                <NavLink
+                  to={item.path}
+                  onClick={() => handleClick(item)}
+                  className={"nav-link"}
+                >
                   {item.name}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </>

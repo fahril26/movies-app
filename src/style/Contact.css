@@ -1,0 +1,91 @@
+.contact {
+  padding: 4rem 20px;
+  background: url("../assets/background/contact_bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.contact-form {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #1f1e24;
+  background: #1f1e24;
+  border-radius: 4px;
+  color: #bcbcbc !important;
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.46);
+  font-weight: 500;
+  padding: 14px 25px;
+  transition: 0.3s linear;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background-color: #1f1e24 !important;
+  box-shadow: none !important;
+  border-color: var(--yellow);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #bcbcbc;
+  font-size: 0.9rem;
+}
+
+.contact-info {
+  padding: 0 30px 1rem 30px;
+  background-color: #1f1e24;
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.46);
+}
+
+.contact-info .list-group {
+  margin: 0px;
+  padding: 2rem 0;
+}
+
+.contact-info .list-group-item {
+  border-color: gray !important;
+  padding: 1rem 0 !important;
+}
+
+.contact-info .icon-info {
+  background-color: var(--yellow);
+  display: inline-block;
+  padding: 11px 15px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.contact-info b {
+  color: #bcbcbc;
+}
+
+.contact-info .info {
+  color: #bcbcbc;
+  font-size: 0.8rem;
+}
+
+.form-btn button {
+  background-color: inherit;
+  border-color: var(--yellow);
+}
+
+.form-btn button:hover {
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+  transition: 0.2s linear;
+}
+
+.map-location {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+}
+
+.contact-form .error {
+  color: red;
+  font-size: 0.8rem;
+}

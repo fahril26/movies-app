@@ -1,0 +1,41 @@
+.card-list-search {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 0.9rem;
+}
+
+.card-list-search .image {
+  padding: 0;
+  width: 10%;
+  cursor: pointer;
+}
+
+.card-list-search .description {
+  width: 90%;
+  margin-top: 0.5rem;
+}
+
+.card-list-search .description h5 a {
+  font-size: 1.1rem;
+  font-variant: normal;
+  color: #000 !important;
+}
+
+.card-list-search .description h5 a:hover {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.card-list-search .image-lost {
+  border-radius: 5px 0 0 5px;
+}
+
+.card-list-search .air-date {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+}
+
+.card-list-search p {
+  margin: 0;
+  margin-top: 0.5rem;
+}

@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-import MyNavbar from "../../../components/Navbar";
-import TvShowHeader from "../../../components/TvShowHeader";
-import useFetch from "../../../hook/useFetch";
+import MyNavbar from "../../components/Navbar";
+import TvShowHeader from "../../components/TvShowHeader";
+import useFetch from "../../hook/useFetch";
 import { useParams } from "react-router-dom";
-import ListGroupComponent from "../../../components/ListGroupComponent";
-import Footer from "../../../components/Footer";
+import ListGroupComponent from "../../components/ListGroupComponent";
+import Footer from "../../components/Footer";
 import { useState } from "react";
 import { useEffect } from "react";
-import AnimatedProgressBar from "../../../components/AnimatedProgressBar";
 import { useNavigate } from "react-router-dom";
-import CurrentPageContext from "../../../context/CurrentPageContext";
-import "../../../style/Episode.css";
+import CurrentPageContext from "../../context/CurrentPageContext";
+import "../../style/Episode.css";
+import Loading from "../../components/Loading";
 
 const Episode = () => {
   const [pagination, setPagination] = useState({
@@ -63,57 +63,62 @@ const Episode = () => {
 
   useEffect(() => {
     handleChangePagination();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [season, season_number, index]);
+  }, [season]);
 
   return (
-    <div className="episode">
-      {showPersentageBar && <AnimatedProgressBar width={loadingPersentage} />}
-      <CurrentPageContext>
-        <MyNavbar fixed={"top"} />
-      </CurrentPageContext>
+    <>
+      {showPersentageBar ? (
+        <Loading />
+      ) : (
+        <div className="episode">
+          <CurrentPageContext>
+            <MyNavbar fixed={"top"} />
+          </CurrentPageContext>
 
-      <TvShowHeader
-        name={data?.name}
-        poster={data?.poster_path}
-        releaseDate={data?.air_date}
-        prevLink={"List Seasons"}
-        listFor={listFor}
-        id={tv_id}
-      />
+          <TvShowHeader
+            name={data?.name}
+            poster={data?.poster_path}
+            releaseDate={data?.air_date}
+            prevLink={"List Seasons"}
+            listFor={listFor}
+            id={tv_id}
+          />
 
-      {season?.length > 1 && (
-        <div className="navigation-list-episode row">
-          <div className="col-6">
-            {pagination?.prevLink && pagination.currentIndex >= 1 && (
-              <Link className="float-start" onClick={decrement}>
-                <i className="bi bi-arrow-left"></i>
-                {pagination.prevLink}
-              </Link>
-            )}
+          {season?.length > 1 && (
+            <div className="navigation-list-episode row">
+              <div className="col-6">
+                {pagination?.prevLink && pagination.currentIndex >= 1 && (
+                  <Link className="float-start" onClick={decrement}>
+                    <i className="bi bi-arrow-left"></i>
+                    {pagination.prevLink}
+                  </Link>
+                )}
+              </div>
+
+              <div className="col-6">
+                {pagination?.nextLink && (
+                  <Link className="float-end" onClick={increment}>
+                    {pagination.nextLink} <i className="bi bi-arrow-right"></i>
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="list-episode">
+            <ListGroupComponent
+              data={data?.episodes}
+              listFor={listFor}
+              title={"Episode"}
+            />
           </div>
 
-          <div className="col-6">
-            {pagination?.nextLink && (
-              <Link className="float-end" onClick={increment}>
-                {pagination.nextLink} <i className="bi bi-arrow-right"></i>
-              </Link>
-            )}
-          </div>
+          <Footer />
         </div>
       )}
-
-      <div className="list-episode">
-        <ListGroupComponent
-          data={data?.episodes}
-          listFor={listFor}
-          title={"Episode"}
-          loading={showPersentageBar}
-        />
-      </div>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
