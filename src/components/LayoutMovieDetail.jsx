@@ -70,7 +70,6 @@ const LayoutMovieDetail = ({ type }) => {
         <Loading />
       ) : (
         <>
-          {" "}
           <div className="movie-detail">
             <CurrentPageContext>
               <MyNavbar fixed={"top"} />

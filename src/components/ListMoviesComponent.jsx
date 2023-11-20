@@ -14,7 +14,7 @@ const ListMoviesComponent = ({
   return (
     <div
       className="list"
-      style={fetchData?.data?.results?.length < 3 ? { height: "80vh" } : {}}
+      style={fetchData?.data?.results?.length < 3 ? { height: "73vh" } : {}}
     >
       {fetchData?.data?.results && (
         <MyPagination
