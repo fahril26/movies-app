@@ -26,10 +26,7 @@ const LayoutListMovies = ({
         <AnimatedProgressBar width={fetchData?.loadingPersentage} />
       ) : null}
 
-      <div
-        className="all-list"
-        style={fetchData?.data?.results?.length < 3 ? { height: "105vh" } : {}}
-      >
+      <div className="all-list">
         <div className="container-fluid">
           <div className="row align-items-end justify-content-between ">
             <div className="col-lg-9  col-8">

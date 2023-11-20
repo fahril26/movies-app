@@ -12,7 +12,10 @@ const ListMoviesComponent = ({
   setPageNumbers,
 }) => {
   return (
-    <>
+    <div
+      className="list"
+      style={fetchData?.data?.results?.length < 3 ? { height: "80vh" } : {}}
+    >
       {fetchData?.data?.results && (
         <MyPagination
           totalPage={fetchData?.data?.total_pages}
@@ -58,7 +61,7 @@ const ListMoviesComponent = ({
           setPageNumbers={setPageNumbers}
         />
       )}
-    </>
+    </div>
   );
 };
 
