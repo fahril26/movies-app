@@ -12,10 +12,7 @@ const ListMoviesComponent = ({
   setPageNumbers,
 }) => {
   return (
-    <div
-      className="list"
-      style={fetchData?.data?.results?.length < 3 ? { height: "73vh" } : {}}
-    >
+    <div className="list d-flex align-items-center flex-column">
       {fetchData?.data?.results && (
         <MyPagination
           totalPage={fetchData?.data?.total_pages}
