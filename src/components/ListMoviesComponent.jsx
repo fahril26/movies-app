@@ -45,7 +45,7 @@ const ListMoviesComponent = ({
           ))}
         </div>
       ) : (
-        <div style={{ height: "50vh" }}>No Data</div>
+        <div style={{ height: "100vh" }}>No Data</div>
       )}
 
       {fetchData?.data?.results && (
