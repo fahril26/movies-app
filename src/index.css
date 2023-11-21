@@ -72,12 +72,16 @@ footer,
   .jumbotron .jumbotron-content {
     width: 75vw;
   }
+
+  .nav-container {
+    height: 6.4rem;
+  }
 }
 
 /* medium */
 @media (max-width: 768px) {
   html {
-    font-size: 80%;
+    font-size: 85%;
   }
   .jumbotron .jumbotron-content {
     width: 85vw;
@@ -99,10 +103,14 @@ footer,
 /* Small */
 @media (max-width: 576px) {
   html {
-    font-size: 70%;
+    font-size: 80%;
   }
   .jumbotron .jumbotron-content {
     width: 105% !important;
+  }
+
+  .nav-container {
+    height: 6.2rem;
   }
 }
 

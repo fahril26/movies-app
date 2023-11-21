@@ -107,17 +107,13 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     }
   };
 
-  const handleShowInputSearch = () => {
-    setShowInputSearch(!showInputSearch);
-  };
-
   useEffect(() => {
     if (windowWidth < 992) setAccordionActive(moviesRef, tvRef);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accordionDefaultActiveKey]);
 
   return (
-    <>
+    <div className="nav-container">
       <Navbar
         expand={"lg"}
         className={`bg-dark`}
@@ -129,6 +125,13 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
           <Link to={"/"} className="fw-semibold fs-2 text-light">
             Popoflix
           </Link>
+          {windowWidth < 992 && (
+            <ButtonTriggerSearch
+              show={showInputSearch}
+              setShowInputSearch={setShowInputSearch}
+              showInputSearch={showInputSearch}
+            />
+          )}
 
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-lg`}
@@ -259,20 +262,31 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                 </li>
               </Nav>
 
-              <button className="search-btn" onClick={handleShowInputSearch}>
-                {showInputSearch ? (
-                  <i className="bi bi-x-lg"></i>
-                ) : (
-                  <i className="bi bi-search"></i>
-                )}
-              </button>
+              {windowWidth > 992 && (
+                <ButtonTriggerSearch
+                  show={showInputSearch}
+                  setShowInputSearch={setShowInputSearch}
+                  showInputSearch={showInputSearch}
+                />
+              )}
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
-
       {showInputSearch && <FormText />}
-    </>
+    </div>
+  );
+}
+
+function ButtonTriggerSearch({ show, setShowInputSearch, showInputSearch }) {
+  const handleShowInputSearch = () => {
+    setShowInputSearch(!showInputSearch);
+  };
+
+  return (
+    <button className="search-btn" onClick={handleShowInputSearch}>
+      {show ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
+    </button>
   );
 }
 

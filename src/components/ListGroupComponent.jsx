@@ -46,7 +46,7 @@ const ListGroupComponent = ({ data, listFor, title }) => {
       {listFor === "episode" ? (
         <h5>
           {data?.length
-            ? title + " " + data?.length
+            ? `Total ${title} (${data?.length})`
             : "There are no episodes added to this season."}
         </h5>
       ) : null}

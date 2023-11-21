@@ -10,20 +10,19 @@ export default function Contact() {
     <>
       <MyNavbar />
       <div className="contact">
-        <div className="container-fluid">
-          <div className="row">
+        <div className="container-fluid px-5 px-lg-4">
+          <div className="row ">
             <div className="col-12 col-lg-8">
               <ContactForm />
             </div>
 
-            <div className="col-12 col-lg-4">
+            <div className="col-12 col-lg-4 mt-5 mt-lg-0">
               <ContactInfo />
             </div>
           </div>
-
-          <div className="map-location ">
-            <Map />
-          </div>
+        </div>
+        <div className="map-location ">
+          <Map />
         </div>
       </div>
       <Footer />
@@ -66,7 +65,7 @@ const ContactForm = function ContactForm() {
 
       <Form className="contact-form p-5" onSubmit={formik.handleSubmit}>
         <div className="row mb-4">
-          <div className="col-12 col-md-6 ">
+          <div className="col-12 col-md-6 mb-4 mb-md-0 ">
             <Form.Control
               placeholder="You Name*"
               {...formik.getFieldProps("name")}
