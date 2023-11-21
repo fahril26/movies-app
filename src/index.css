@@ -72,10 +72,6 @@ footer,
   .jumbotron .jumbotron-content {
     width: 75vw;
   }
-
-  .nav-container {
-    height: 6.4rem;
-  }
 }
 
 /* medium */
@@ -98,6 +94,10 @@ footer,
     padding-left: 1.1rem !important;
     padding-right: 1.1rem !important;
   }
+
+  .input-search {
+    top: 9%;
+  }
 }
 
 /* Small */
@@ -109,8 +109,8 @@ footer,
     width: 105% !important;
   }
 
-  .nav-container {
-    height: 6.2rem;
+  .input-search {
+    top: 7.6%;
   }
 }
 

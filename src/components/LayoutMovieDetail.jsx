@@ -88,7 +88,7 @@ const LayoutMovieDetail = ({ type }) => {
                   )}
                 </div>
 
-                <div className="col-12 col-md-7 col-xl-6 ">
+                <div className="col-12 col-md-7 col-xl-6 px-4 px-lg-0">
                   {!showPersentageBar ? (
                     <>
                       <header>

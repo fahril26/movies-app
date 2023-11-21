@@ -113,7 +113,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   }, [accordionDefaultActiveKey]);
 
   return (
-    <div className="nav-container">
+    <>
       <Navbar
         expand={"lg"}
         className={`bg-dark`}
@@ -262,7 +262,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                 </li>
               </Nav>
 
-              {windowWidth > 992 && (
+              {windowWidth >= 992 && (
                 <ButtonTriggerSearch
                   show={showInputSearch}
                   setShowInputSearch={setShowInputSearch}
@@ -274,7 +274,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
         </Container>
       </Navbar>
       {showInputSearch && <FormText />}
-    </div>
+    </>
   );
 }
 
