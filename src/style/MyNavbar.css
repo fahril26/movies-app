@@ -174,3 +174,23 @@ button.btn-close {
   border: none;
   padding: 0;
 }
+
+.input-sm {
+  background: #2b2632;
+  display: flex;
+  align-items: center;
+  border-radius: 9px;
+  width: 90% !important;
+  justify-content: space-between;
+}
+
+.input-sm input {
+  width: 80%;
+  background: inherit;
+  border: none;
+  color: #bcbcbc !important;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: inherit;
+  transition: 0.3s linear;
+}

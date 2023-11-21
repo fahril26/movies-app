@@ -13,10 +13,10 @@ import AccordionsCustomToogle from "./AccordionsCustomToogle";
 import { CurrentPage } from "../context/CurrentPageContext";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { Form } from "react-bootstrap";
 import { KeywordContext } from "../context/KeywordSearchContex";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { CloseButton, Form } from "react-bootstrap";
 
 const movieLink = [
   { name: "Popular", path: "/movies/popular/1" },
@@ -45,6 +45,11 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     movie: false,
     tvSeries: false,
   });
+
+  const [inputValue, setInputValue] = useState("");
+
+  const { setKeywordSearch } = useContext(KeywordContext);
+  const navigate = useNavigate();
 
   const tvRef = useRef(null);
   const moviesRef = useRef(null);
@@ -107,6 +112,21 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     }
   };
 
+  const handleSubmit = () => {
+    setKeywordSearch(inputValue);
+    navigate("/search/movies/1");
+    localStorage.setItem("paginationNumbers", JSON.stringify([1, 2, 3, 4, 5]));
+    localStorage.setItem("keywordSearch", inputValue);
+  };
+
+  const handleKeywordChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleClearKeyword = () => {
+    setInputValue("");
+  };
+
   useEffect(() => {
     if (windowWidth < 992) setAccordionActive(moviesRef, tvRef);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,159 +141,176 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
         style={style}
       >
         <Container fluid>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
-          <Link to={"/"} className="fw-semibold fs-2 text-light">
-            Popoflix
-          </Link>
-          {windowWidth < 992 && (
-            <ButtonTriggerSearch
-              show={showInputSearch}
+          {showInputSearch && windowWidth < 992 ? (
+            <InputSearchSmallScreen
               setShowInputSearch={setShowInputSearch}
-              showInputSearch={showInputSearch}
+              onSubmit={handleSubmit}
+              handleClearKeyword={handleClearKeyword}
+              handleKeywordChange={handleKeywordChange}
             />
-          )}
-
-          <Navbar.Offcanvas
-            id={`offcanvasNavbar-expand-lg`}
-            aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
-            placement="start"
-          >
-            <Offcanvas.Header closeButton className="text-bg-dark">
-              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+          ) : (
+            <>
+              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+              <Link to={"/"} className="fw-semibold fs-2 text-light">
                 Popoflix
-              </Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body
-              className={windowWidth < 992 ? "bg-dark bg-hover" : null}
-            >
-              <Nav
-                className="justify-content-center align-items-start  flex-grow-1   gap-4 "
-                as={"ul"}
-              >
-                <li style={{ width: windowWidth < 992 ? "100%" : null }}>
-                  <NavLink to={"/"} className={"nav-link"}>
-                    Home
-                  </NavLink>
-                </li>
-
-                {windowWidth < 992 ? (
-                  <AccordionsCustomToogle
-                    rotateArrow={rotateArrow}
-                    setRotateArrow={setRotateArrow}
-                    list={movieLink}
-                    eventKey={0}
-                    resetStorage={resetStorage}
-                    moviesRef={moviesRef}
-                    defaultActiveKey={accordionDefaultActiveKey}
-                  >
-                    Movies
-                    <i
-                      className={`bi bi-chevron-right ${
-                        rotateArrow[0] ? "rotate" : ""
-                      }`}
-                    ></i>
-                  </AccordionsCustomToogle>
-                ) : (
-                  <li
-                    className={"movies"}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <NavLink
-                      to={"/movies"}
-                      className={"movies nav-link"}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Movies
-                    </NavLink>
-
-                    <DropdownMenu show={showDropdown.movie}>
-                      {movieLink.map((link) => {
-                        return (
-                          <NavLink
-                            key={link.name}
-                            className={"dropdown-item"}
-                            onClick={resetStorage}
-                            to={link.path}
-                          >
-                            {link.name}
-                          </NavLink>
-                        );
-                      })}
-                    </DropdownMenu>
-                  </li>
-                )}
-
-                {windowWidth < 992 ? (
-                  <AccordionsCustomToogle
-                    rotateArrow={rotateArrow}
-                    setRotateArrow={setRotateArrow}
-                    list={tvSeriesLink}
-                    eventKey={1}
-                    resetStorage={resetStorage}
-                    tvRef={tvRef}
-                    defaultActiveKey={accordionDefaultActiveKey}
-                  >
-                    Tv Show
-                    <i
-                      className={`bi bi-chevron-right ${
-                        rotateArrow[1] ? "rotate" : ""
-                      }`}
-                    ></i>
-                  </AccordionsCustomToogle>
-                ) : (
-                  <li
-                    className={"tv-series"}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    style={{ width: windowWidth < 992 ? "100%" : null }}
-                  >
-                    <NavLink
-                      className={"tv-series nav-link"}
-                      to={"/tv"}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Tv Show
-                    </NavLink>
-                    <DropdownMenu show={showDropdown.tvSeries}>
-                      {tvSeriesLink.map((link) => (
-                        <NavLink
-                          key={link.name}
-                          className={"dropdown-item"}
-                          onClick={resetStorage}
-                          to={link.path}
-                        >
-                          {link.name}
-                        </NavLink>
-                      ))}
-                    </DropdownMenu>
-                  </li>
-                )}
-
-                <li style={{ width: windowWidth < 992 ? "100%" : null }}>
-                  <NavLink to={"/blog"} className={"nav-link"}>
-                    Blog
-                  </NavLink>
-                </li>
-                <li style={{ width: windowWidth < 992 ? "100%" : null }}>
-                  <NavLink to={"/contact"} className={"nav-link"}>
-                    Contact
-                  </NavLink>
-                </li>
-              </Nav>
-
-              {windowWidth >= 992 && (
+              </Link>
+              {windowWidth < 992 && (
                 <ButtonTriggerSearch
                   show={showInputSearch}
                   setShowInputSearch={setShowInputSearch}
                   showInputSearch={showInputSearch}
                 />
               )}
-            </Offcanvas.Body>
-          </Navbar.Offcanvas>
+              <Navbar.Offcanvas
+                id={`offcanvasNavbar-expand-lg`}
+                aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
+                placement="start"
+              >
+                <Offcanvas.Header closeButton className="text-bg-dark">
+                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+                    Popoflix
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body
+                  className={windowWidth < 992 ? "bg-dark bg-hover" : null}
+                >
+                  <Nav
+                    className="justify-content-center align-items-start  flex-grow-1   gap-4 "
+                    as={"ul"}
+                  >
+                    <li style={{ width: windowWidth < 992 ? "100%" : null }}>
+                      <NavLink to={"/"} className={"nav-link"}>
+                        Home
+                      </NavLink>
+                    </li>
+
+                    {windowWidth < 992 ? (
+                      <AccordionsCustomToogle
+                        rotateArrow={rotateArrow}
+                        setRotateArrow={setRotateArrow}
+                        list={movieLink}
+                        eventKey={0}
+                        resetStorage={resetStorage}
+                        moviesRef={moviesRef}
+                        defaultActiveKey={accordionDefaultActiveKey}
+                      >
+                        Movies
+                        <i
+                          className={`bi bi-chevron-right ${
+                            rotateArrow[0] ? "rotate" : ""
+                          }`}
+                        ></i>
+                      </AccordionsCustomToogle>
+                    ) : (
+                      <li
+                        className={"movies"}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        <NavLink
+                          to={"/movies"}
+                          className={"movies nav-link"}
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Movies
+                        </NavLink>
+
+                        <DropdownMenu show={showDropdown.movie}>
+                          {movieLink.map((link) => {
+                            return (
+                              <NavLink
+                                key={link.name}
+                                className={"dropdown-item"}
+                                onClick={resetStorage}
+                                to={link.path}
+                              >
+                                {link.name}
+                              </NavLink>
+                            );
+                          })}
+                        </DropdownMenu>
+                      </li>
+                    )}
+
+                    {windowWidth < 992 ? (
+                      <AccordionsCustomToogle
+                        rotateArrow={rotateArrow}
+                        setRotateArrow={setRotateArrow}
+                        list={tvSeriesLink}
+                        eventKey={1}
+                        resetStorage={resetStorage}
+                        tvRef={tvRef}
+                        defaultActiveKey={accordionDefaultActiveKey}
+                      >
+                        Tv Show
+                        <i
+                          className={`bi bi-chevron-right ${
+                            rotateArrow[1] ? "rotate" : ""
+                          }`}
+                        ></i>
+                      </AccordionsCustomToogle>
+                    ) : (
+                      <li
+                        className={"tv-series"}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        style={{ width: windowWidth < 992 ? "100%" : null }}
+                      >
+                        <NavLink
+                          className={"tv-series nav-link"}
+                          to={"/tv"}
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Tv Show
+                        </NavLink>
+                        <DropdownMenu show={showDropdown.tvSeries}>
+                          {tvSeriesLink.map((link) => (
+                            <NavLink
+                              key={link.name}
+                              className={"dropdown-item"}
+                              onClick={resetStorage}
+                              to={link.path}
+                            >
+                              {link.name}
+                            </NavLink>
+                          ))}
+                        </DropdownMenu>
+                      </li>
+                    )}
+
+                    <li style={{ width: windowWidth < 992 ? "100%" : null }}>
+                      <NavLink to={"/blog"} className={"nav-link"}>
+                        Blog
+                      </NavLink>
+                    </li>
+                    <li style={{ width: windowWidth < 992 ? "100%" : null }}>
+                      <NavLink to={"/contact"} className={"nav-link"}>
+                        Contact
+                      </NavLink>
+                    </li>
+                  </Nav>
+
+                  {windowWidth >= 992 && (
+                    <ButtonTriggerSearch
+                      show={showInputSearch}
+                      setShowInputSearch={setShowInputSearch}
+                      showInputSearch={showInputSearch}
+                    />
+                  )}
+                </Offcanvas.Body>
+              </Navbar.Offcanvas>
+            </>
+          )}
         </Container>
       </Navbar>
-      {showInputSearch && <FormText />}
+      {showInputSearch && windowWidth >= 992 && (
+        <FormText
+          handleClearKeyword={handleClearKeyword}
+          handleKeywordChange={handleKeywordChange}
+          inputValue={inputValue}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 }
@@ -290,26 +327,40 @@ function ButtonTriggerSearch({ show, setShowInputSearch, showInputSearch }) {
   );
 }
 
-function FormText() {
-  const { setKeywordSearch } = useContext(KeywordContext);
-  const [inputValue, setInputValue] = useState("");
-  const navigate = useNavigate();
+function InputSearchSmallScreen({
+  setShowInputSearch,
+  onSubmit,
+  handleClearKeyword,
+  handleKeywordChange,
+}) {
+  return (
+    <Form className="container-fluid  input-sm" onSubmit={onSubmit}>
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={handleKeywordChange}
+      />
+      <div className="wrapper-search-btn d-flex align-items-center">
+        <button className="search-btn">
+          <i className="bi bi-search"></i>
+        </button>
+        <CloseButton
+          onClick={() => {
+            setShowInputSearch(false);
+            handleClearKeyword();
+          }}
+        />
+      </div>
+    </Form>
+  );
+}
 
-  const handleKeywordChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    setKeywordSearch(inputValue);
-    navigate("/search/movies/1");
-    localStorage.setItem("paginationNumbers", JSON.stringify([1, 2, 3, 4, 5]));
-    localStorage.setItem("keywordSearch", inputValue);
-  };
-
-  const handleClearKeyword = () => {
-    setInputValue("");
-  };
-
+function FormText({
+  handleSubmit,
+  inputValue,
+  handleKeywordChange,
+  handleClearKeyword,
+}) {
   return (
     <Form
       className="input-search d-flex align-items-center gap-1"
