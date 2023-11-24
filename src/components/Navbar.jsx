@@ -381,7 +381,10 @@ function InputSearchSmallScreen({
   handleKeywordChange,
 }) {
   return (
-    <Form className="container-fluid  input-sm" onSubmit={onSubmit}>
+    <Form
+      className="container-fluid input-sm d-flex justify-content-around"
+      onSubmit={onSubmit}
+    >
       <input
         type="text"
         placeholder="Search..."
@@ -421,7 +424,6 @@ function FormText({
         onChange={handleKeywordChange}
         value={inputValue}
       />
-
       {inputValue ? (
         <button
           className="close-btn"
