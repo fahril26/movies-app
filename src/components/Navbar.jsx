@@ -145,6 +145,14 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   useEffect(() => {
     getAnActivePage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    const handleHideOffcanvas = (e) => {
+      if (e.target.classList.contains("offcanvas-backdrop")) hideOffcanvas();
+    };
+
+    window.addEventListener("click", handleHideOffcanvas);
+
+    return () => window.removeEventListener("click", handleClearKeyword);
   }, []);
 
   useEffect(() => {
