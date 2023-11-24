@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "../style/MyNavbar.css";
 import { useContext } from "react";
 import { ResizeContext } from "../context/WindowWidthContext";
@@ -14,7 +14,6 @@ import { CurrentPage } from "../context/CurrentPageContext";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { KeywordContext } from "../context/KeywordSearchContex";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CloseButton, Form } from "react-bootstrap";
 
@@ -38,19 +37,19 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   const { setCurrentPage } = useContext(CurrentPage);
   const [rotateArrow, setRotateArrow] = useState([false, false]);
   const [showInputSearch, setShowInputSearch] = useState(false);
-
-  const [accordionDefaultActiveKey, setAccordionDefaultActiveKey] =
-    useState(null);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [activeNav, setActiveNav] = useState({ typePage: "", page: "" });
   const [showDropdown, setShowDropdown] = useState({
     movie: false,
     tvSeries: false,
   });
-
-  const [inputValue, setInputValue] = useState("");
+  const [accordionDefaultActiveKey, setAccordionDefaultActiveKey] =
+    useState(null);
 
   const { setKeywordSearch } = useContext(KeywordContext);
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
   const tvRef = useRef(null);
   const moviesRef = useRef(null);
 
@@ -127,10 +126,30 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     setInputValue("");
   };
 
+  const getAnActivePage = () => {
+    const typePage = pathname.split("/")[1];
+    const page = pathname.split("/")[2];
+    const newData = { ...activeNav, typePage, page };
+    setActiveNav(newData);
+  };
+
+  const hideOffcanvas = () => {
+    setShowOffcanvas(false);
+  };
+
   useEffect(() => {
     if (windowWidth < 992) setAccordionActive(moviesRef, tvRef);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accordionDefaultActiveKey]);
+
+  useEffect(() => {
+    getAnActivePage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth > 992) hideOffcanvas();
+  }, [windowWidth]);
 
   return (
     <>
@@ -150,7 +169,10 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
             />
           ) : (
             <>
-              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+              <Navbar.Toggle
+                aria-controls={`offcanvasNavbar-expand-lg`}
+                onClick={() => setShowOffcanvas(true)}
+              />
               <Link to={"/"} className="fw-semibold fs-2 text-light">
                 Popoflix
               </Link>
@@ -165,21 +187,26 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                 id={`offcanvasNavbar-expand-lg`}
                 aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
                 placement="start"
+                show={showOffcanvas}
               >
-                <Offcanvas.Header closeButton className="text-bg-dark">
+                <Offcanvas.Header className="text-bg-dark">
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
                     Popoflix
                   </Offcanvas.Title>
+
+                  <CloseButton onClick={() => setShowOffcanvas(false)} />
                 </Offcanvas.Header>
                 <Offcanvas.Body
-                  className={windowWidth < 992 ? "bg-dark bg-hover" : null}
+                  className={`${
+                    windowWidth < 992 ? " bg-hover" : null
+                  } bg-dark`}
                 >
                   <Nav
                     className="justify-content-center align-items-start  flex-grow-1   gap-4 "
                     as={"ul"}
                   >
                     <li style={{ width: windowWidth < 992 ? "100%" : null }}>
-                      <NavLink to={"/"} className={"nav-link"}>
+                      <NavLink to={"/"} className={`nav-link`}>
                         Home
                       </NavLink>
                     </li>
@@ -193,6 +220,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                         resetStorage={resetStorage}
                         moviesRef={moviesRef}
                         defaultActiveKey={accordionDefaultActiveKey}
+                        activeNav={activeNav}
                       >
                         Movies
                         <i
@@ -220,7 +248,12 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                             return (
                               <NavLink
                                 key={link.name}
-                                className={"dropdown-item"}
+                                className={`dropdown-item ${
+                                  link.path.includes(activeNav.typePage) &&
+                                  link.path.includes(activeNav.page)
+                                    ? "active"
+                                    : ""
+                                }`}
                                 onClick={resetStorage}
                                 to={link.path}
                               >
@@ -241,6 +274,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                         resetStorage={resetStorage}
                         tvRef={tvRef}
                         defaultActiveKey={accordionDefaultActiveKey}
+                        activeNav={activeNav}
                       >
                         Tv Show
                         <i
@@ -267,7 +301,12 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                           {tvSeriesLink.map((link) => (
                             <NavLink
                               key={link.name}
-                              className={"dropdown-item"}
+                              className={`dropdown-item ${
+                                link.path.includes(activeNav.typePage) &&
+                                link.path.includes(activeNav.page)
+                                  ? "active"
+                                  : ""
+                              }`}
                               onClick={resetStorage}
                               to={link.path}
                             >

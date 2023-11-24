@@ -4,7 +4,9 @@ import "../../style/SeachLayout.css";
 import { NavLink } from "react-router-dom";
 import { ListGroup } from "react-bootstrap";
 import useFetch from "../../hook/useFetch";
+import Footer from "../../components/Footer";
 import AnimationExample from "../../components/Placeholder";
+import { useLocation } from "react-router-dom";
 
 export default function SearchPageLayout() {
   const keywordSearch = localStorage.getItem("keywordSearch");
@@ -21,6 +23,10 @@ export default function SearchPageLayout() {
     return number?.toLocaleString("id-ID");
   };
 
+  const { pathname } = useLocation();
+
+  const currentPathName = pathname.split("/")[2];
+
   const totalMoviesData = setFormatNumber(moviesData?.data?.total_results);
 
   const totalTvShowData = setFormatNumber(tvShowData?.data?.total_results);
@@ -28,11 +34,10 @@ export default function SearchPageLayout() {
   return (
     <>
       <MyNavbar fixed={"top"} />
-
       <div className="searching-page">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-3">
+            <div className="col-lg-3 col-12">
               <div className="search-results-list ">
                 <header>
                   <h5>Search Results</h5>
@@ -47,7 +52,10 @@ export default function SearchPageLayout() {
                         totalItems={1}
                       />
                     ) : (
-                      <NavLink to={"/search/movies/1"}>
+                      <NavLink
+                        to={"/search/movies/1"}
+                        className={currentPathName === "movies" && "active"}
+                      >
                         Movies {`(${totalMoviesData ? totalMoviesData : "0"})`}
                       </NavLink>
                     )}
@@ -60,7 +68,10 @@ export default function SearchPageLayout() {
                         totalItems={1}
                       />
                     ) : (
-                      <NavLink to={"/search/tv/1"}>
+                      <NavLink
+                        to={"/search/tv/1"}
+                        className={currentPathName === "tv" && "active"}
+                      >
                         Tv Show {`(${totalTvShowData ? totalTvShowData : "0"})`}
                       </NavLink>
                     )}
@@ -69,24 +80,22 @@ export default function SearchPageLayout() {
               </div>
             </div>
 
-            <div className="col-9">
+            <div className="col-12 col-lg-9 py-5 py-lg-0">
               {!moviesData.showPersentageBar ? (
                 <Outlet />
               ) : (
                 <AnimationExample
-                  style={{
-                    padding: "25px",
-                    borderRadius: "5px",
-                    width: "100%",
-                  }}
-                  size={"lg"}
-                  totalItems={7}
+                  style={{ width: "100%", padding: "20px" }}
+                  size={"md"}
+                  totalItems={6}
                 />
               )}
             </div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

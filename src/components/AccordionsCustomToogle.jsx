@@ -45,6 +45,7 @@ function AccordionsCustomToogle({
   moviesRef,
   tvRef,
   defaultActiveKey,
+  activeNav,
 }) {
   const handleClick = () => {
     resetStorage();
@@ -75,7 +76,12 @@ function AccordionsCustomToogle({
                 <NavLink
                   to={item.path}
                   onClick={() => handleClick(item)}
-                  className={"nav-link"}
+                  className={`nav-link  ${
+                    item.path.includes(activeNav.typePage) &&
+                    item.path.includes(activeNav.page)
+                      ? "active"
+                      : ""
+                  }`}
                 >
                   {item.name}
                 </NavLink>

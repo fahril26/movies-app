@@ -72,6 +72,11 @@ footer,
   .jumbotron .jumbotron-content {
     width: 75vw;
   }
+
+  .offcanvas-body ul li a.active {
+    color: var(--yellow) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
 }
 
 /* medium */
@@ -106,7 +111,7 @@ footer,
     font-size: 80%;
   }
   .jumbotron .jumbotron-content {
-    width: 105% !important;
+    width: 115% !important;
   }
 
   .input-search {
@@ -117,12 +122,12 @@ footer,
 /* extra */
 @media (max-width: 880px) {
   .jumbotron .jumbotron-content {
-    width: 80vw;
+    width: 88vw;
   }
 }
 
 @media (max-width: 650px) {
   .jumbotron .jumbotron-content {
-    width: 90vw;
+    width: 95vw;
   }
 }

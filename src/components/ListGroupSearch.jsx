@@ -36,12 +36,12 @@ const ListGroupSearch = ({
   return (
     <div className="card-list-search">
       <div className="d-flex">
-        <div className="image ">
+        <div className="image">
           {poster ? (
             <img
               src={`https://image.tmdb.org/t/p/w220_and_h330_face${poster}`}
               alt="poster"
-              width={"100%"}
+              width={"130%"}
               style={{ borderRadius: "5px 0 0 5px" }}
               onClick={navigateTo}
             />
@@ -50,7 +50,7 @@ const ListGroupSearch = ({
           )}
         </div>
 
-        <div className=" description px-4">
+        <div className=" description px-5 ">
           <header>
             <h5>
               <Link

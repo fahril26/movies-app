@@ -7,6 +7,10 @@ nav .container-fluid {
   padding: 0;
 }
 
+nav a.active {
+  color: var(--yellow) !important;
+}
+
 nav a {
   text-decoration: none !important;
   color: #fff;
@@ -89,22 +93,29 @@ button.btn-close {
   padding-right: 5px;
 }
 
-.dropdown-item.active {
-  background-color: transparent !important;
-}
-
 .dropdown-menu .dropdown-item:hover {
   color: var(--yellow) !important;
+}
+.dropdown-item.active {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .navbar-nav .accordion {
   width: 100% !important;
 }
 
+.accordion-collapse {
+  padding: 0;
+}
+
 .navbar-nav .accordion a {
   width: 100% !important;
   display: flex;
   justify-content: space-between;
+}
+
+.accordion-collapse li a {
+  padding-left: 2.5rem !important;
 }
 
 .offcanvas a {
@@ -127,7 +138,6 @@ button.btn-close {
 .rotate {
   transform: rotate(90deg);
   transition: 0.3s;
-
   color: #fff;
 }
 
@@ -154,7 +164,7 @@ button.btn-close {
   position: fixed;
   left: 0;
   right: 0;
-  top: 9.5%;
+  top: 10%;
   z-index: 1;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
@@ -176,12 +186,13 @@ button.btn-close {
 }
 
 .input-sm {
-  background: #2b2632;
+  background: #444;
   display: flex;
   align-items: center;
   border-radius: 9px;
   width: 90% !important;
   justify-content: space-between;
+  padding: 0 5px;
 }
 
 .input-sm input {
