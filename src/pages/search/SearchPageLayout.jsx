@@ -85,7 +85,7 @@ export default function SearchPageLayout() {
                 <Outlet />
               ) : (
                 <AnimationExample
-                  style={{ width: "100%", padding: "20px" }}
+                  style={{ width: "100%", padding: "35px" }}
                   size={"md"}
                   totalItems={6}
                 />

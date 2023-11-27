@@ -99,6 +99,10 @@ footer,
   .input-search {
     top: 9%;
   }
+
+  .movie-detail img {
+    width: 65%;
+  }
 }
 
 /* Small */
@@ -112,6 +116,10 @@ footer,
 
   .input-search {
     top: 2%;
+  }
+
+  .movie-detail img {
+    width: 60%;
   }
 }
 

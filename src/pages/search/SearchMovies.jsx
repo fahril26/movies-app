@@ -5,25 +5,15 @@ import useFetch from "../../hook/useFetch";
 import { useState } from "react";
 import AnimatedProgressBar from "../../components/AnimatedProgressBar";
 import { KeywordContext } from "../../context/KeywordSearchContex";
-import { useEffect } from "react";
 
 export default function SearchMovies() {
   const { keywordSearch } = useContext(KeywordContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const [firstLoad, setFirstLoad] = useState(true);
   const { data, loadingPersentage, showPersentageBar, error } = useFetch(
     `https://api.themoviedb.org/3/search/movie?query=${keywordSearch}&include_adult=false&language=en-US&page=${currentPage}`
   );
 
   const [pageNumbers, setPageNumbers] = useState([1, 2, 3, 4, 5]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFirstLoad(false);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <>
@@ -33,7 +23,7 @@ export default function SearchMovies() {
 
       <div
         className="movies-search-list"
-        style={firstLoad ? { height: "100vh" } : {}}
+        style={!data || data.results.length < 4 ? { height: "90vh" } : {}}
       >
         {data?.results?.length !== 0 && !error ? (
           <ul className=" d-flex flex-column gap-3 ">
@@ -51,7 +41,9 @@ export default function SearchMovies() {
             ))}
           </ul>
         ) : (
-          <div style={{ fontSize: "1.3rem" }}>No Have Data</div>
+          <div
+            style={{ fontSize: "1.3rem" }}
+          >{`Not Found : "${keywordSearch}"`}</div>
         )}
 
         {data?.total_pages > 1 ? (

@@ -174,6 +174,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
               onSubmit={handleSubmit}
               handleClearKeyword={handleClearKeyword}
               handleKeywordChange={handleKeywordChange}
+              inputValue={inputValue}
             />
           ) : (
             <>
@@ -379,11 +380,15 @@ function InputSearchSmallScreen({
   onSubmit,
   handleClearKeyword,
   handleKeywordChange,
+  inputValue,
 }) {
   return (
     <Form
       className="container-fluid input-sm d-flex justify-content-around"
-      onSubmit={onSubmit}
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (inputValue) onSubmit();
+      }}
     >
       <input
         type="text"
@@ -414,7 +419,10 @@ function FormText({
   return (
     <Form
       className="input-search d-flex align-items-center gap-1"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (inputValue) handleSubmit();
+      }}
     >
       <i className="bi bi-search"></i>
       <Form.Control

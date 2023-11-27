@@ -70,13 +70,13 @@ const LayoutMovieDetail = ({ type }) => {
         <Loading />
       ) : (
         <>
-          <div className="movie-detail" style={{ height: "100vh" }}>
+          <div className="movie-detail">
             <CurrentPageContext>
               <MyNavbar fixed={"top"} />
             </CurrentPageContext>
             <div className="container-fluid mt-5 px-0">
               <div className="content row  gap-md-3 gap-5 justify-content-center justify-content-md-start">
-                <div className="poster col-11 col-md-5 col-lg-4 col-xl-3 ">
+                <div className="poster col-11 col-md-5 col-lg-4 col-xl-3  justify-content-center d-flex">
                   {!showPersentageBar && data?.poster_path ? (
                     <img
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face${data?.poster_path}`}

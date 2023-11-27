@@ -1,31 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ListGroupSearch from "../../components/ListGroupSearch";
-
 import useFetch from "../../hook/useFetch";
-import { useState } from "react";
 import AnimatedProgressBar from "../../components/AnimatedProgressBar";
 import MyPagination from "../../components/MyPagination";
 import { KeywordContext } from "../../context/KeywordSearchContex";
-import { useEffect } from "react";
 
 const SearchTv = () => {
   const { keywordSearch } = useContext(KeywordContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const [firstLoad, setFirstLoad] = useState(true);
 
   const { data, loadingPersentage, showPersentageBar, error } = useFetch(
     `https://api.themoviedb.org/3/search/tv?query=${keywordSearch}&include_adult=false&language=en-US&page=${currentPage}`
   );
 
   const [pageNumbers, setPageNumbers] = useState([1, 2, 3, 4, 5]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFirstLoad(false);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <>
@@ -35,7 +23,7 @@ const SearchTv = () => {
 
       <div
         className="tv-search-list"
-        style={firstLoad ? { height: "100vh" } : {}}
+        style={!data || data.results.length < 4 ? { height: "90vh" } : {}}
       >
         {data?.results?.length !== 0 && !error ? (
           <ul className=" d-flex flex-column gap-3 ">
@@ -53,7 +41,9 @@ const SearchTv = () => {
             ))}
           </ul>
         ) : (
-          <div style={{ fontSize: "1.3rem" }}>No Have Data</div>
+          <div
+            style={{ fontSize: "1.3rem" }}
+          >{`Not Found : "${keywordSearch}"`}</div>
         )}
 
         {data?.total_page > 1 && (
