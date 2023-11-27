@@ -23,7 +23,7 @@ const SearchTv = () => {
 
       <div
         className="tv-search-list"
-        style={!data || data.results.length < 4 ? { height: "90vh" } : {}}
+        style={!data || data.results.length <= 5 ? { height: "90vh" } : {}}
       >
         {data?.results?.length !== 0 && !error ? (
           <ul className=" d-flex flex-column gap-3 ">
