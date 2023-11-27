@@ -23,7 +23,7 @@ export default function SearchMovies() {
 
       <div
         className="movies-search-list"
-        style={!data || data.results.length <= 5 ? { height: "50vh" } : {}}
+        style={!data || data.results.length <= 5 ? { height: "55vh" } : {}}
       >
         {data?.results?.length !== 0 && !error ? (
           <ul className=" d-flex flex-column gap-3 ">

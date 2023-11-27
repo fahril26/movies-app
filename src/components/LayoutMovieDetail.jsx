@@ -73,7 +73,7 @@ const LayoutMovieDetail = ({ type }) => {
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
-          <div className="movie-detail">
+          <div className="movie-detail" style={{ height: "100vh" }}>
             <div className="container-fluid mt-5 px-0">
               <div className="content row  gap-md-3 gap-5 justify-content-center justify-content-md-start">
                 <div className="poster col-11 col-md-5 col-lg-4 col-xl-3  justify-content-center d-flex">
