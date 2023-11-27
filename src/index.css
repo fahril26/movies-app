@@ -121,6 +121,10 @@ footer,
   .movie-detail img {
     width: 60%;
   }
+
+  .movie-detail {
+    height: 85vh;
+  }
 }
 
 /* extra */
