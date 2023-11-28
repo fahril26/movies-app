@@ -5,13 +5,20 @@ import "../../../../style/LifeAreaSection.css";
 import Img from "../../../../assets/background/live_img.png";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import { ResizeContext } from "../../../../context/WindowWidthContext";
 
 const LiveAreaSection = () => {
-  const [windowHeight, setWindowHeight] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const windowWidth = useContext(ResizeContext);
 
   useEffect(() => {
     const handleOnScroll = () => {
-      setWindowHeight(window.scrollY);
+      console.log(window.scrollY);
+      if (windowWidth > 992 && window.scrollY >= 2300) setShow(true);
+      else if (windowWidth <= 992 && window.scrollY >= 3200) setShow(true);
+      else if (windowWidth <= 768 && window.scrollY >= 3550) setShow(true);
     };
 
     window.addEventListener("scroll", handleOnScroll);
@@ -44,8 +51,7 @@ const LiveAreaSection = () => {
 
               <div className="active-customer col  p-0 ">
                 <div className="viewers">
-                  {windowHeight >= 2450 ? <MyOdometer /> : null}K
-                  <span className="plus">+</span>
+                  {show ? <MyOdometer /> : null}K<span className="plus">+</span>
                 </div>
                 <span className="text">Active Customer</span>
               </div>
@@ -53,7 +59,7 @@ const LiveAreaSection = () => {
           </div>
           <div
             className={`col-12 col-lg-6 live-area-img mt-5 mt-lg-0 ${
-              windowHeight >= 2450 ? "animation" : ""
+              show ? "animation" : ""
             }`}
           >
             <img src={Img} alt="img" />
