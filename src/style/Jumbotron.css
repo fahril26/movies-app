@@ -42,7 +42,38 @@
   clip-path: polygon(0 0, 90% 0, 50% 100%, 0% 100%);
 }
 
-.jumbotron .jumbotron .jumbotron-content h5,
+.jumbotron .jumbotron-content h5,
 .jumbotron .jumbotron-content span {
   color: #e36414;
+}
+
+.jumbotron .jumbotron-content h5 {
+  animation: nameAnimation 0.8s linear;
+}
+
+.jumbotron .jumbotron-content h1 {
+  animation: descAnimation 0.8s linear;
+}
+
+@keyframes descAnimation {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes nameAnimation {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

@@ -3,8 +3,22 @@ import Header from "../../../../components/Header";
 import MyOdometer from "../../../../components/MyOdometer";
 import "../../../../style/LifeAreaSection.css";
 import Img from "../../../../assets/background/live_img.png";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const LiveAreaSection = () => {
+  const [windowHeight, setWindowHeight] = useState(0);
+
+  useEffect(() => {
+    const handleOnScroll = () => {
+      setWindowHeight(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleOnScroll);
+
+    return () => window.removeEventListener("scroll", handleOnScroll);
+  }, []);
+
   return (
     <section className="live-area" id="live-area">
       <div className="container-fluid py-5">
@@ -30,13 +44,18 @@ const LiveAreaSection = () => {
 
               <div className="active-customer col  p-0 ">
                 <div className="viewers">
-                  <MyOdometer />K<span className="plus">+</span>
+                  {windowHeight >= 2300 ? <MyOdometer /> : null}K
+                  <span className="plus">+</span>
                 </div>
                 <span className="text">Active Customer</span>
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-6 live-area-img mt-5 mt-lg-0">
+          <div
+            className={`col-12 col-lg-6 live-area-img mt-5 mt-lg-0 ${
+              windowHeight >= 2300 ? "animation" : ""
+            }`}
+          >
             <img src={Img} alt="img" />
           </div>
         </div>

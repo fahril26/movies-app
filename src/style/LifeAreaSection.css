@@ -56,6 +56,9 @@
 .live-area-img {
   transform: translateX(50px);
   opacity: 0;
+}
+
+.animation {
   animation: showImg 2s forwards;
 }
 

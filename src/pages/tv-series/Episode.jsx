@@ -41,6 +41,8 @@ const Episode = () => {
     }
   };
 
+  console.log(data);
+
   const decrement = () => {
     if (!loadingPersentage) {
       localStorage.setItem("index", index - 1);

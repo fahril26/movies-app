@@ -7,7 +7,7 @@ const MyOdometer = ({ className, style }) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setValue(20), 1000);
+    const timeoutId = setTimeout(() => setValue(20), 0);
     return () => {
       clearTimeout(timeoutId);
     };
