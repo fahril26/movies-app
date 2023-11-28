@@ -48,11 +48,11 @@
 }
 
 .jumbotron .jumbotron-content h5 {
-  animation: nameAnimation 0.8s linear;
+  animation: nameAnimation 1s linear;
 }
 
 .jumbotron .jumbotron-content h1 {
-  animation: descAnimation 0.8s linear;
+  animation: descAnimation 1s linear;
 }
 
 @keyframes descAnimation {

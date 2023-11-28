@@ -44,7 +44,7 @@ const LiveAreaSection = () => {
 
               <div className="active-customer col  p-0 ">
                 <div className="viewers">
-                  {windowHeight >= 2300 ? <MyOdometer /> : null}K
+                  {windowHeight >= 2450 ? <MyOdometer /> : null}K
                   <span className="plus">+</span>
                 </div>
                 <span className="text">Active Customer</span>
@@ -53,7 +53,7 @@ const LiveAreaSection = () => {
           </div>
           <div
             className={`col-12 col-lg-6 live-area-img mt-5 mt-lg-0 ${
-              windowHeight >= 2300 ? "animation" : ""
+              windowHeight >= 2450 ? "animation" : ""
             }`}
           >
             <img src={Img} alt="img" />
