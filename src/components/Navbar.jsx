@@ -94,14 +94,14 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     let newRotateArrow = [...rotateArrow];
     let defaultActiveKey = null;
 
-    for (const index in classList) {
-      if (classList[index].includes("active")) {
-        defaultActiveKey = Number(index);
-        newRotateArrow[index] = true;
+    for (const className in classList) {
+      if (classList[className].includes("active")) {
+        defaultActiveKey = Number(className);
+        newRotateArrow[className] = true;
         setAccordionDefaultActiveKey(defaultActiveKey);
         setRotateArrow(newRotateArrow);
       } else {
-        newRotateArrow[index] = false;
+        newRotateArrow[className] = false;
         setRotateArrow(newRotateArrow);
       }
     }
