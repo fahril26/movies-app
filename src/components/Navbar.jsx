@@ -3,18 +3,14 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation, Link } from "react-router-dom";
 import "../style/MyNavbar.css";
-import { useContext } from "react";
 import { ResizeContext } from "../context/WindowWidthContext";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-import { useState } from "react";
 import AccordionsCustomToogle from "./AccordionsCustomToogle";
 import { CurrentPage } from "../context/CurrentPageContext";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { KeywordContext } from "../context/KeywordSearchContex";
-import { Link } from "react-router-dom";
 import { CloseButton, Form } from "react-bootstrap";
 
 const movieLink = [
@@ -48,8 +44,8 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     useState(null);
 
   const { setKeywordSearch } = useContext(KeywordContext);
-  const navigate = useNavigate();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const tvRef = useRef(null);
   const moviesRef = useRef(null);
 
@@ -112,8 +108,11 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   };
 
   const handleSubmit = () => {
+    const params = new URLSearchParams();
+    params.append("query", inputValue);
+
     setKeywordSearch(inputValue);
-    navigate("/search/movies/1");
+    navigate(`/movies/search?${params.toString()}`);
     localStorage.setItem("paginationNumbers", JSON.stringify([1, 2, 3, 4, 5]));
     localStorage.setItem("keywordSearch", inputValue);
   };
@@ -153,6 +152,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     window.addEventListener("click", handleHideOffcanvas);
 
     return () => window.removeEventListener("click", handleClearKeyword);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -327,11 +327,6 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                     )}
 
                     <li style={{ width: windowWidth < 992 ? "100%" : null }}>
-                      <NavLink to={"/blog"} className={"nav-link"}>
-                        Blog
-                      </NavLink>
-                    </li>
-                    <li style={{ width: windowWidth < 992 ? "100%" : null }}>
                       <NavLink to={"/contact"} className={"nav-link"}>
                         Contact
                       </NavLink>
@@ -394,6 +389,7 @@ function InputSearchSmallScreen({
         type="text"
         placeholder="Search..."
         onChange={handleKeywordChange}
+        autoFocus
       />
       <div className="wrapper-search-btn d-flex align-items-center">
         <button className="search-btn">
@@ -431,6 +427,7 @@ function FormText({
         placeholder="Search for a movie or tv show"
         onChange={handleKeywordChange}
         value={inputValue}
+        autoFocus
       />
       {inputValue ? (
         <button

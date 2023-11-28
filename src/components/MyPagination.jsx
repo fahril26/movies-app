@@ -12,6 +12,7 @@ const MyPagination = ({
   loading,
   pageNumbers,
   setPageNumbers,
+  navigatePath,
 }) => {
   const [pathName, setPathName] = useState("");
   const navigate = useNavigate();
@@ -91,15 +92,21 @@ const MyPagination = ({
   };
 
   const handleClick = (number, index) => {
+    const pathname = navigatePath
+      ? `${navigatePath}&page=${number}`
+      : `${pathName}/${number}`;
+
     if (!loading) {
       setCurrentPage(number);
-      navigate(`${pathName}/${number}`);
+      navigate(pathname);
 
       number !== currentPage && changeNumber(index, number);
     }
   };
 
   const firstPage = () => {
+    const pathname = navigatePath ? `${navigatePath}&page=1` : `${pathName}/1`;
+
     if (!loading) {
       const currentNumber = pageNumbers.slice();
       const newNumber = [];
@@ -111,11 +118,15 @@ const MyPagination = ({
       localStorage.setItem("paginationNumbers", JSON.stringify(newNumber));
       setCurrentPage(1);
       setPageNumbers(newNumber);
-      navigate(`${pathName}/1`);
+      navigate(pathname);
     }
   };
 
   const lastPage = () => {
+    const pathname = navigatePath
+      ? `${navigatePath}&page=${totalPage}`
+      : `${pathName}/${totalPage}`;
+
     if (!loading) {
       const currentNumber = pageNumbers.slice();
       const newNumber = [];
@@ -129,23 +140,30 @@ const MyPagination = ({
       localStorage.setItem("paginationNumbers", JSON.stringify(newNumber));
       setCurrentPage(totalPage);
       setPageNumbers(newNumber);
-      navigate(`${pathName}/${totalPage}`);
+      navigate(pathname);
     }
   };
 
   const handlePrev = (currentPage) => {
+    const pathname = navigatePath
+      ? `${navigatePath}&page=${currentPage - 1}`
+      : `${pathName}/${currentPage - 1}`;
     if (!loading) {
       setCurrentPage(currentPage - 1);
-      navigate(`${pathName}/${currentPage - 1}`);
+      navigate(pathname);
 
       if (currentPage <= totalPage - 4) changeNumber(1);
     }
   };
 
   const handleNext = (currentPage) => {
+    const pathname = navigatePath
+      ? `${navigatePath}&page=${currentPage + 1}`
+      : `${pathName}/${currentPage + 1}`;
+
     if (!loading) {
       setCurrentPage(currentPage + 1);
-      navigate(`${pathName}/${currentPage + 1}`);
+      navigate(pathname);
 
       if (currentPage >= 5) {
         changeNumber(3);

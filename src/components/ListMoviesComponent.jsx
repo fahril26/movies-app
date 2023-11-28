@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import MyCard from "./MyCard";
 import MyPagination from "./MyPagination";
+import { useLocation } from "react-router-dom";
 
 const ListMoviesComponent = ({
   fetchData,
@@ -11,6 +12,21 @@ const ListMoviesComponent = ({
   pageNumbers,
   setPageNumbers,
 }) => {
+  const { pathname } = useLocation();
+
+  const getTotalPage = () => {
+    let total = null;
+    const pageName = pathname.split("/")[2];
+
+    if (pageName === "airing-today") total = 16;
+    else if (pageName === "on-the-air") total = 64;
+    else total = fetchData?.data?.total_pages;
+
+    return total;
+  };
+
+  const totalPage = getTotalPage();
+
   return (
     <div
       className="list"
@@ -18,7 +34,7 @@ const ListMoviesComponent = ({
     >
       {fetchData?.data?.results && (
         <MyPagination
-          totalPage={fetchData?.data?.total_pages}
+          totalPage={totalPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           loading={loading}
@@ -53,7 +69,7 @@ const ListMoviesComponent = ({
 
       {fetchData?.data?.results && (
         <MyPagination
-          totalPage={fetchData?.data?.total_pages}
+          totalPage={totalPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           loading={loading}

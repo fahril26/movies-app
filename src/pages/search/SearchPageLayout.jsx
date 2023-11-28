@@ -53,7 +53,7 @@ export default function SearchPageLayout() {
                       />
                     ) : (
                       <NavLink
-                        to={"/search/movies/1"}
+                        to={`/movies/search${location.search}`}
                         className={currentPathName === "movies" && "active"}
                       >
                         Movies {`(${totalMoviesData ? totalMoviesData : "0"})`}
@@ -69,7 +69,7 @@ export default function SearchPageLayout() {
                       />
                     ) : (
                       <NavLink
-                        to={"/search/tv/1"}
+                        to={`/tv/search${location.search}`}
                         className={currentPathName === "tv" && "active"}
                       >
                         Tv Show {`(${totalTvShowData ? totalTvShowData : "0"})`}

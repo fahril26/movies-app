@@ -121,7 +121,6 @@ export const RoutersRoot = () => {
           />
 
           <Route
-            path={`/search`}
             element={
               <CurrentPageContext>
                 <ScrollRestoration />
@@ -130,7 +129,8 @@ export const RoutersRoot = () => {
             }
           >
             <Route
-              path={"/search/movies/:page"}
+              path={"/movies/search"}
+              index
               element={
                 <CurrentPageContext>
                   <SearchMovies />
@@ -138,7 +138,7 @@ export const RoutersRoot = () => {
               }
             />
             <Route
-              path={"/search/tv/:page"}
+              path={"/tv/search"}
               element={
                 <CurrentPageContext>
                   <SearchTv />
