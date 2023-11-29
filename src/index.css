@@ -97,7 +97,7 @@ footer,
   }
 
    .input-search {
-    top: 2%;
+    top: 0.8%;
   }
 
   .movie-detail img {
@@ -118,9 +118,7 @@ footer,
     width: 115% !important;
   }
 
-  .input-search {
-    top: 2%;
-  }
+  
 
   .movie-detail img {
     width: 60%;
