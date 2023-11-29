@@ -1,5 +1,6 @@
 .live-area {
   position: relative;
+  overflow: hidden;
 }
 
 .live-area::before {

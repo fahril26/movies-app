@@ -16,6 +16,9 @@ const SearchTv = () => {
 
   const [pageNumbers, setPageNumbers] = useState([1, 2, 3, 4, 5]);
 
+  const params = new URLSearchParams(location.search);
+  const navigatePath = `/tv/search?query=${params.get("query")}`;
+
   return (
     <>
       {showPersentageBar ? (
@@ -59,6 +62,7 @@ const SearchTv = () => {
             loading={showPersentageBar}
             pageNumbers={pageNumbers}
             setPageNumbers={setPageNumbers}
+            navigatePath={navigatePath}
           />
         ) : null}
       </div>

@@ -87,7 +87,7 @@ export default function SearchPageLayout() {
                 <AnimationExample
                   style={{ width: "100%", padding: "35px" }}
                   size={"md"}
-                  totalItems={8}
+                  totalItems={9}
                 />
               )}
             </div>
