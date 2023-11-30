@@ -78,7 +78,7 @@ const LayoutMovieDetail = ({ type }) => {
           </CurrentPageContext>
           <div
             className="detail-movie"
-            style={windowWidth <= 768 ? { height: "115vh" } : {}}
+            style={windowWidth <= 768 ? { height: "100vh" } : {}}
           >
             <div className="container-fluid mt-5 px-0">
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
