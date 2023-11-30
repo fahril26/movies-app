@@ -50,9 +50,33 @@ export const RoutersRoot = () => {
             </CurrentPageContext>
           }
         />
-        <Route path="/movie-detail/:movie_id" element={<MovieDetail />} />
-        <Route path="/tv-series-detail/:tv_id" element={<TvSeriesDetail />} />
-        <Route path="/tv-series-detail/:tv_id/seasons" element={<Seasons />} />
+        <Route
+          path="/movie-detail/:movie_id"
+          element={
+            <>
+              <ScrollRestoration />
+              <MovieDetail />
+            </>
+          }
+        />
+        <Route
+          path="/tv-series-detail/:tv_id"
+          element={
+            <>
+              <ScrollRestoration />
+              <TvSeriesDetail />
+            </>
+          }
+        />
+        <Route
+          path="/tv-series-detail/:tv_id/seasons"
+          element={
+            <>
+              <ScrollRestoration />
+              <Seasons />
+            </>
+          }
+        />
         <Route
           path="/tv-series-detail/:tv_id/seasons/:index"
           element={<Episode />}

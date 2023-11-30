@@ -89,6 +89,11 @@ footer,
     padding-right: 1.1rem !important;
   }
 
+  .detail-movie {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
   .blocks-wrapper {
     transform: translateY(-150px);
   }
@@ -96,6 +101,10 @@ footer,
 
 /* Small */
 @media (max-width: 576px) {
+  html {
+    font-size: 98%;
+  }
+
   .jumbotron .jumbotron-content {
     width: 115% !important;
   }

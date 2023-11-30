@@ -22,7 +22,10 @@ const Seasons = () => {
       {showPersentageBar ? (
         <Loading />
       ) : (
-        <div className="seasons">
+        <div
+          className="seasons"
+          style={data.seasons.length <= 3 ? { height: "100vh" } : {}}
+        >
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
