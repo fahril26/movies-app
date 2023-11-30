@@ -12,13 +12,10 @@ import { TrailerContext } from "../context/ModaltrailerContext";
 import ModalWatchNow from "../components/ModalWatchNow";
 import CurrentPageContext from "../context/CurrentPageContext";
 import Loading from "../components/Loading";
-import { ResizeContext } from "../context/WindowWidthContext";
 
 const LayoutMovieDetail = ({ type }) => {
   const { modalShow, setModalShow, handleShowModal } =
     useContext(TrailerContext);
-
-  const windowWidth = useContext(ResizeContext);
 
   const handleChangeUrl = (urlMovie, urlTv) => {
     let url = null;
@@ -76,10 +73,7 @@ const LayoutMovieDetail = ({ type }) => {
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
-          <div
-            className="detail-movie"
-            style={windowWidth <= 768 ? { height: "100vh" } : {}}
-          >
+          <div className="detail-movie">
             <div className="container-fluid mt-5 px-0">
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
                 <div className="poster col-5  col-lg-4 col-xl-3  justify-content-center d-flex">
