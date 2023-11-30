@@ -108,6 +108,10 @@ footer,
   .jumbotron .jumbotron-content {
     width: 128% !important;
   }
+
+  .jumbotron .jumbotron-content h1{
+    font-size: 2rem
+  }
 }
 
 /* extra */
