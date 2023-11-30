@@ -97,6 +97,10 @@ footer,
   .blocks-wrapper {
     transform: translateY(-150px);
   }
+
+  footer .navigation a {
+    font-size: 0.8rem
+  }
 }
 
 /* Small */
