@@ -101,8 +101,8 @@ footer,
 
 /* Small */
 @media (max-width: 576px) {
-  html {
-    font-size: 98%;
+  footer .navigation a {
+    font-size: 0.9rem;
   }
 
   .jumbotron .jumbotron-content {
