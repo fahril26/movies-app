@@ -137,17 +137,23 @@ const LayoutMovieDetail = ({ type }) => {
                       </div>
                       <div className=" mt-4 w-100 ">
                         {type === "movie" ? (
-                          <div className="director">
-                            <p className="fw-semibold">Director : </p>
-                            {getDirector?.length > 0 ? (
-                              getDirector?.map((data) => (
-                                <p key={data?.id}>
-                                  {data?.name ? data.name : "No Data"}
-                                </p>
-                              ))
-                            ) : (
-                              <p>No Data</p>
-                            )}
+                          <div className="row">
+                            <div className="col-8">
+                              <p className="fw-semibold">Director : </p>
+                              <ul className="director d-flex  flex-wrap w-100 p-0 gap-2 ">
+                                {getDirector?.length > 0 ? (
+                                  getDirector?.map((data) => (
+                                    <Badge key={data?.id} bg="secondary">
+                                      <li>
+                                        {data?.name ? data.name : "No Data"}
+                                      </li>
+                                    </Badge>
+                                  ))
+                                ) : (
+                                  <p>No Data</p>
+                                )}
+                              </ul>
+                            </div>
                           </div>
                         ) : (
                           <div className="row">
