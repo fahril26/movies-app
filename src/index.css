@@ -96,6 +96,11 @@ footer,
     padding-right: 1.1rem !important;
   }
 
+  .detail-movie {
+    padding-top: 8rem;
+    padding-bottom: 10rem;
+  }
+
   .blocks-wrapper {
     transform: translateY(-150px);
   }
