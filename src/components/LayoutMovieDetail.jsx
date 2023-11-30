@@ -139,8 +139,8 @@ const LayoutMovieDetail = ({ type }) => {
                         {type === "movie" ? (
                           <div className="row">
                             <div className="col-8">
-                              <p className="fw-semibold">Director : </p>
-                              <ul className="director d-flex  flex-wrap w-100 p-0 gap-2 ">
+                              <p className="fw-semibold m-0">Director : </p>
+                              <ul className="director d-flex  flex-wrap w-100 m-0 gap-2  ">
                                 {getDirector?.length > 0 ? (
                                   getDirector?.map((data) => (
                                     <Badge key={data?.id} bg="secondary">
@@ -158,8 +158,8 @@ const LayoutMovieDetail = ({ type }) => {
                         ) : (
                           <div className="row">
                             <div className="col-8">
-                              <p className="fw-semibold ">Producer: </p>
-                              <ul className="producer d-flex  flex-wrap w-100 p-0 gap-2 ">
+                              <p className="fw-semibold m-0">Producer: </p>
+                              <ul className="producer d-flex  flex-wrap w-100 m-0 gap-2 ">
                                 {getProducer?.length > 0 ? (
                                   getProducer?.map((data) => (
                                     <Badge key={data.id} bg="secondary">
