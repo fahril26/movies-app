@@ -24,7 +24,7 @@ const Seasons = () => {
       ) : (
         <div
           className="seasons"
-          style={data.seasons.length <= 3 ? { height: "100vh" } : {}}
+          style={data?.seasons?.length < 4 ? { height: "100vh" } : {}}
         >
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
