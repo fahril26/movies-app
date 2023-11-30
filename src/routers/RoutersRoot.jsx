@@ -28,7 +28,7 @@ import Contact from "../pages/contact/Contact";
 export const RoutersRoot = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route errorElement={<ErrorElement />}>
+      <>
         <Route element={<Home />} path="/" />
 
         <Route
@@ -154,7 +154,7 @@ export const RoutersRoot = () => {
         />
 
         <Route path="*" element={<ErrorElement />} />
-      </Route>
+      </>
     )
   );
 
