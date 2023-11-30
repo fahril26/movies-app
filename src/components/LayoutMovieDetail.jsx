@@ -73,10 +73,10 @@ const LayoutMovieDetail = ({ type }) => {
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
-          <div className="movie-detail">
+          <div className="detail-movie">
             <div className="container-fluid mt-5 px-0">
-              <div className="content row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
-                <div className="poster col-11 col-md-5 col-lg-4 col-xl-3  justify-content-center d-flex">
+              <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
+                <div className="poster col-5  col-lg-4 col-xl-3  justify-content-center d-flex">
                   {!showPersentageBar && data?.poster_path ? (
                     <img
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face${data?.poster_path}`}
@@ -223,12 +223,13 @@ const LayoutMovieDetail = ({ type }) => {
               </div>
             </div>
           </div>
+          <Footer />
+
           <ModalWatchNow
             show={modalShow}
             onHide={() => setModalShow(false)}
             data={getOfficialTrailer?.key}
           />
-          <Footer />
         </>
       )}
     </>

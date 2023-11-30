@@ -13,3 +13,6 @@
   align-items: center;
   height: 100vh;
 }
+.blocks-wrapper {
+  transform: translateY(-80px);
+}

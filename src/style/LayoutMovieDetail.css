@@ -1,11 +1,12 @@
-.movie-detail {
+.detail-movie {
   background: url("../assets/background/services_bg.jpg");
   color: #fff;
   padding: 5rem 0;
-  overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
-.movie-detail a.nav-link {
+.detail-movie a.nav-link {
   padding: 0;
 }
 
@@ -26,6 +27,6 @@
   border-radius: 5px;
 }
 
-.movie-detail .navigation a {
+.detail-movie .navigation a {
   text-decoration: underline !important;
 }
