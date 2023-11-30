@@ -28,136 +28,133 @@ import Contact from "../pages/contact/Contact";
 export const RoutersRoot = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <>
-        <Route path="/" errorElement={<ErrorElement />}>
-          <Route index element={<Home />} />
+      <Route errorElement={<ErrorElement />}>
+        <Route element={<Home />} path="/" />
 
-          <Route
-            path="/movies/upcoming/:page"
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <UpcomingList />
-              </CurrentPageContext>
-            }
-          />
+        <Route
+          path="/movies/upcoming/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <UpcomingList />
+            </CurrentPageContext>
+          }
+        />
 
-          <Route
-            path="/movies/top-rated/:page"
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <TopRatedList />
-              </CurrentPageContext>
-            }
-          />
-          <Route path="/movie-detail/:movie_id" element={<MovieDetail />} />
-          <Route path="/tv-series-detail/:tv_id" element={<TvSeriesDetail />} />
-          <Route
-            path="/tv-series-detail/:tv_id/seasons"
-            element={<Seasons />}
-          />
-          <Route
-            path="/tv-series-detail/:tv_id/seasons/:index"
-            element={<Episode />}
-          />
-          <Route
-            path="/movies/popular/:page"
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <PopularMovieList />
-              </CurrentPageContext>
-            }
-          />
-          <Route
-            path="/movies/now-playing/:page"
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <NowPlayingList />
-              </CurrentPageContext>
-            }
-          />
+        <Route
+          path="/movies/top-rated/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <TopRatedList />
+            </CurrentPageContext>
+          }
+        />
+        <Route path="/movie-detail/:movie_id" element={<MovieDetail />} />
+        <Route path="/tv-series-detail/:tv_id" element={<TvSeriesDetail />} />
+        <Route path="/tv-series-detail/:tv_id/seasons" element={<Seasons />} />
+        <Route
+          path="/tv-series-detail/:tv_id/seasons/:index"
+          element={<Episode />}
+        />
+        <Route
+          path="/movies/popular/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <PopularMovieList />
+            </CurrentPageContext>
+          }
+        />
+        <Route
+          path="/movies/now-playing/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <NowPlayingList />
+            </CurrentPageContext>
+          }
+        />
 
+        <Route
+          path="/tv/popular/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <PopularTvSeries />
+            </CurrentPageContext>
+          }
+        />
+
+        <Route
+          path="/tv/top-rated/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <TopRatedSeries />
+            </CurrentPageContext>
+          }
+        />
+
+        <Route
+          path="/tv/airing-today/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <AiringToday />
+            </CurrentPageContext>
+          }
+        />
+
+        <Route
+          path="/tv/on-the-air/:page"
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <OnTv />
+            </CurrentPageContext>
+          }
+        />
+
+        <Route
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <SearchPageLayout />
+            </CurrentPageContext>
+          }
+        >
           <Route
-            path="/tv/popular/:page"
+            path={"/movies/search"}
+            index
             element={
               <CurrentPageContext>
-                <ScrollRestoration />
-                <PopularTvSeries />
+                <SearchMovies />
               </CurrentPageContext>
             }
           />
-
           <Route
-            path="/tv/top-rated/:page"
+            path={"/tv/search"}
             element={
               <CurrentPageContext>
-                <ScrollRestoration />
-                <TopRatedSeries />
-              </CurrentPageContext>
-            }
-          />
-
-          <Route
-            path="/tv/airing-today/:page"
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <AiringToday />
-              </CurrentPageContext>
-            }
-          />
-
-          <Route
-            path="/tv/on-the-air/:page"
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <OnTv />
-              </CurrentPageContext>
-            }
-          />
-
-          <Route
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <SearchPageLayout />
-              </CurrentPageContext>
-            }
-          >
-            <Route
-              path={"/movies/search"}
-              index
-              element={
-                <CurrentPageContext>
-                  <SearchMovies />
-                </CurrentPageContext>
-              }
-            />
-            <Route
-              path={"/tv/search"}
-              element={
-                <CurrentPageContext>
-                  <SearchTv />
-                </CurrentPageContext>
-              }
-            />
-          </Route>
-
-          <Route
-            path={"/contact"}
-            element={
-              <CurrentPageContext>
-                <ScrollRestoration />
-                <Contact />
+                <SearchTv />
               </CurrentPageContext>
             }
           />
         </Route>
-      </>
+
+        <Route
+          path={"/contact"}
+          element={
+            <CurrentPageContext>
+              <ScrollRestoration />
+              <Contact />
+            </CurrentPageContext>
+          }
+        />
+
+        <Route path="*" element={<ErrorElement />} />
+      </Route>
     )
   );
 

@@ -3,7 +3,7 @@ import useFetch from "../hook/useFetch";
 import "../style/LayoutMovieDetail.css";
 import MyNavbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
-import { Button, Nav } from "react-bootstrap";
+import { Badge, Button, Nav } from "react-bootstrap";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import ImageLost from "./ImageLost";
@@ -135,7 +135,7 @@ const LayoutMovieDetail = ({ type }) => {
                       <div className="overview mt-4">
                         <p>{data?.overview}</p>
                       </div>
-                      <div className="d-flex  gap-5 mt-4">
+                      <div className=" mt-4 w-100 ">
                         {type === "movie" ? (
                           <div className="director">
                             <p className="fw-semibold">Director : </p>
@@ -150,15 +150,21 @@ const LayoutMovieDetail = ({ type }) => {
                             )}
                           </div>
                         ) : (
-                          <div className="producer">
-                            <p className="fw-semibold">Producer : </p>
-                            {getProducer?.length > 0 ? (
-                              getProducer?.map((data) => (
-                                <p key={data?.id}>{data?.name}</p>
-                              ))
-                            ) : (
-                              <p>No Data</p>
-                            )}
+                          <div className="row">
+                            <div className="col-8">
+                              <p className="fw-semibold ">Producer: </p>
+                              <ul className="producer d-flex  flex-wrap w-100 p-0 gap-2 ">
+                                {getProducer?.length > 0 ? (
+                                  getProducer?.map((data) => (
+                                    <Badge key={data.id} bg="secondary">
+                                      <li>{data?.name}</li>
+                                    </Badge>
+                                  ))
+                                ) : (
+                                  <p>No Data</p>
+                                )}
+                              </ul>
+                            </div>
                           </div>
                         )}
                       </div>

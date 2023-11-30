@@ -5,11 +5,9 @@ import useFetch from "../../hook/useFetch";
 import { useState } from "react";
 import AnimatedProgressBar from "../../components/AnimatedProgressBar";
 import { KeywordContext } from "../../context/KeywordSearchContex";
-import { ResizeContext } from "../../context/WindowWidthContext";
 
 export default function SearchMovies() {
   const { keywordSearch } = useContext(KeywordContext);
-  const windowWidth = useContext(ResizeContext);
   const [currentPage, setCurrentPage] = useState(1);
   const { data, loadingPersentage, showPersentageBar, error } = useFetch(
     `https://api.themoviedb.org/3/search/movie?query=${keywordSearch}&include_adult=false&language=en-US&page=${currentPage}`
@@ -28,11 +26,7 @@ export default function SearchMovies() {
 
       <div
         className="movies-search-list"
-        style={
-          !data || (data.results.length <= 5 && windowWidth < 768)
-            ? { height: "100vh" }
-            : {}
-        }
+        style={!data || data.results.length <= 5 ? { height: "100vh" } : {}}
       >
         {data?.results?.length !== 0 && !error ? (
           <ul className=" d-flex flex-column gap-3 ">

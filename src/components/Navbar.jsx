@@ -132,6 +132,18 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     setActiveNav(newData);
   };
 
+  const rotateArrowBack = () => {
+    const newRotateArrow = rotateArrow.slice();
+
+    for (const index in newRotateArrow) {
+      if (!activeNav.typePage) {
+        newRotateArrow[index] = false;
+      }
+    }
+
+    setRotateArrow(newRotateArrow);
+  };
+
   const hideOffcanvas = () => {
     setShowOffcanvas(false);
   };
@@ -197,6 +209,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                 aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
                 placement="start"
                 show={showOffcanvas}
+                onHide={rotateArrowBack}
               >
                 <Offcanvas.Header className="text-bg-dark">
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
@@ -345,15 +358,16 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
             </>
           )}
         </Container>
+
+        {showInputSearch && windowWidth >= 992 && (
+          <FormText
+            handleClearKeyword={handleClearKeyword}
+            handleKeywordChange={handleKeywordChange}
+            inputValue={inputValue}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </Navbar>
-      {showInputSearch && windowWidth >= 992 && (
-        <FormText
-          handleClearKeyword={handleClearKeyword}
-          handleKeywordChange={handleKeywordChange}
-          inputValue={inputValue}
-          handleSubmit={handleSubmit}
-        />
-      )}
     </>
   );
 }

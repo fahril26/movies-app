@@ -4,12 +4,11 @@ import useFetch from "../../hook/useFetch";
 import AnimatedProgressBar from "../../components/AnimatedProgressBar";
 import MyPagination from "../../components/MyPagination";
 import { KeywordContext } from "../../context/KeywordSearchContex";
-import { ResizeContext } from "../../context/WindowWidthContext";
 
 const SearchTv = () => {
   const { keywordSearch } = useContext(KeywordContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const windowWidth = useContext(ResizeContext);
+
   const { data, loadingPersentage, showPersentageBar, error } = useFetch(
     `https://api.themoviedb.org/3/search/tv?query=${keywordSearch}&include_adult=false&language=en-US&page=${currentPage}`
   );
@@ -27,11 +26,7 @@ const SearchTv = () => {
 
       <div
         className="tv-search-list"
-        style={
-          !data || (data.results.length <= 5 && windowWidth < 768)
-            ? { height: "100vh" }
-            : {}
-        }
+        style={!data || data.results.length <= 5 ? { height: "100vh" } : {}}
       >
         {data?.results?.length !== 0 && !error ? (
           <ul className=" d-flex flex-column gap-3 ">

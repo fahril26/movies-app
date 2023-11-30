@@ -6,3 +6,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.loading-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

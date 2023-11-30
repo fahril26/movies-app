@@ -15,7 +15,6 @@ const LiveAreaSection = () => {
 
   useEffect(() => {
     const handleOnScroll = () => {
-      console.log(window.scrollY);
       if (windowWidth > 992 && window.scrollY >= 2300) setShow(true);
       else if (windowWidth <= 992 && window.scrollY >= 3200) setShow(true);
       else if (windowWidth <= 768 && window.scrollY >= 3550) setShow(true);

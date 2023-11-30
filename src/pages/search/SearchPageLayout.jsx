@@ -7,6 +7,7 @@ import useFetch from "../../hook/useFetch";
 import Footer from "../../components/Footer";
 import AnimationExample from "../../components/Placeholder";
 import { useLocation } from "react-router-dom";
+import LoadingSearch from "../../components/LoadingSearch";
 
 export default function SearchPageLayout() {
   const keywordSearch = localStorage.getItem("keywordSearch");
@@ -34,7 +35,10 @@ export default function SearchPageLayout() {
   return (
     <>
       <MyNavbar fixed={"top"} />
-      <div className="searching-page">
+      <div
+        className="searching-page"
+        style={!moviesData.data || !tvShowData.data ? { height: "100vh" } : {}}
+      >
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-3 col-12">
@@ -81,15 +85,7 @@ export default function SearchPageLayout() {
             </div>
 
             <div className="col-12 col-lg-9 py-5 py-lg-0">
-              {!moviesData.showPersentageBar ? (
-                <Outlet />
-              ) : (
-                <AnimationExample
-                  style={{ width: "100%", padding: "35px" }}
-                  size={"md"}
-                  totalItems={9}
-                />
-              )}
+              {!moviesData.showPersentageBar ? <Outlet /> : <LoadingSearch />}
             </div>
           </div>
         </div>

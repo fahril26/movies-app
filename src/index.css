@@ -96,10 +96,6 @@ footer,
     padding-right: 1.1rem !important;
   }
 
-  .input-search {
-    top: 9%;
-  }
-
   .movie-detail img {
     width: 65%;
   }
@@ -116,10 +112,6 @@ footer,
   }
   .jumbotron .jumbotron-content {
     width: 115% !important;
-  }
-
-  .input-search {
-    top: 2%;
   }
 
   .movie-detail img {

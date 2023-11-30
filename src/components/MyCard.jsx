@@ -17,6 +17,13 @@ const MyCard = ({
 }) => {
   const navigate = useNavigate();
 
+  const roundsDecimalNumbers = (number) => {
+    if (Number.isInteger(number)) return number;
+    else return number.toFixed(1);
+  };
+
+  const rating = roundsDecimalNumbers(voteAverage);
+
   return (
     <Card
       className={className}
@@ -31,7 +38,6 @@ const MyCard = ({
           src={`https://image.tmdb.org/t/p/w220_and_h330_face${poster}`}
           className="rounded"
           alt="poster"
-          height={350}
           onClick={() =>
             navigate(
               type == "movie"
@@ -76,7 +82,7 @@ const MyCard = ({
           <div className="col-4 p-0 d-flex gap-3 justify-content-end">
             <span className="rating">
               <i className="bi bi-hand-thumbs-up-fill me-2"></i>
-              {voteAverage}
+              {rating}
             </span>
           </div>
         </div>
