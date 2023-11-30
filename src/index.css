@@ -96,6 +96,13 @@ footer,
     padding-right: 1.1rem !important;
   }
 
+<<<<<<< HEAD
+=======
+   .input-search {
+    top: 0.8%;
+  }
+
+>>>>>>> bb646575a3bdf65084581079e397fd3021ee5a56
   .movie-detail img {
     width: 65%;
   }
@@ -114,6 +121,11 @@ footer,
     width: 115% !important;
   }
 
+<<<<<<< HEAD
+=======
+  
+
+>>>>>>> bb646575a3bdf65084581079e397fd3021ee5a56
   .movie-detail img {
     width: 60%;
   }
