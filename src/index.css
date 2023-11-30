@@ -61,10 +61,6 @@ footer,
 
 /* larger */
 @media (max-width: 992px) {
-  html {
-    font-size: 95%;
-  }
-
   .jumbotron .jumbotron-content {
     width: 75vw;
   }
@@ -77,9 +73,6 @@ footer,
 
 /* medium */
 @media (max-width: 768px) {
-  html {
-    font-size: 90%;
-  }
   .jumbotron .jumbotron-content {
     width: 85vw;
   }
@@ -103,9 +96,6 @@ footer,
 
 /* Small */
 @media (max-width: 576px) {
-  html {
-    font-size: 85%;
-  }
   .jumbotron .jumbotron-content {
     width: 115% !important;
   }
