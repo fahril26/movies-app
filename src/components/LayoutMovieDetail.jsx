@@ -76,11 +76,11 @@ const LayoutMovieDetail = ({ type }) => {
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
-          <div className="detail-movie">
-            <div
-              className="container-fluid mt-5 px-0"
-              style={windowWidth <= 768 ? { height: "115vh" } : {}}
-            >
+          <div
+            className="detail-movie"
+            style={windowWidth <= 768 ? { height: "115vh" } : {}}
+          >
+            <div className="container-fluid mt-5 px-0">
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
                 <div className="poster col-5  col-lg-4 col-xl-3  justify-content-center d-flex">
                   {!showPersentageBar && data?.poster_path ? (
