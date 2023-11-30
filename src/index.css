@@ -35,7 +35,7 @@ nav,
 .best-tv-series,
 footer,
 .all-list,
-.movie-detail {
+.detail-movie {
   padding-left: 2rem !important;
   padding-right: 2rem !important;
 }
@@ -91,21 +91,13 @@ footer,
   .best-tv-series,
   footer,
   .all-list,
-  .movie-detail {
+  .detail-movie {
     padding-left: 1.1rem !important;
     padding-right: 1.1rem !important;
   }
 
-  .movie-detail img {
-    width: 65%;
-  }
-
   .blocks-wrapper {
     transform: translateY(-150px);
-  }
-
-  .movie-detail {
-    height: 90vh !important;
   }
 }
 
@@ -116,10 +108,6 @@ footer,
   }
   .jumbotron .jumbotron-content {
     width: 115% !important;
-  }
-
-  .movie-detail img {
-    width: 60%;
   }
 }
 

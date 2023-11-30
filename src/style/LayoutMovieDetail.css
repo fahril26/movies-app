@@ -1,7 +1,7 @@
 .detail-movie {
   background: url("../assets/background/services_bg.jpg");
   color: #fff;
-  padding: 5rem 0;
+  padding: 5rem 32px;
   background-size: cover;
   background-position: center;
 }
