@@ -12,10 +12,13 @@ import { TrailerContext } from "../context/ModaltrailerContext";
 import ModalWatchNow from "../components/ModalWatchNow";
 import CurrentPageContext from "../context/CurrentPageContext";
 import Loading from "../components/Loading";
+import { ResizeContext } from "../context/WindowWidthContext";
 
 const LayoutMovieDetail = ({ type }) => {
   const { modalShow, setModalShow, handleShowModal } =
     useContext(TrailerContext);
+
+  const windowWidth = useContext(ResizeContext);
 
   const handleChangeUrl = (urlMovie, urlTv) => {
     let url = null;
@@ -74,7 +77,10 @@ const LayoutMovieDetail = ({ type }) => {
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
           <div className="detail-movie">
-            <div className="container-fluid mt-5 px-0">
+            <div
+              className="container-fluid mt-5 px-0"
+              style={windowWidth <= 768 ? { height: "100vh" } : {}}
+            >
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
                 <div className="poster col-5  col-lg-4 col-xl-3  justify-content-center d-flex">
                   {!showPersentageBar && data?.poster_path ? (
@@ -140,7 +146,7 @@ const LayoutMovieDetail = ({ type }) => {
                           <div className="row">
                             <div className="col-8">
                               <p className="fw-semibold m-0">Director : </p>
-                              <ul className="director d-flex  flex-wrap w-100 m-0 gap-2  ">
+                              <ul className="director d-flex  flex-wrap w-100 m-0 p-0 gap-2  ">
                                 {getDirector?.length > 0 ? (
                                   getDirector?.map((data) => (
                                     <Badge key={data?.id} bg="secondary">
@@ -159,7 +165,7 @@ const LayoutMovieDetail = ({ type }) => {
                           <div className="row">
                             <div className="col-8">
                               <p className="fw-semibold m-0">Producer: </p>
-                              <ul className="producer d-flex  flex-wrap w-100 m-0 gap-2 ">
+                              <ul className="producer d-flex  flex-wrap w-100 m-0 p-0 gap-2 ">
                                 {getProducer?.length > 0 ? (
                                   getProducer?.map((data) => (
                                     <Badge key={data.id} bg="secondary">
