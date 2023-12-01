@@ -4,11 +4,15 @@ import "../style/Footer.css";
 
 const Footer = ({ className }) => {
   return (
-    <footer className={`bg-dark pt-5 pb-3 ${className}`}>
+    <footer className={`bg-dark pt-5 pb-3 ${className || ""}`}>
       <div className="container-fluid">
         <div className="row navigation align-items-center">
-          <div className="quick-link-list col-7 col-lg-9 px-0">
-            <Nav defaultActiveKey="/home" as="ul">
+          <div className="quick-link-list col-12  col-md-6 px-0">
+            <Nav
+              defaultActiveKey="/home"
+              as="ul"
+              className="d-flex justify-content-center justify-content-md-start mb-3 mb-md-0"
+            >
               <Nav.Item as="li">
                 <Nav.Link href="/home">FAQ</Nav.Link>
               </Nav.Item>
@@ -24,11 +28,11 @@ const Footer = ({ className }) => {
             </Nav>
           </div>
 
-          <div className="social-media-list col-5 col-lg-3">
+          <div className="social-media-list col-12 col-md-6 p-0">
             <Nav
               defaultActiveKey="/home"
               as="ul"
-              className="d-flex justify-content-end gap-2 gap-sm-3"
+              className="d-flex justify-content-center justify-content-md-end gap-1 gap-sm-3 "
             >
               <Nav.Item as="li">
                 <Nav.Link href="/home">

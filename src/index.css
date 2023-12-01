@@ -62,7 +62,7 @@ footer,
 /* larger */
 @media (max-width: 992px) {
   .jumbotron .jumbotron-content {
-    width: 75vw;
+    width: 80vw;
   }
 
   .offcanvas-body ul li a.active {
@@ -74,7 +74,7 @@ footer,
 /* medium */
 @media (max-width: 768px) {
   .jumbotron .jumbotron-content {
-    width: 85vw;
+    width: 98vw !important;
   }
   nav,
   .jumbotron,
@@ -82,20 +82,29 @@ footer,
   .top-rated,
   .live-area,
   .best-tv-series,
-  footer,
-  .all-list,
-  .detail-movie {
+  .all-list {
     padding-left: 1.1rem !important;
     padding-right: 1.1rem !important;
   }
 
   .detail-movie {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding: 7rem 10px !important;
   }
 
   .blocks-wrapper {
     transform: translateY(-150px);
+  }
+
+  footer {
+    padding: 10px !important;
+  }
+
+  footer a {
+    font-size: 10px !important;
+  }
+
+  html {
+    font-size: 90%;
   }
 }
 
@@ -106,7 +115,7 @@ footer,
   }
 
   .jumbotron .jumbotron-content {
-    width: 128% !important;
+    width: 125% !important;
   }
 }
 

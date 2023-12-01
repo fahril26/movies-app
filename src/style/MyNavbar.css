@@ -1,6 +1,5 @@
 nav {
   box-shadow: 0 0 10px rgba(108, 117, 125, 0.5);
-  padding: 15px 0 15px !important;
   z-index: 2;
   position: relative;
 }

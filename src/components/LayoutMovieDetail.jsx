@@ -94,39 +94,23 @@ const LayoutMovieDetail = ({ type }) => {
                       <header>
                         <h1>{type === "movie" ? data?.title : data?.name}</h1>
 
-                        <div className="additional-info d-flex align-items-center gap-3 mt-3 mb-2">
-                          <span>
-                            <i className="bi bi-hand-thumbs-up-fill me-1"></i>
-                            {Math.floor(data?.vote_average * 10) / 10}
-                          </span>
-                          <span>
-                            <i className="bi bi-calendar4 me-1"></i>{" "}
-                            {type === "movie"
-                              ? data?.release_date
-                              : data?.first_air_date}
-                          </span>
-                          {type === "movie" && (
+                        <div className="additional-info row align-items-center gap-3 mt-3 mb-3">
+                          <div className="d-flex col-12 gap-3 ">
                             <span>
-                              <i className="bi bi-clock"></i> {getDuration}
+                              <i className="bi bi-hand-thumbs-up-fill me-1"></i>
+                              {Math.floor(data?.vote_average * 10) / 10}
                             </span>
-                          )}
-                          |
-                          <div className="genre">
-                            <Nav defaultActiveKey="/home" as="ul">
-                              {data?.genres.map((item, index) => (
-                                <Nav.Item as="li" key={item.id}>
-                                  <Nav.Link
-                                    style={{
-                                      marginLeft: index !== 0 ? "3px" : null,
-                                    }}
-                                  >
-                                    {index === data?.genres?.length - 1
-                                      ? item.name
-                                      : item.name + ","}
-                                  </Nav.Link>
-                                </Nav.Item>
-                              ))}
-                            </Nav>
+                            <span>
+                              <i className="bi bi-calendar4 me-1"></i>{" "}
+                              {type === "movie"
+                                ? data?.release_date
+                                : data?.first_air_date}
+                            </span>
+                            {type === "movie" && (
+                              <span>
+                                <i className="bi bi-clock"></i> {getDuration}
+                              </span>
+                            )}
                           </div>
                         </div>
 
@@ -135,12 +119,32 @@ const LayoutMovieDetail = ({ type }) => {
                       <div className="overview mt-4">
                         <p>{data?.overview}</p>
                       </div>
-                      <div className=" mt-4 w-100 ">
+
+                      <div className="mt-4 w-100 ">
+                        <div className="row">
+                          <div className="genre mb-4 col-8">
+                            <p className="m-0">Genre: </p>
+                            <Nav
+                              defaultActiveKey="/home"
+                              as="ul"
+                              className="d-flex gap-2"
+                            >
+                              {data?.genres.map((item) => (
+                                <Nav.Item as="li" key={item.id}>
+                                  <Nav.Link>
+                                    <Badge bg="secondary">{item.name}</Badge>
+                                  </Nav.Link>
+                                </Nav.Item>
+                              ))}
+                            </Nav>
+                          </div>
+                        </div>
+
                         {type === "movie" ? (
                           <div className="row">
                             <div className="col-8">
                               <p className="fw-semibold m-0">Director : </p>
-                              <ul className="director d-flex  flex-wrap w-100 m-0 p-0 gap-2  ">
+                              <ul className="director d-flex  flex-wrap w-100 p-0 gap-2">
                                 {getDirector?.length > 0 ? (
                                   getDirector?.map((data) => (
                                     <Badge key={data?.id} bg="secondary">
@@ -159,7 +163,7 @@ const LayoutMovieDetail = ({ type }) => {
                           <div className="row">
                             <div className="col-8">
                               <p className="fw-semibold m-0">Producer: </p>
-                              <ul className="producer d-flex  flex-wrap w-100 m-0 p-0 gap-2 ">
+                              <ul className="producer d-flex  flex-wrap w-100 p-0 gap-2">
                                 {getProducer?.length > 0 ? (
                                   getProducer?.map((data) => (
                                     <Badge key={data.id} bg="secondary">

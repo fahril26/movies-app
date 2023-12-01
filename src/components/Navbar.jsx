@@ -9,7 +9,7 @@ import { ResizeContext } from "../context/WindowWidthContext";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import AccordionsCustomToogle from "./AccordionsCustomToogle";
 import { CurrentPage } from "../context/CurrentPageContext";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { KeywordContext } from "../context/KeywordSearchContex";
 import { CloseButton, Form } from "react-bootstrap";
 
@@ -46,8 +46,6 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   const { setKeywordSearch } = useContext(KeywordContext);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const tvRef = useRef(null);
-  const moviesRef = useRef(null);
 
   const handleMouseEnter = (e) => {
     const newData = { ...showDropdown };
@@ -87,23 +85,20 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     }
   };
 
-  const setAccordionActive = (movies, tv) => {
-    const navMoviesClassList = Array.from(movies.current.classList);
-    const navTvClassList = Array.from(tv.current.classList);
-    const classList = [navMoviesClassList, navTvClassList];
+  const setAccordionActive = () => {
     let newRotateArrow = [...rotateArrow];
     let defaultActiveKey = null;
 
-    for (const className in classList) {
-      if (classList[className].includes("active")) {
-        defaultActiveKey = Number(className);
-        newRotateArrow[className] = true;
-        setAccordionDefaultActiveKey(defaultActiveKey);
-        setRotateArrow(newRotateArrow);
-      } else {
-        newRotateArrow[className] = false;
-        setRotateArrow(newRotateArrow);
-      }
+    if (pathname.includes("movies")) {
+      defaultActiveKey = 0;
+      newRotateArrow[0] = true;
+      setAccordionDefaultActiveKey(defaultActiveKey);
+      setRotateArrow(newRotateArrow);
+    } else if (pathname.includes("tv")) {
+      defaultActiveKey = 1;
+      newRotateArrow[1] = true;
+      setAccordionDefaultActiveKey(defaultActiveKey);
+      setRotateArrow(newRotateArrow);
     }
   };
 
@@ -134,13 +129,11 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
 
   const rotateArrowBack = () => {
     const newRotateArrow = rotateArrow.slice();
-
     for (const index in newRotateArrow) {
       if (!activeNav.typePage) {
         newRotateArrow[index] = false;
       }
     }
-
     setRotateArrow(newRotateArrow);
   };
 
@@ -149,9 +142,9 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   };
 
   useEffect(() => {
-    if (windowWidth < 992) setAccordionActive(moviesRef, tvRef);
+    if (windowWidth < 992) setAccordionActive();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accordionDefaultActiveKey]);
+  }, [accordionDefaultActiveKey, showOffcanvas]);
 
   useEffect(() => {
     getAnActivePage();
@@ -240,7 +233,6 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                         list={movieLink}
                         eventKey={0}
                         resetStorage={resetStorage}
-                        moviesRef={moviesRef}
                         defaultActiveKey={accordionDefaultActiveKey}
                         activeNav={activeNav}
                       >
@@ -294,7 +286,6 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                         list={tvSeriesLink}
                         eventKey={1}
                         resetStorage={resetStorage}
-                        tvRef={tvRef}
                         defaultActiveKey={accordionDefaultActiveKey}
                         activeNav={activeNav}
                       >

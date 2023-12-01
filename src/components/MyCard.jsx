@@ -59,7 +59,7 @@ const MyCard = ({
       )}
 
       <Card.Body>
-        <Card.Title style={{ height: "20px", fontSize: "0.9rem" }}>
+        <Card.Title style={{ height: "30px", fontSize: "0.9rem" }}>
           <div className="row">
             <div className="col-12 p-0">
               <Link
@@ -76,14 +76,15 @@ const MyCard = ({
         </Card.Title>
 
         <div className="row mt-3 align-items-center">
-          <div className="col-8 resolution p-0">
-            <span>Release: {releaseDate}</span>
-          </div>
-          <div className="col-4 p-0 d-flex gap-3 justify-content-end">
+          <div className="col-4 p-0  gap-3 ">
             <span className="rating">
               <i className="bi bi-hand-thumbs-up-fill me-2"></i>
               {rating}
             </span>
+          </div>
+
+          <div className="col-8 resolution p-0 d-flex justify-content-end">
+            <span>Release: {releaseDate}</span>
           </div>
         </div>
       </Card.Body>

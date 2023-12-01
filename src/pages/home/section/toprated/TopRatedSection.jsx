@@ -46,7 +46,7 @@ const TopRatedSection = ({ handleShowModal }) => {
           <MyNav link={link} />
         </div>
 
-        <div className=" mt-4 top-rated-cards-wrapper  row row-cols-2 row-cols-md-3 row-cols-lg-4  row-gap-5">
+        <div className=" mt-4 top-rated-cards-wrapper row row-cols-2 row-cols-md-3 row-cols-lg-4  row-gap-5">
           {getDataRandom?.map((data) => (
             <div className="col d-flex justify-content-center" key={data.id}>
               {loading ? (

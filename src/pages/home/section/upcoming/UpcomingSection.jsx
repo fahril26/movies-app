@@ -44,7 +44,7 @@ const UpcomingSection = ({ handleShowModal }) => {
           </div>
         </div>
 
-        <div className=" row row-cols-2 row-cols-md-3 row-cols-lg-4 pt-5 ucm-cards-wrapper">
+        <div className="row-gap-5 row row-cols-2 row-cols-md-3 row-cols-lg-4 pt-5 ucm-cards-wrapper">
           {getDataRandom?.map((data) => (
             <div className="col d-flex justify-content-center " key={data.id}>
               {loading ? (
