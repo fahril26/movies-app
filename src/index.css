@@ -92,7 +92,11 @@ footer,
   }
 
   .blocks-wrapper {
-    transform: translateY(-150px);
+    transform: translateY(-250px);
+  }
+
+  footer .navigation a {
+    font-size: 0.8rem;
   }
 
   footer {
@@ -110,12 +114,13 @@ footer,
 
 /* Small */
 @media (max-width: 576px) {
-  footer .navigation a {
-    font-size: 0.9rem;
-  }
 
   .jumbotron .jumbotron-content {
     width: 125% !important;
+  }
+
+  .jumbotron .jumbotron-content h1{
+    font-size: 2rem
   }
 }
 
