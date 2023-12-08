@@ -12,12 +12,10 @@ import { TrailerContext } from "../context/ModaltrailerContext";
 import ModalWatchNow from "../components/ModalWatchNow";
 import CurrentPageContext from "../context/CurrentPageContext";
 import Loading from "../components/Loading";
-import { ResizeContext } from "../context/WindowWidthContext";
 
 const LayoutMovieDetail = ({ type }) => {
   const { modalShow, setModalShow, handleShowModal } =
     useContext(TrailerContext);
-  const windowWidth = useContext(ResizeContext);
 
   const handleChangeUrl = (urlMovie, urlTv) => {
     let url = null;
@@ -77,7 +75,7 @@ const LayoutMovieDetail = ({ type }) => {
           </CurrentPageContext>
           <div
             className="detail-movie"
-            style={!data.overview ? { height: "85vh" } : {}}
+            style={!data.overview ? { height: "90vh" } : {}}
           >
             <div className="container-fluid mt-5 px-0">
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
@@ -89,10 +87,7 @@ const LayoutMovieDetail = ({ type }) => {
                       width={"100%"}
                     />
                   ) : (
-                    <ImageLost
-                      width={"100%"}
-                      height={windowWidth <= 768 ? "550px" : null}
-                    />
+                    <ImageLost width={"100%"} />
                   )}
                 </div>
 
