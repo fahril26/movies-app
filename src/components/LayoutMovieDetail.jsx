@@ -75,7 +75,7 @@ const LayoutMovieDetail = ({ type }) => {
           </CurrentPageContext>
           <div
             className="detail-movie"
-            style={!data.overview ? { height: "90vh" } : {}}
+            style={!data.overview ? { height: "80vh" } : {}}
           >
             <div className="container-fluid mt-5 px-0">
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
