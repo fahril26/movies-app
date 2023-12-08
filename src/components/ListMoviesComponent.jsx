@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import MyCard from "./MyCard";
 import MyPagination from "./MyPagination";
 import { useLocation } from "react-router-dom";
@@ -19,7 +20,7 @@ const ListMoviesComponent = ({
     const pageName = pathname.split("/")[2];
 
     if (pageName === "airing-today") total = 16;
-    else if (pageName === "on-the-air") total = 64;
+    else if (pageName === "on-the-air") total = 57;
     else total = fetchData?.data?.total_pages;
 
     return total;
@@ -32,7 +33,7 @@ const ListMoviesComponent = ({
       className="list"
       style={fetchData?.data?.results?.length < 3 ? { height: "73vh" } : {}}
     >
-      {fetchData?.data?.results && (
+      {fetchData?.data?.results?.length > 0 ? (
         <MyPagination
           totalPage={totalPage}
           currentPage={currentPage}
@@ -41,9 +42,9 @@ const ListMoviesComponent = ({
           pageNumbers={pageNumbers}
           setPageNumbers={setPageNumbers}
         />
-      )}
+      ) : null}
 
-      {fetchData?.data?.results ? (
+      {fetchData?.data?.results?.length > 0 ? (
         <div className="row row-cols-lg-5 row-cols-md-3 row-cols-2 cards-wrapper">
           {fetchData?.data?.results.map((data) => (
             <div
@@ -64,10 +65,10 @@ const ListMoviesComponent = ({
           ))}
         </div>
       ) : (
-        <div style={{ height: "100vh" }}>No Data</div>
+        <div style={{ height: "100vh" }}></div>
       )}
 
-      {fetchData?.data?.results && (
+      {fetchData?.data?.results?.length > 0 && (
         <MyPagination
           totalPage={totalPage}
           currentPage={currentPage}

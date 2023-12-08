@@ -12,10 +12,12 @@ import { TrailerContext } from "../context/ModaltrailerContext";
 import ModalWatchNow from "../components/ModalWatchNow";
 import CurrentPageContext from "../context/CurrentPageContext";
 import Loading from "../components/Loading";
+import { ResizeContext } from "../context/WindowWidthContext";
 
 const LayoutMovieDetail = ({ type }) => {
   const { modalShow, setModalShow, handleShowModal } =
     useContext(TrailerContext);
+  const windowWidth = useContext(ResizeContext);
 
   const handleChangeUrl = (urlMovie, urlTv) => {
     let url = null;
@@ -84,7 +86,10 @@ const LayoutMovieDetail = ({ type }) => {
                       width={"100%"}
                     />
                   ) : (
-                    <ImageLost />
+                    <ImageLost
+                      width={"100%"}
+                      height={windowWidth <= 768 ? "450px" : null}
+                    />
                   )}
                 </div>
 

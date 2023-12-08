@@ -89,15 +89,22 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     let newRotateArrow = [...rotateArrow];
     let defaultActiveKey = null;
 
-    if (pathname.includes("movies")) {
+    if (pathname.includes("movie")) {
       defaultActiveKey = 0;
       newRotateArrow[0] = true;
+      newRotateArrow[1] = false;
       setAccordionDefaultActiveKey(defaultActiveKey);
       setRotateArrow(newRotateArrow);
     } else if (pathname.includes("tv")) {
       defaultActiveKey = 1;
       newRotateArrow[1] = true;
+      newRotateArrow[0] = false;
       setAccordionDefaultActiveKey(defaultActiveKey);
+      setRotateArrow(newRotateArrow);
+    } else {
+      for (const index in newRotateArrow) {
+        newRotateArrow[index] = false;
+      }
       setRotateArrow(newRotateArrow);
     }
   };
@@ -125,16 +132,6 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
     const page = pathname.split("/")[2];
     const newData = { ...activeNav, typePage, page };
     setActiveNav(newData);
-  };
-
-  const rotateArrowBack = () => {
-    const newRotateArrow = rotateArrow.slice();
-    for (const index in newRotateArrow) {
-      if (!activeNav.typePage) {
-        newRotateArrow[index] = false;
-      }
-    }
-    setRotateArrow(newRotateArrow);
   };
 
   const hideOffcanvas = () => {
@@ -202,7 +199,6 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
                 aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
                 placement="start"
                 show={showOffcanvas}
-                onHide={rotateArrowBack}
               >
                 <Offcanvas.Header className="text-bg-dark">
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
