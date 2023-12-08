@@ -88,7 +88,7 @@ const LayoutMovieDetail = ({ type }) => {
                   ) : (
                     <ImageLost
                       width={"100%"}
-                      height={windowWidth <= 768 ? "450px" : null}
+                      height={windowWidth <= 768 ? "550px" : null}
                     />
                   )}
                 </div>
