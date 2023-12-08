@@ -75,7 +75,10 @@ const LayoutMovieDetail = ({ type }) => {
           <CurrentPageContext>
             <MyNavbar fixed={"top"} />
           </CurrentPageContext>
-          <div className="detail-movie">
+          <div
+            className="detail-movie"
+            style={!data.overview ? { height: "100vh" } : {}}
+          >
             <div className="container-fluid mt-5 px-0">
               <div className="row  gap-md-3 gap-5 justify-content-center justify-content-lg-start">
                 <div className="poster col-7  col-lg-4 col-xl-3  justify-content-center d-flex">
@@ -121,10 +124,7 @@ const LayoutMovieDetail = ({ type }) => {
 
                         <i className="text-secondary">{data?.tagline}</i>
                       </header>
-                      <div
-                        className="overview mt-4"
-                        style={!data?.overview ? { height: "200px" } : {}}
-                      >
+                      <div className="overview mt-4">
                         <p>{data?.overview}</p>
                       </div>
 
