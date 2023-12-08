@@ -15,8 +15,8 @@ export default function SearchMovies() {
 
   const [pageNumbers, setPageNumbers] = useState([1, 2, 3, 4, 5]);
 
-  const params = new URLSearchParams(location.search);
-  const navigatePath = `/movies/search?query=${params.get("query")}`;
+  const params = new URLSearchParams(location.search).get("query");
+  const navigatePath = `/movies/search?query=${params}`;
 
   return (
     <>
