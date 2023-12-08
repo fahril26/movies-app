@@ -121,7 +121,10 @@ const LayoutMovieDetail = ({ type }) => {
 
                         <i className="text-secondary">{data?.tagline}</i>
                       </header>
-                      <div className="overview mt-4">
+                      <div
+                        className="overview mt-4"
+                        style={!data?.overview ? { height: "200px" } : {}}
+                      >
                         <p>{data?.overview}</p>
                       </div>
 
