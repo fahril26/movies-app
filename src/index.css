@@ -90,6 +90,9 @@ footer,
   .detail-movie {
     padding: 7rem 10px !important;
   }
+  .detail-movie .poster {
+    height: inherit;
+  }
 
   .blocks-wrapper {
     transform: translateY(-250px);
@@ -114,13 +117,12 @@ footer,
 
 /* Small */
 @media (max-width: 576px) {
-
   .jumbotron .jumbotron-content {
     width: 125% !important;
   }
 
-  .jumbotron .jumbotron-content h1{
-    font-size: 2rem
+  .jumbotron .jumbotron-content h1 {
+    font-size: 2rem;
   }
 }
 

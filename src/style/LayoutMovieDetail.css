@@ -23,6 +23,10 @@
   color: var(--yellow);
 }
 
+.detail-movie .poster {
+  height: 450px;
+}
+
 .poster img {
   border-radius: 5px;
 }
