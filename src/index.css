@@ -88,7 +88,11 @@ footer,
   }
 
   .detail-movie {
-    padding: 10rem 10px !important;
+    padding: 7rem 10px !important;
+  }
+
+  .wrapper-detail-movie {
+    height: 100vh;
   }
 
   .detail-movie .poster {
