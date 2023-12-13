@@ -65,7 +65,7 @@ const LayoutMovieDetail = ({ type }) => {
   );
 
   return (
-    <div className="wrapper-detail-movie">
+    <>
       {showPersentageBar ? (
         <Loading />
       ) : (
@@ -236,7 +236,7 @@ const LayoutMovieDetail = ({ type }) => {
           />
         </>
       )}
-    </div>
+    </>
   );
 };
 

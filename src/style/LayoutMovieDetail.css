@@ -1,9 +1,10 @@
 .detail-movie {
+  background: url("../assets/background/services_bg.jpg");
   color: #fff;
   padding: 5rem 32px;
   background-size: cover;
   background-position: center;
-  background: url("../assets/background/services_bg.jpg");
+  background-repeat: no-repeat;
 }
 
 .detail-movie a.nav-link {
