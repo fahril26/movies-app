@@ -1,7 +1,9 @@
-import { Route } from "react-router-dom";
-import { RouterProvider } from "react-router-dom";
-import { createRoutesFromElements } from "react-router-dom";
-import { createBrowserRouter } from "react-router-dom";
+import {
+  Route,
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+} from "react-router-dom";
 import Home from "../pages/home/Home";
 import ErrorElement from "../ErrorElement";
 import WindowWidthContext from "../context/WindowWidthContext";
@@ -28,8 +30,8 @@ import Contact from "../pages/contact/Contact";
 export const RoutersRoot = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <>
-        <Route element={<Home />} path="/" />
+      <Route errorElement={<ErrorElement />} path="/">
+        <Route element={<Home />} index />
 
         <Route
           path="/movies/upcoming/:page"
@@ -176,9 +178,7 @@ export const RoutersRoot = () => {
             </CurrentPageContext>
           }
         />
-
-        <Route path="*" element={<ErrorElement />} />
-      </>
+      </Route>
     )
   );
 
