@@ -1,18 +1,5 @@
 {
-  "rewrites": [
-    {
-      "source": "/movies/popular",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/movies/upcoming",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/index.html"
-    }
-  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html"], 
   "routes": [
     {
       "src": "/[^.]+",
