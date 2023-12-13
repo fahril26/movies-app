@@ -14,16 +14,16 @@ const Footer = ({ className }) => {
               className="d-flex justify-content-center justify-content-md-start mb-3 mb-md-0"
             >
               <Nav.Item as="li">
-                <Nav.Link href="/home">FAQ</Nav.Link>
+                <Nav.Link>FAQ</Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="link-1">HELP CENTER</Nav.Link>
+                <Nav.Link>HELP CENTER</Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="link-2">TERMS OF USE</Nav.Link>
+                <Nav.Link>TERMS OF USE</Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="link-3">PRIVACY</Nav.Link>
+                <Nav.Link>PRIVACY</Nav.Link>
               </Nav.Item>
             </Nav>
           </div>
@@ -35,17 +35,17 @@ const Footer = ({ className }) => {
               className="d-flex justify-content-center justify-content-md-end gap-1 gap-sm-3 "
             >
               <Nav.Item as="li">
-                <Nav.Link href="/home">
+                <Nav.Link>
                   <i className="fa-brands fa-facebook-f"></i>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="link-1">
+                <Nav.Link>
                   <i className="fa-brands fa-twitter"></i>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="link-2">
+                <Nav.Link>
                   <i className="fa-brands fa-pinterest-p"></i>
                 </Nav.Link>
               </Nav.Item>
