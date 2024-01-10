@@ -22,7 +22,7 @@ const MyCard = ({
     else return number.toFixed(1);
   };
 
-  const rating = roundsDecimalNumbers(voteAverage);
+  const rating = voteAverage ? roundsDecimalNumbers(voteAverage) : 0;
 
   return (
     <Card

@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 
+import { useEffect } from "react";
 import MyCard from "./MyCard";
 import MyPagination from "./MyPagination";
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const ListMoviesComponent = ({
   fetchData,
@@ -13,27 +15,26 @@ const ListMoviesComponent = ({
   pageNumbers,
   setPageNumbers,
 }) => {
-  const { pathname } = useLocation();
+  const totalPage = fetchData?.data?.total_pages;
+  const [listPageNumbers, setListPageNumbers] = useState([]);
 
-  const getTotalPage = () => {
-    let total = null;
-    const pageName = pathname.split("/")[2];
-
-    if (pageName === "airing-today") total = 16;
-    else if (pageName === "on-the-air") total = 57;
-    else if (pageName === "upcoming") total = 28;
-    else if (pageName === "now-playing") total = 208;
-    else total = fetchData?.data?.total_pages;
-
-    return total;
+  const deleteTheFirstArray = (list) => {
+    if (list.length > 3) {
+      list.shift();
+    }
   };
 
-  const totalPage = getTotalPage();
+  useEffect(() => {
+    const list = listPageNumbers.slice();
+    list.push(pageNumbers);
+    deleteTheFirstArray(list);
+    setListPageNumbers(list);
+  }, [pageNumbers]);
 
   return (
     <div
       className="list"
-      style={fetchData?.data?.results?.length < 3 ? { height: "73vh" } : {}}
+      style={fetchData?.data?.results?.length < 3 ? { height: "90vh" } : {}}
     >
       {fetchData?.data?.results?.length > 0 ? (
         <MyPagination
@@ -47,7 +48,7 @@ const ListMoviesComponent = ({
       ) : null}
 
       {fetchData?.data?.results?.length > 0 ? (
-        <div className="row row-cols-lg-5 row-cols-md-3 row-cols-2 cards-wrapper">
+        <div className="row row-cols-lg-5 row-cols-md-3 row-cols-2 cards-wrapper ">
           {fetchData?.data?.results.map((data) => (
             <div
               className={`col p-0 d-flex justify-content-center  mt-4`}
@@ -59,7 +60,7 @@ const ListMoviesComponent = ({
                 releaseDate={
                   type === "tv" ? data.first_air_date : data.release_date
                 }
-                voteAverage={data.vote_average}
+                voteAverage={data?.vote_average}
                 id={data.id}
                 type={type}
               />
@@ -67,7 +68,23 @@ const ListMoviesComponent = ({
           ))}
         </div>
       ) : (
-        <div style={{ height: "100vh" }}></div>
+        <div style={{ height: "100vh", textAlign: "center" }}>
+          <h1 style={{ color: "#fff", marginTop: "100px" }}>
+            No Have Data Film
+          </h1>
+          <Link
+            to={-1}
+            onClick={() => {
+              setPageNumbers(listPageNumbers[listPageNumbers.length - 2]);
+              localStorage.setItem(
+                "paginationNumbers",
+                JSON.stringify(listPageNumbers[listPageNumbers.length - 2])
+              );
+            }}
+          >
+            Back to previous page
+          </Link>
+        </div>
       )}
 
       {fetchData?.data?.results?.length > 0 && (

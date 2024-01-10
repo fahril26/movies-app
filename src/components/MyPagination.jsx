@@ -4,6 +4,7 @@ import "../style/MyPagination.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const MyPagination = ({
   totalPage,
@@ -15,7 +16,10 @@ const MyPagination = ({
   navigatePath,
 }) => {
   const [pathName, setPathName] = useState("");
+
+  const [fixedTotalPage, setFixedTotalPage] = useState(null);
   const navigate = useNavigate();
+  const { page } = useParams();
 
   const getPageNumbers =
     totalPage <= 5
@@ -34,11 +38,9 @@ const MyPagination = ({
       }
     } else if (
       index > 2 &&
-      currentNumber[currentNumber.length - 1] !== totalPage
+      currentNumber[currentNumber.length - 1] !== fixedTotalPage
     ) {
-      1;
-
-      if (currentPage <= totalPage || number >= 3) {
+      if (currentPage <= fixedTotalPage || number >= 3) {
         newNumbers = incrementNumber(index, currentNumber);
         localStorage.setItem("paginationNumbers", JSON.stringify(newNumbers));
         setPageNumbers(newNumbers);
@@ -59,7 +61,7 @@ const MyPagination = ({
       newNumber.push(currentNumber[index]);
     }
 
-    if (newNumber[4] > totalPage)
+    if (newNumber[4] > fixedTotalPage)
       newNumber = [
         totalPage - 4,
         totalPage - 3,
@@ -165,7 +167,7 @@ const MyPagination = ({
       setCurrentPage(currentPage + 1);
       navigate(pathname);
 
-      if (currentPage >= 5) {
+      if (currentPage >= 5 || pageNumbers[4] !== fixedTotalPage) {
         changeNumber(3);
       }
     }
@@ -174,11 +176,12 @@ const MyPagination = ({
   useEffect(() => {
     const pathName = location.pathname.split("/").slice(0, 3).join("/");
     setPathName(pathName);
+    setFixedTotalPage(totalPage);
   }, []);
 
   return (
     <Pagination className="my-pagination d-flex justify-content-center gap-2">
-      {pageNumbers[0] !== 1 && totalPage >= 5 && (
+      {pageNumbers[0] !== 1 && fixedTotalPage >= 5 && (
         <Pagination.Item
           onClick={firstPage}
           linkStyle={{ cursor: loading && "no-drop" }}
@@ -186,7 +189,7 @@ const MyPagination = ({
           {1}
         </Pagination.Item>
       )}
-      {currentPage > 1 && totalPage >= 5 && (
+      {currentPage > 1 && fixedTotalPage >= 5 && (
         <Pagination.Prev
           onClick={() => handlePrev(currentPage)}
           linkStyle={{ cursor: loading && "no-drop" }}
@@ -196,25 +199,25 @@ const MyPagination = ({
         <Pagination.Item
           key={items}
           onClick={() => handleClick(items, index)}
-          active={currentPage === items}
+          active={page == items}
           linkStyle={{ cursor: loading && "no-drop" }}
         >
           {items}
         </Pagination.Item>
       ))}
 
-      {currentPage <= totalPage - 1 && totalPage >= 5 && (
+      {currentPage <= fixedTotalPage - 1 && fixedTotalPage >= 5 && (
         <Pagination.Next
           onClick={() => handleNext(currentPage)}
           linkStyle={{ cursor: loading && "no-drop" }}
         />
       )}
-      {pageNumbers[4] !== totalPage && totalPage >= 5 && (
+      {pageNumbers[4] !== fixedTotalPage && fixedTotalPage >= 5 && (
         <Pagination.Item
           onClick={lastPage}
           linkStyle={{ cursor: loading && "no-drop" }}
         >
-          {totalPage}
+          {fixedTotalPage}
         </Pagination.Item>
       )}
     </Pagination>

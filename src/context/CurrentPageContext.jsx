@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { createContext } from "react";
 import { useParams } from "react-router-dom";
 
@@ -8,7 +9,11 @@ export const CurrentPage = createContext();
 const CurrentPageContext = ({ children }) => {
   const { page } = useParams();
 
-  const [currentPage, setCurrentPage] = useState(Number(page));
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(Number(page));
+  }, [page]);
 
   return (
     <CurrentPage.Provider value={{ currentPage, setCurrentPage }}>
