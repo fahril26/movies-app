@@ -19,7 +19,10 @@ const MyPagination = ({
 
   const [fixedTotalPage, setFixedTotalPage] = useState(null);
   const navigate = useNavigate();
+  const SearchUrlParamsPage = new URLSearchParams(location.search).get("page");
   const { page } = useParams();
+
+  const usedParams = page ? page : SearchUrlParamsPage;
 
   const getPageNumbers =
     totalPage <= 5
@@ -199,7 +202,7 @@ const MyPagination = ({
         <Pagination.Item
           key={items}
           onClick={() => handleClick(items, index)}
-          active={page == items}
+          active={usedParams == items}
           linkStyle={{ cursor: loading && "no-drop" }}
         >
           {items}

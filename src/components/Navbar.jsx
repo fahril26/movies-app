@@ -112,6 +112,7 @@ function MyNavbar({ fixed, style, setPageNumbers }) {
   const handleSubmit = () => {
     const params = new URLSearchParams();
     params.append("query", inputValue);
+    params.append("page", 1);
 
     setKeywordSearch(inputValue);
     navigate(`/movies/search?${params.toString()}`);
