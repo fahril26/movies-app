@@ -34,7 +34,7 @@ const ListMoviesComponent = ({
   return (
     <div
       className="list"
-      style={fetchData?.data?.results?.length < 3 ? { height: "90vh" } : {}}
+      style={fetchData?.data?.results?.length < 3 ? { height: "73vh" } : {}}
     >
       {fetchData?.data?.results?.length > 0 ? (
         <MyPagination
@@ -87,7 +87,7 @@ const ListMoviesComponent = ({
         </div>
       )}
 
-      {fetchData?.data?.results?.length > 0 && (
+      {fetchData?.data?.results?.length > 4 && (
         <MyPagination
           totalPage={totalPage}
           currentPage={currentPage}
