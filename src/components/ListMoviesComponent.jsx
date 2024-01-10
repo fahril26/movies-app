@@ -19,8 +19,7 @@ const ListMoviesComponent = ({
     let total = null;
     const pageName = pathname.split("/")[2];
 
-    if (pageName === "airing-today") total = 16;
-    else if (pageName === "on-the-air") total = 57;
+    if (pageName === "on-the-air") total = 57;
     else if (pageName === "upcoming") total = 28;
     else if (pageName === "now-playing") total = 208;
     else total = fetchData?.data?.total_pages;
