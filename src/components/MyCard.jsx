@@ -38,6 +38,7 @@ const MyCard = ({
           src={`https://image.tmdb.org/t/p/w220_and_h330_face${poster}`}
           className="rounded"
           alt="poster"
+          loading="lazy"
           onClick={() =>
             navigate(
               type == "movie"
